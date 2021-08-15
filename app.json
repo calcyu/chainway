@@ -8,7 +8,7 @@
   "db": {
     "host": "skyiah.com",
     "port": 5432,
-    "database": "zhnt",
+    "database": "supply",
     "username": "postgres",
     "password": "Gs721004"
   },
