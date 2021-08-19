@@ -6,19 +6,19 @@
     "main": "http://localhost"
   },
   "db": {
-    "host": "skyiah.com",
+    "host": "121.43.190.163",
     "port": 5432,
     "database": "supply",
     "username": "postgres",
     "password": "Gs721004"
   },
   "ext": {
-    "url": "https://skyiah.com",
-    "appid": "wxc6f29749892ac6f3",
-    "appsecret": "4c50549e1911ee2ac7562b88e9620b62",
+    "url": "https://skyiah:81.com",
+    "appid": "wx15809e9c6f599b8c",
+    "appsecret": "2df432cb748a371d1388f428af9eabe1",
     "mchid": "1584964561",
     "noncestr": "30a5fe271",
-    "spbillcreateip": "8.136.200.223",
+    "spbillcreateip": "121.43.190.163",
     "key": "28165acab74c2fbf3b042b5d2f87d274",
     "idcertcode": "b05b4c8bc1ec4fad90309adad7026aca"
   }
