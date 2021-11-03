@@ -5,7 +5,7 @@
   "chain": {
     "host": "121.43.190.163",
     "port": 5432,
-    "database": "supply",
+    "database": "revital",
     "username": "postgres",
     "password": "Gs721004",
     "name": "中惠农通",
