@@ -9,7 +9,7 @@
     "username": "postgres",
     "password": "Gs721004",
     "name": "中惠农通",
-    "tip": "中惠农通新型供应链"
+    "tip": "智慧农贸和健康供应平台"
   },
   "web": {
     "main": "http://localhost"
