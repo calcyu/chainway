@@ -8,8 +8,8 @@
     "database": "revital",
     "username": "postgres",
     "password": "Gs721004",
-    "name": "中惠农通",
-    "tip": "智慧农贸和健康供应平台"
+    "name": "中惠农通（江西）",
+    "tip": "智慧农贸及供应链平台"
   },
   "web": {
     "main": "http://localhost"
