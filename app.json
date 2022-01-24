@@ -2,7 +2,7 @@
   "logging": 2,
   "crypto": "ebce206103e439514f3c4748c683274e",
   "certpass": "fVC2ToAq",
-  "chain": {
+  "store": {
     "host": "81.69.218.155",
     "port": 5432,
     "database": "revital",
