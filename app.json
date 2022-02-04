@@ -11,11 +11,16 @@
     "name": "中惠农通（江西）",
     "tip": "智慧农贸及供应链平台"
   },
-  "web": {
-    "main": "http://localhost"
+  "web-main": {
+    "address": "http://localhost"
+  },
+  "web-msg": {
+    "address": "http://localhost:81"
   },
   "ext": {
     "url": "http://zhnt-x.com",
+    "url-img": null,
+    "url-msg": null,
     "appid": "wx15809e9c6f599b8c",
     "appsecret": "2df432cb748a371d1388f428af9eabe1",
     "mchid": "1584964561",
