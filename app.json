@@ -11,10 +11,10 @@
     "name": "中惠农通（江西）",
     "tip": "智慧农贸及供应链平台"
   },
-  "web-main": {
-    "address": "http://localhost"
+  "web-pub": {
+    "address": "http://localhost:80"
   },
-  "web-msg": {
+  "web-mgt": {
     "address": "http://localhost:81"
   },
   "ext": {
