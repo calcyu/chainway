@@ -11,10 +11,10 @@
     "name": "中惠农通（江西）",
     "tip": "智慧农贸及供应链平台"
   },
-  "web-www": {
+  "web-dir": {
     "address": "http://localhost:80"
   },
-  "web-mgt": {
+  "web-site": {
     "address": "http://localhost:81"
   },
   "ext": {
