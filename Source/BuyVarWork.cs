@@ -5,9 +5,11 @@ using SkyChain;
 using SkyChain.Web;
 using static SkyChain.Web.Appear;
 using static SkyChain.Web.Modal;
-using static Revital.WeChatUtility;
+using static Coverse.WeChatUtility;
+using static SkyChain.Nodal.Home;
+using static SkyChain.Web.Application;
 
-namespace Revital
+namespace Coverse
 {
     public class BuyVarWork : WebWork
     {

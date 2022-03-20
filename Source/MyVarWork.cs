@@ -1,10 +1,11 @@
 using System.Threading.Tasks;
 using SkyChain;
+using SkyChain.Nodal;
 using SkyChain.Web;
 using static System.String;
 using static SkyChain.Web.Modal;
 
-namespace Revital
+namespace Coverse
 {
     [UserAuthorize]
     [Ui("账号信息")]
@@ -69,9 +70,9 @@ namespace Revital
                 string credential =
                     IsNullOrEmpty(password) ? null :
                     password == PASSMASK ? prin.credential :
-                    RevitalUtility.ComputeCredential(tel, password);
+                    RuralUtility.ComputeCredential(tel, password);
 
-                using var dc = NewDbContext();
+                using var dc = Home.NewDbContext();
                 dc.Sql("UPDATE users SET name = CASE WHEN @1 IS NULL THEN name ELSE @1 END , tel = @2, credential = @3 WHERE id = @4 RETURNING ").collst(User.Empty);
                 prin = await dc.QueryTopAsync<User>(p => p.Set(name).Set(tel).Set(credential).Set(prin.id));
                 // refresh cookie

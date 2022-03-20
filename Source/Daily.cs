@@ -1,7 +1,7 @@
 ﻿using System;
 using SkyChain;
 
-namespace Revital
+namespace Coverse
 {
     /// <summary>
     /// A reportive record of daily transaction for goods.

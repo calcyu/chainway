@@ -3,9 +3,11 @@ using System.Data;
 using System.Threading.Tasks;
 using SkyChain;
 using SkyChain.Web;
+using static SkyChain.Nodal.Home;
+using static SkyChain.Web.Application;
 using static SkyChain.Web.Modal;
 
-namespace Revital
+namespace Coverse
 {
     public class BookVarWork : WebWork
     {
@@ -142,10 +144,9 @@ namespace Revital
     public class DietCtrlyBookVarWork : CtrlyBookVarWork
     {
     }
-    
-    
+
+
     public class FrmlyBookVarWork : BookVarWork
     {
     }
-
 }

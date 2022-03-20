@@ -1,10 +1,11 @@
 using System;
 using System.Threading.Tasks;
 using SkyChain.Web;
-using static Revital.Item;
+using static Coverse.Item;
+using static SkyChain.Nodal.Home;
 using static SkyChain.Web.Modal;
 
-namespace Revital
+namespace Coverse
 {
     public abstract class PieceWork : WebWork
     {

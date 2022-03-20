@@ -1,6 +1,6 @@
 ﻿using SkyChain;
 
-namespace Revital
+namespace Coverse
 {
     /// <summary>
     /// A data model for post entry.

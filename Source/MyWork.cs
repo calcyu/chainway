@@ -1,7 +1,7 @@
 using SkyChain;
 using SkyChain.Web;
 
-namespace Revital
+namespace Coverse
 {
     public class MyWork : WebWork
     {

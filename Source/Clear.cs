@@ -1,7 +1,7 @@
 ﻿using System;
 using SkyChain;
 
-namespace Revital
+namespace Coverse
 {
     public class Clear : Info, IKeyable<int>
     {

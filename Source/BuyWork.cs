@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
 using SkyChain.Web;
-using static Revital.User;
+using static Coverse.User;
+using static SkyChain.Nodal.Home;
 
-namespace Revital
+namespace Coverse
 {
     public abstract class BuyWork : WebWork
     {

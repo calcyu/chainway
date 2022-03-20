@@ -1,7 +1,7 @@
 ﻿using System;
 using SkyChain;
 
-namespace Revital
+namespace Coverse
 {
     public struct Act : IData
     {

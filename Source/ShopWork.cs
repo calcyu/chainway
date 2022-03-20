@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using SkyChain.Web;
 
-namespace Revital
+namespace Coverse
 {
     public abstract class ShopWork : WebWork
     {

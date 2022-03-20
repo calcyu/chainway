@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using SkyChain;
 using SkyChain.Web;
+using static SkyChain.Nodal.Home;
 
-namespace Revital
+namespace Coverse
 {
     public abstract class DailyWork : WebWork
     {

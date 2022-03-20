@@ -2,9 +2,10 @@ using System;
 using System.Threading.Tasks;
 using SkyChain;
 using SkyChain.Web;
+using static SkyChain.Nodal.Home;
 using static SkyChain.Web.Modal;
 
-namespace Revital
+namespace Coverse
 {
     public abstract class ItemVarWork : WebWork
     {

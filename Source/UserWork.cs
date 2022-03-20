@@ -1,8 +1,9 @@
 ﻿using SkyChain.Web;
 using static SkyChain.Web.Modal;
-using static Revital.User;
+using static Coverse.User;
+using static SkyChain.Nodal.Home;
 
-namespace Revital
+namespace Coverse
 {
     public abstract class UserWork : WebWork
     {

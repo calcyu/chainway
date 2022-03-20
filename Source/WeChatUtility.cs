@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using SkyChain;
 using SkyChain.Web;
 using static SkyChain.CryptoUtility;
-using static SkyChain.Application;
+using static SkyChain.Web.Application;
 using WebUtility = System.Net.WebUtility;
 
-namespace Revital
+namespace Coverse
 {
     /// <summary>
     /// A hub of operation that has its own weixin official acount.

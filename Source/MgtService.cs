@@ -2,14 +2,15 @@ using System;
 using System.Threading.Tasks;
 using System.Web;
 using SkyChain;
-using SkyChain.Chain;
+using SkyChain.Nodal;
 using SkyChain.Web;
-using static Revital.WeChatUtility;
+using static Coverse.WeChatUtility;
+using static SkyChain.Nodal.Home;
 
-namespace Revital
+namespace Coverse
 {
     [UserAuthenticate]
-    public class MgtService : FedService
+    public class MgtService : NodeService
     {
         protected override void OnCreate()
         {
@@ -31,13 +32,13 @@ namespace Revital
             wc.GivePage(200, h =>
             {
                 h.FORM_();
-                h.FIELDSUL_("批发目标分组");
+                h.FIELDSUL_("供应链市场分组");
                 for (int i = 0; i < orgs.Count; i++)
                 {
                     var org = orgs.ValueAt(i);
                     if (!org.IsCtr) continue;
                     h.LI_("uk-flex");
-                    h.A_(org.Key, "/", end: true, css: "uk-button uk-button-link uk-flex-left").T(org.name)._A();
+                    h.A_(org.Key, "/", end: true, css: "uk-button uk-button-link uk-flex-left").T(org.name).T("组")._A();
                     h._LI();
                 }
                 h._FIELDSUL();
@@ -54,7 +55,7 @@ namespace Revital
                 h._FIELDSUL();
 
                 h._FORM();
-            }, true, 3600, title: Home.Self.Name + "管理");
+            }, true, 3600, title: Self.Name + "管理");
         }
 
         public void @catch(WebContext wc)
@@ -114,7 +115,7 @@ namespace Revital
                 url = f[nameof(url)];
 
                 using var dc = NewDbContext();
-                var credential = RevitalUtility.ComputeCredential(tel, password);
+                var credential = RuralUtility.ComputeCredential(tel, password);
                 dc.Sql("SELECT ").collst(User.Empty).T(" FROM users WHERE tel = @1");
                 var prin = dc.QueryTop<User>(p => p.Set(tel));
                 if (prin == null || !credential.Equals(prin.credential))

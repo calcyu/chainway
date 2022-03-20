@@ -1,6 +1,6 @@
 ﻿using SkyChain;
 
-namespace Revital
+namespace Coverse
 {
     /// <summary>
     /// The data modal for an standard item of product or service.

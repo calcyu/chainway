@@ -3,9 +3,10 @@ using System.Data;
 using System.Threading.Tasks;
 using SkyChain;
 using SkyChain.Web;
+using static SkyChain.Nodal.Home;
 using static SkyChain.Web.Modal;
 
-namespace Revital
+namespace Coverse
 {
     [UserAuthorize(admly: User.ADMLY_)]
     [Ui("平台代收款项结算", "credit-card")]

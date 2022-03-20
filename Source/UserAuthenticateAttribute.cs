@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using SkyChain.Chain;
+using SkyChain.Nodal;
 using SkyChain.Web;
 
-namespace Revital
+namespace Coverse
 {
     /// <summary>
     /// To establish principal identity. 

@@ -1,7 +1,7 @@
 ﻿using System;
 using SkyChain;
 
-namespace Revital
+namespace Coverse
 {
     /// <summary>
     /// The data model for a particular product supply.

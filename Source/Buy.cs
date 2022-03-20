@@ -1,6 +1,6 @@
 ﻿using SkyChain;
 
-namespace Revital
+namespace Coverse
 {
     /// <summary>
     /// An online or offline retail order

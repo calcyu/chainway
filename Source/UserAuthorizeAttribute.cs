@@ -1,7 +1,7 @@
 ﻿using System;
 using SkyChain.Web;
 
-namespace Revital
+namespace Coverse
 {
     /// <summary>
     /// To implement principal authorization of access to the target resources.

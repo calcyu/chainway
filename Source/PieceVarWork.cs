@@ -1,8 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using SkyChain.Web;
+using static SkyChain.Nodal.Home;
 
-namespace Revital
+namespace Coverse
 {
     public class PieceVarWork : WebWork
     {

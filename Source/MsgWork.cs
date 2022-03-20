@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SkyChain;
 using SkyChain.Web;
 
-namespace Revital
+namespace Coverse
 {
     public abstract class MsgWork : WebWork
     {

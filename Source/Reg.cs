@@ -1,6 +1,6 @@
 ﻿using SkyChain;
 
-namespace Revital
+namespace Coverse
 {
     public class Reg : Info, IKeyable<short>
     {

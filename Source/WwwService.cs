@@ -2,11 +2,11 @@ using System;
 using System.Threading.Tasks;
 using System.Web;
 using SkyChain;
-using SkyChain.Chain;
 using SkyChain.Web;
-using static Revital.WeChatUtility;
+using static Coverse.WeChatUtility;
+using static SkyChain.Nodal.Home;
 
-namespace Revital
+namespace Coverse
 {
     [UserAuthenticate]
     public class WwwService : WebService
@@ -82,7 +82,7 @@ namespace Revital
 
                     h.BOTTOMBAR_().BUTTON("确定", string.Empty, subscript: 1, post: false)._BOTTOMBAR();
                     h._FORM();
-                }, false, 15, title: Home.Self.Name);
+                }, false, 15, title: Self.Name);
             }
             else if (cmd == 1) // agreement
             {
@@ -157,7 +157,7 @@ namespace Revital
                 url = f[nameof(url)];
 
                 using var dc = NewDbContext();
-                var credential = RevitalUtility.ComputeCredential(tel, password);
+                var credential = RuralUtility.ComputeCredential(tel, password);
                 dc.Sql("SELECT ").collst(User.Empty).T(" FROM users WHERE tel = @1");
                 var prin = dc.QueryTop<User>(p => p.Set(tel));
                 if (prin == null || !credential.Equals(prin.credential))

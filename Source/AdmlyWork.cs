@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
 using SkyChain;
-using SkyChain.Chain;
+using SkyChain.Nodal;
 using SkyChain.Web;
+using static SkyChain.Nodal.Home;
 
-namespace Revital
+namespace Coverse
 {
     [UserAuthorize(admly: User.ADMLY_)]
     [Ui("平台管理")]
@@ -25,7 +26,7 @@ namespace Revital
 
             CreateWork<AdmlyUserWork>("user");
 
-            CreateWork<FedWork>("fed", authorize: new UserAuthorizeAttribute(admly: User.ADMLY_MGT));
+            CreateWork<NodalWork>("fed", authorize: new UserAuthorizeAttribute(admly: User.ADMLY_MGT));
 
             CreateWork<AdmlyClearWork>("clear");
         }
@@ -33,7 +34,7 @@ namespace Revital
         public void @default(WebContext wc)
         {
             var prin = (User) wc.Principal;
-            var o = Home.Self;
+            var o = Self;
             wc.GivePage(200, h =>
             {
                 h.TOOLBAR(tip: prin.name + "（" + wc.Role + "）");

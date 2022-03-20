@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
 using SkyChain;
 using SkyChain.Web;
+using static SkyChain.Nodal.Home;
 
-namespace Revital
+namespace Coverse
 {
     /// <summary>
     /// The home page for markets and businesses therein..
