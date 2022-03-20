@@ -1,0 +1,12 @@
+[Unit]
+Description=A Deployment of The Coverse Platform
+
+[Service]
+EnvironmentFile=/etc/environment
+Type=forking
+WorkingDirectory=/home/ubuntu
+ExecStart=sudo /usr/bin/dotnet /home/ubuntu/publish/Coverse.dll deploy
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
