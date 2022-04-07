@@ -5,8 +5,71 @@ using static SkyChain.Nodal.Home;
 
 namespace Coverse
 {
-    public abstract class OrglyVarWork : WebWork
+    [Ui("机构主体操作")]
+    public class OrglyVarWork : WebWork
     {
+        protected override void OnCreate()
+        {
+            CreateWork<MrtlyOrgWork>("org");
+
+            CreateWork<MrtlyUserWork>("user");
+
+            CreateWork<MrtlyBookWork>("mbook");
+
+            CreateWork<MrtlyBuyWork>("mbuy");
+
+            CreateWork<MrtlyDailyWork>("daily");
+
+            CreateWork<BizlyPieceWork>("piece");
+
+            CreateWork<BizlyBuyWork>("bbuy");
+
+            CreateWork<BizlyShopWork>("shop");
+
+            CreateWork<BizlyBookWork>("bbook");
+
+            CreateWork<OrglyClearWork>("clear");
+
+            CreateWork<OrglyMsgWork>("msg");
+        }
+
+        public void @default(WebContext wc)
+        {
+            var org = wc[0].As<Org>();
+            var prin = (User) wc.Principal;
+            using var dc = NewDbContext();
+            wc.GivePage(200, h =>
+            {
+                var role = prin.orgid != org.id ? "代办" : User.Orgly[prin.orgly];
+                h.TOOLBAR(tip: prin.name + "（" + role + "）");
+
+                h.FORM_("uk-card uk-card-primary");
+                h.UL_("uk-card-body uk-list uk-list-divider");
+                h.LI_().FIELD("主体名称", org.name)._LI();
+                h.LI_().FIELD("类型", Org.Typs[org.typ])._LI();
+                h.LI_().FIELD(org.IsMrt ? "地址" : "编址", org.addr)._LI();
+                if (org.sprid > 0)
+                {
+                    var spr = GrabObject<int, Org>(org.sprid);
+                    h.LI_().FIELD("所在市场", spr.name)._LI();
+                }
+                h.LI_().FIELD2("管理员", org.mgrname, org.mgrtel)._LI();
+                if (org.ctras != null)
+                {
+                    var ctr = GrabObject<int, Org>(org.ctras[0]);
+                    h.LI_().FIELD("关联中枢", ctr.name)._LI();
+                }
+                if (org.IsBiz)
+                {
+                    h.LI_().FIELD("委托代办", org.trust)._LI();
+                }
+                h._UL();
+                h._FORM();
+
+                h.TASKLIST();
+            }, false, 3);
+        }
+
         [UserAuthorize(orgly: 15)]
         [Ui("操作权限"), Tool(Modal.ButtonOpen)]
         public async Task acl(WebContext wc, int cmd)
@@ -93,167 +156,6 @@ namespace Coverse
 
                 wc.GivePane(200);
             }
-        }
-    }
-
-    [UserAuthorize(Org.TYP_BIZ, 1)]
-#if ZHNT
-    [Ui("市场业务操作")]
-#else
-    [Ui("驿站业务操作")]
-#endif
-    public class MrtlyVarWork : OrglyVarWork
-    {
-        protected override void OnCreate()
-        {
-            CreateWork<MrtlyOrgWork>("org");
-
-            CreateWork<MrtlyUserWork>("user");
-
-            CreateWork<MrtlyBookWork>("mbook");
-
-            CreateWork<MrtlyBuyWork>("mbuy");
-
-            CreateWork<MrtlyDailyWork>("daily");
-
-            CreateWork<BizlyPieceWork>("piece");
-
-            CreateWork<BizlyBuyWork>("bbuy");
-
-            CreateWork<BizlyShopWork>("shop");
-
-            CreateWork<BizlyBookWork>("bbook");
-
-            CreateWork<OrglyClearWork>("clear");
-
-            CreateWork<OrglyMsgWork>("msg");
-        }
-
-        public void @default(WebContext wc)
-        {
-            var org = wc[0].As<Org>();
-            var prin = (User) wc.Principal;
-            using var dc = NewDbContext();
-            wc.GivePage(200, h =>
-            {
-                var role = prin.orgid != org.id ? "代办" : User.Orgly[prin.orgly];
-                h.TOOLBAR(tip: prin.name + "（" + role + "）");
-
-                h.FORM_("uk-card uk-card-primary");
-                h.UL_("uk-card-body uk-list uk-list-divider");
-                h.LI_().FIELD("主体名称", org.name)._LI();
-                h.LI_().FIELD("类型", Org.Typs[org.typ])._LI();
-                h.LI_().FIELD(org.IsMrt ? "地址" : "编址", org.addr)._LI();
-                if (org.sprid > 0)
-                {
-                    var spr = GrabObject<int, Org>(org.sprid);
-                    h.LI_().FIELD("所在市场", spr.name)._LI();
-                }
-                h.LI_().FIELD2("管理员", org.mgrname, org.mgrtel)._LI();
-                if (org.ctras != null)
-                {
-                    var ctr = GrabObject<int, Org>(org.ctras[0]);
-                    h.LI_().FIELD("关联中枢", ctr.name)._LI();
-                }
-                if (org.IsBiz)
-                {
-                    h.LI_().FIELD("委托代办", org.trust)._LI();
-                }
-                h._UL();
-                h._FORM();
-
-                h.TASKLIST();
-            }, false, 3);
-        }
-    }
-
-    [UserAuthorize(Org.TYP_FRM, 1)]
-    [Ui("产源业务操作")]
-    public class SrclyVarWork : OrglyVarWork
-    {
-        protected override void OnCreate()
-        {
-            CreateWork<SrclyOrgWork>("org");
-
-            CreateWork<SrclyCtrBookWork, SrclyOwnBookWork>("sbook");
-
-            CreateWork<SrclyDailyWork>("daily");
-
-            CreateWork<FrmlyProductWork>("product");
-
-            CreateWork<FrmlyCtrBookWork, FrmlyOwnBookWork>("fbook");
-
-            CreateWork<OrglyClearWork>("clear");
-        }
-
-        public void @default(WebContext wc)
-        {
-            var org = wc[0].As<Org>();
-            var orgs = Grab<int, Org>();
-            var prin = (User) wc.Principal;
-
-            wc.GivePage(200, h =>
-            {
-                h.TOOLBAR(tip: prin.name + "（" + wc.Role + "）");
-
-                h.FORM_("uk-card uk-card-primary");
-                h.UL_("uk-card-body uk-list uk-list-divider");
-                h.LI_().FIELD("主体名称", org.name)._LI();
-                h.LI_().FIELD("类型", Org.Typs[org.typ])._LI();
-                if (org.addr != null)
-                {
-                    h.LI_().FIELD("地址", org.addr)._LI();
-                }
-                if (!org.IsSpr)
-                {
-                    var spr = orgs[org.sprid];
-                    h.LI_().FIELD("所在产源", spr.name)._LI();
-                }
-                h.LI_().FIELD2("管理员", org.mgrname, org.mgrtel)._LI();
-                var ctras = org.ctras;
-                if (ctras != null)
-                {
-                    h.LI_().FIELD("关联中枢", ctras, orgs)._LI();
-                }
-                h._UL();
-                h._FORM();
-
-                h.TASKLIST();
-            }, false, 3);
-        }
-    }
-
-    [UserAuthorize(Org.TYP_CTR, 1)]
-    [Ui("中枢操作")]
-    public class CtrlyVarWork : OrglyVarWork
-    {
-        protected override void OnCreate()
-        {
-            CreateWork<CtrlyBookWork>("book");
-        }
-
-        public void @default(WebContext wc)
-        {
-            var org = wc[0].As<Org>();
-            var regs = Grab<short, Reg>();
-            var prin = (User) wc.Principal;
-            using var dc = NewDbContext();
-            wc.GivePage(200, h =>
-            {
-                var role = prin.orgid != org.id ? "代办" : User.Orgly[prin.orgly];
-                h.TOOLBAR(tip: prin.name + "（" + role + "）");
-
-                h.FORM_("uk-card uk-card-primary");
-                h.UL_("uk-card-body ul-list uk-list-divider");
-                h.LI_().FIELD("主体名称", org.name)._LI();
-                h.LI_().FIELD2("地址", regs[org.regid]?.name, org.addr)._LI();
-                h.LI_().FIELD2("管理员", org.mgrname, org.mgrtel)._LI();
-                h.LI_().FIELD("状态", Info.Statuses[org.status])._LI();
-                h._UL();
-                h._FORM();
-
-                h.TASKLIST();
-            }, false, 3);
         }
     }
 }

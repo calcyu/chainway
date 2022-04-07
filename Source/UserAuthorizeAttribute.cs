@@ -68,17 +68,6 @@ namespace Coverse
                 return true;
             }
 
-            // is trusted for the org
-            if (org.trust && org.sprid == prin.orgid)
-            {
-                if (!mock)
-                {
-                    wc.Party = org.name;
-                    wc.Role = "代办";
-                }
-                return true;
-            }
-
             return false;
         }
     }

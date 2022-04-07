@@ -18,11 +18,7 @@ namespace Coverse
 
             CreateWork<AdmlyWork>("admly"); // for admin
 
-            CreateWork<SrclyWork>("srcly"); // for source & farms
-
-            CreateWork<CtrlyWork>("ctrly"); // for center
-
-            CreateWork<MrtlyWork>("mrtly"); // for markets and bizs
+            CreateWork<OrglyWork>("orgly"); // for org & company
         }
 
         public void @default(WebContext wc, int cmd)

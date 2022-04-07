@@ -26,7 +26,7 @@ namespace Coverse
 
             CreateWork<AdmlyUserWork>("user");
 
-            CreateWork<NodalWork>("fed", authorize: new UserAuthorizeAttribute(admly: User.ADMLY_MGT));
+            CreateWork<NodeWork>("fed", authorize: new UserAuthorizeAttribute(admly: User.ADMLY_MGT));
 
             CreateWork<AdmlyClearWork>("clear");
         }

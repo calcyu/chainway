@@ -11,13 +11,15 @@ using static System.Data.IsolationLevel;
 
 namespace Coverse
 {
-    public class RuralApp : Application
+    public class CoverseApplication : Application
     {
-        Map<short, Schema> schemas = new Map<short, Schema>();
+        static readonly Map<short, Scheme> schemas = new Map<short, Scheme>();
 
-        ConcurrentDictionary<int, Plan> plans = new ConcurrentDictionary<int, Plan>();
+        static readonly ConcurrentDictionary<int, Project> projects = new ConcurrentDictionary<int, Project>();
 
-        public static S CreateSchema<S>(string name) where S : Schema, new()
+        static readonly ConcurrentDictionary<int, Deal> deals = new ConcurrentDictionary<int, Deal>();
+
+        public static S CreateSchema<S>(string name) where S : Scheme, new()
         {
             if (name == null)
             {
@@ -47,14 +49,14 @@ namespace Coverse
             }
             else
             {
-                if (args.Contains("pub-p"))
+                if (args.Contains("www-p"))
                 {
-                    CreateService<WebProxy>("pub");
+                    CreateService<ProxyService>("www");
                 }
 
                 if (args.Contains("mgt-p"))
                 {
-                    CreateService<WebProxy>("mgt");
+                    CreateService<ProxyService>("mgt");
                 }
             }
 

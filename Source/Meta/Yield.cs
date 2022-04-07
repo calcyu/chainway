@@ -1,7 +1,6 @@
 ﻿namespace Coverse.Meta
 {
-    public class Phase
+    public class Yield : Thing
     {
-        
     }
 }
