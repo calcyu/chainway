@@ -1,32 +1,24 @@
 ﻿using System.Threading.Tasks;
-using SkyChain;
-using SkyChain.Web;
-using static SkyChain.Nodal.Home;
+using Chainly;
+using Chainly.Web;
+using static Chainly.Nodal.Store;
 
-namespace Coverse
+namespace Urbrural
 {
     [Ui("机构主体操作")]
     public class OrglyVarWork : WebWork
     {
         protected override void OnCreate()
         {
-            CreateWork<MrtlyOrgWork>("org");
-
-            CreateWork<MrtlyUserWork>("user");
-
-            CreateWork<MrtlyBookWork>("mbook");
-
-            CreateWork<MrtlyBuyWork>("mbuy");
+            CreateWork<OrglyUserWork>("user");
 
             CreateWork<MrtlyDailyWork>("daily");
 
-            CreateWork<BizlyPieceWork>("piece");
+            CreateWork<OrglyProjWork>("proj");
 
-            CreateWork<BizlyBuyWork>("bbuy");
+            CreateWork<OrglyCreditWork>("credit");
 
-            CreateWork<BizlyShopWork>("shop");
-
-            CreateWork<BizlyBookWork>("bbook");
+            CreateWork<OrglyDealWork>("deal");
 
             CreateWork<OrglyClearWork>("clear");
 

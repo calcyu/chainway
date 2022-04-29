@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using SkyChain;
-using SkyChain.Web;
-using static SkyChain.Nodal.Home;
-using static SkyChain.Web.Modal;
+using Chainly;
+using Chainly.Web;
+using static Chainly.Nodal.Store;
+using static Chainly.Web.Modal;
 
-namespace Coverse
+namespace Urbrural
 {
     public abstract class UserVarWork : WebWork
     {

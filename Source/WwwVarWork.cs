@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
-using SkyChain;
-using SkyChain.Web;
-using static SkyChain.Nodal.Home;
+using Chainly;
+using Chainly.Web;
+using Urbrural;
+using static Chainly.Nodal.Store;
 
-namespace Coverse
+namespace Urbrural
 {
     /// <summary>
     /// The home page for markets and businesses therein..
@@ -43,20 +44,6 @@ namespace Coverse
             else if (org.IsBiz)
             {
                 using var dc = NewDbContext();
-                dc.Sql("SELECT ").collst(Piece.Empty).T(" FROM pieces WHERE orgid = @1 AND status > 0 ORDER BY status DESC");
-                var posts = await dc.QueryAsync<Piece>(p => p.Set(org.id));
-                wc.GivePage(200, h =>
-                {
-                    h.TOPBAR_();
-                    h.T(org.name);
-                    h._TOPBAR();
-
-                    h.GRID(posts, o =>
-                    {
-                        h.HEADER_().T(o.name)._HEADER();
-                        h.A_("/piece/", o.id, "/", end: true).T(o.name)._A();
-                    });
-                }, title: org.name);
             }
         }
 
@@ -68,18 +55,6 @@ namespace Coverse
             if (inner)
             {
                 using var dc = NewDbContext();
-                dc.Sql("SELECT ").collst(Piece.Empty).T(" FROM pieces WHERE orgid = @1 AND status > 0 ORDER BY status DESC");
-                var posts = await dc.QueryAsync<Piece>(p => p.Set(orgid));
-                wc.GivePane(200, h =>
-                {
-                    h.TOOLBAR(tip: "查询" + regs[(short) sect].name);
-
-                    h.FORM_();
-                    h.RADIO("sdfs", "sdfasdf");
-                    h.T("erwer");
-                    h.BOTTOM_BUTTON("确定");
-                    h._FORM();
-                }, true, 60);
             }
             else
             {

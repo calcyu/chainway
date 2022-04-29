@@ -1,7 +1,7 @@
-using SkyChain;
-using SkyChain.Web;
+using Chainly;
+using Chainly.Web;
 
-namespace Coverse
+namespace Urbrural
 {
     public class MyWork : WebWork
     {

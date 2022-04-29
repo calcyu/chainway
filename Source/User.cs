@@ -1,7 +1,7 @@
 ﻿using System;
-using SkyChain;
+using Chainly;
 
-namespace Coverse
+namespace Urbrural
 {
     public class User : Info, IKeyable<int>
     {

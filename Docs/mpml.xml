@@ -1,0 +1,40 @@
+﻿<mpml>
+    <head>
+        <factx type="">
+            <fact/>
+            <fact/>
+            <fact/>
+        </factx>
+        <jobx type="">
+            <job/>
+        </jobx>
+    </head>
+    <body>
+        <stage label="准备" tip="选种整地施肥" pay="1200.00">
+            <factx type="add">
+                <fact/>
+                <fact/>
+            </factx>
+            <jobx>
+            </jobx>
+        </stage>
+        <stage label="播种" tip="护种播种">
+            <factx>
+            </factx>
+            <jobx>
+            </jobx>
+        </stage>
+        <stage label="管理" tip="施肥除虫灌溉">
+            <factx>
+            </factx>
+            <jobx>
+            </jobx>
+        </stage>
+        <stage label="收获" tip="成熟收获晒储">
+            <factx>
+            </factx>
+            <jobx>
+            </jobx>
+        </stage>
+    </body>
+</mpml>

@@ -1,7 +1,7 @@
-﻿using SkyChain;
-using SkyChain.Web;
+﻿using Chainly;
+using Chainly.Web;
 
-namespace Coverse
+namespace Urbrural
 {
     /// <summary>
     /// The data model for an organizational unit.

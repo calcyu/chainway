@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using SkyChain;
-using SkyChain.Nodal;
-using SkyChain.Web;
-using static SkyChain.Nodal.Home;
+using Chainly;
+using Chainly.Nodal;
+using Chainly.Web;
+using static Chainly.Nodal.Store;
 
-namespace Coverse
+namespace Urbrural
 {
     [UserAuthorize(admly: User.ADMLY_)]
     [Ui("平台管理")]
@@ -16,17 +16,15 @@ namespace Coverse
 
             CreateWork<AdmlyOrgWork>("org");
 
-            CreateWork<AdmlyItemWork>("item");
+            CreateWork<AdmlyDealWork>("deal");
 
-            CreateWork<AdmlyBookWork>("book");
-
-            CreateWork<AdmlyBuyWork>("buy");
+            CreateWork<AdmlyCreditWork>("carbon");
 
             CreateWork<AdmlyDailyWork>("daily");
 
             CreateWork<AdmlyUserWork>("user");
 
-            CreateWork<NodeWork>("fed", authorize: new UserAuthorizeAttribute(admly: User.ADMLY_MGT));
+            CreateWork<FedMgtWork>("fed", authorize: new UserAuthorizeAttribute(admly: User.ADMLY_MGT));
 
             CreateWork<AdmlyClearWork>("clear");
         }
@@ -45,7 +43,7 @@ namespace Coverse
                 {
                     h.LI_().FIELD("平台名称", o.Name)._LI();
                     h.LI_().FIELD("描述", o.Tip)._LI();
-                    h.LI_().FIELD("连接地址", o.Domain)._LI();
+                    h.LI_().FIELD("连接地址", o.WebUrl)._LI();
                 }
                 h._UL();
                 h._FORM();

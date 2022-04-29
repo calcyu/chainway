@@ -1,9 +1,9 @@
-﻿using SkyChain.Web;
-using static SkyChain.Web.Modal;
-using static Coverse.User;
-using static SkyChain.Nodal.Home;
+﻿using Chainly.Web;
+using static Chainly.Web.Modal;
+using static Urbrural.User;
+using static Chainly.Nodal.Store;
 
-namespace Coverse
+namespace Urbrural
 {
     public abstract class UserWork : WebWork
     {
@@ -89,7 +89,7 @@ namespace Coverse
 
     [UserAuthorize(Org.TYP_MRT, 1)]
     [Ui("市场消费者管理", "users")]
-    public class MrtlyUserWork : UserWork
+    public class OrglyUserWork : UserWork
     {
         protected override void OnCreate()
         {

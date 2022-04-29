@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Data;
 using System.Threading.Tasks;
-using SkyChain;
-using SkyChain.Web;
-using static SkyChain.Nodal.Home;
-using static SkyChain.Web.Modal;
+using Chainly;
+using Chainly.Web;
+using static Chainly.Nodal.Store;
+using static Chainly.Web.Modal;
 
-namespace Coverse
+namespace Urbrural
 {
     [UserAuthorize(admly: User.ADMLY_)]
     [Ui("平台代收款项结算", "credit-card")]

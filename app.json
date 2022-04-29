@@ -1,15 +1,15 @@
 {
   "logging": 2,
   "certpasswd": "fVC2ToAq",
-  "famkey": "ebce206103e439514f3c4748c683274e",
-  "chain": {
+  "crypto": "ebce206103e439514f3c4748c683274e",
+  "nodal": {
     "host": "81.69.218.155",
     "port": 5432,
-    "database": "revital",
+    "database": "coverse",
     "username": "postgres",
     "password": "Gs721004",
     "name": "城乡元宇宙",
-    "tip": "城乡元宇宙生态项目平台",
+    "tip": "城乡元宇宙项目平台",
     "domain": "jx.ezhnt.cn",
     "secure": false,
     "fedkey": "ebce206103e439514f3c4748c683274e"

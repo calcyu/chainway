@@ -1,7 +1,7 @@
 ﻿using System;
-using SkyChain.Web;
+using Chainly.Web;
 
-namespace Coverse
+namespace Urbrural
 {
     /// <summary>
     /// To implement principal authorization of access to the target resources.

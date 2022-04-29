@@ -1,9 +1,9 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
-using SkyChain;
-using SkyChain.Web;
+using Chainly;
+using Chainly.Web;
 
-namespace Coverse
+namespace Urbrural
 {
     public abstract class MsgWork : WebWork
     {

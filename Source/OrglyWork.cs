@@ -1,8 +1,8 @@
-using SkyChain;
-using SkyChain.Web;
-using static SkyChain.Nodal.Home;
+using Chainly;
+using Chainly.Web;
+using static Chainly.Nodal.Store;
 
-namespace Coverse
+namespace Urbrural
 {
     [Ui("机构主体操作")]
     public class OrglyWork : WebWork

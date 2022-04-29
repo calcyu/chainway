@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using SkyChain.Web;
+using Chainly.Web;
 
-namespace Coverse
+namespace Urbrural
 {
     public abstract class ClearVarWork : WebWork
     {

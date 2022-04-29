@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using SkyChain.Nodal;
-using SkyChain.Web;
+using Chainly.Web;
+using static Chainly.Nodal.Store;
 
-namespace Coverse
+namespace Urbrural
 {
     /// <summary>
     /// To establish principal identity. 
@@ -61,7 +61,7 @@ namespace Coverse
                     }
 
                     // create principal
-                    using var dc = Home.NewDbContext();
+                    using var dc = NewDbContext();
                     dc.Sql("SELECT ").collst(User.Empty).T(" FROM users WHERE im = @1");
                     if (dc.QueryTop(p => p.Set(openid)))
                     {

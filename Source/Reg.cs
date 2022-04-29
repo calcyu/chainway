@@ -1,8 +1,9 @@
-﻿using SkyChain;
+﻿using Chainly;
+using Coverse.Metaverse;
 
-namespace Coverse
+namespace Urbrural
 {
-    public class Reg : Info, IKeyable<short>
+    public class Reg : Info, IKeyable<short>, IContainer
     {
         public static readonly Reg Empty = new Reg();
 
@@ -52,5 +53,10 @@ namespace Coverse
         public bool IsSect => typ == TYP_SECT;
 
         public override string ToString() => name;
+
+        public ProjSite SiteAt(int p)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

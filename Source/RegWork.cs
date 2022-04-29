@@ -1,11 +1,13 @@
 using System;
 using System.Threading.Tasks;
-using SkyChain.Web;
-using static Coverse.User;
-using static SkyChain.Nodal.Home;
-using static SkyChain.Web.Modal;
+using Chainly;
+using Chainly.Web;
+using Urbrural;
+using static Urbrural.User;
+using static Chainly.Nodal.Store;
+using static Chainly.Web.Modal;
 
-namespace Coverse
+namespace Urbrural
 {
     public abstract class RegWork : WebWork
     {
@@ -105,7 +107,7 @@ namespace Coverse
             {
                 o = await wc.ReadObjectAsync(instance: o);
                 using var dc = NewDbContext();
-                dc.Sql("INSERT INTO regs ").colset(Reg.Empty)._VALUES_(Item.Empty);
+                // dc.Sql("INSERT INTO regs ").colset(Reg.Empty)._VALUES_(Item.Empty);
                 await dc.ExecuteAsync(p => o.Write(p));
 
                 wc.GivePane(200); // close dialog

@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
-using SkyChain;
-using SkyChain.Nodal;
-using SkyChain.Web;
+using Chainly;
+using Chainly.Web;
 using static System.String;
-using static SkyChain.Web.Modal;
+using static Chainly.Nodal.Store;
+using static Chainly.Web.Modal;
 
-namespace Coverse
+namespace Urbrural
 {
     [UserAuthorize]
     [Ui("账号信息")]
@@ -13,7 +13,7 @@ namespace Coverse
     {
         protected override void OnCreate()
         {
-            CreateWork<MyBuyWork>("buy");
+            CreateWork<MyCreditWork>("buy");
         }
 
         [UserAuthorize]
@@ -70,9 +70,9 @@ namespace Coverse
                 string credential =
                     IsNullOrEmpty(password) ? null :
                     password == PASSMASK ? prin.credential :
-                    RuralUtility.ComputeCredential(tel, password);
+                    CoverseUtility.ComputeCredential(tel, password);
 
-                using var dc = Home.NewDbContext();
+                using var dc = NewDbContext();
                 dc.Sql("UPDATE users SET name = CASE WHEN @1 IS NULL THEN name ELSE @1 END , tel = @2, credential = @3 WHERE id = @4 RETURNING ").collst(User.Empty);
                 prin = await dc.QueryTopAsync<User>(p => p.Set(name).Set(tel).Set(credential).Set(prin.id));
                 // refresh cookie

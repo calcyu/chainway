@@ -1,7 +1,7 @@
 ﻿using System;
-using SkyChain;
+using Chainly;
 
-namespace Coverse
+namespace Urbrural
 {
     /// <summary>
     /// A reportive record of daily transaction for goods.

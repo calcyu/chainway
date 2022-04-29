@@ -1,10 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using SkyChain.Web;
-using static SkyChain.Nodal.Home;
-using static SkyChain.Web.Modal;
+using Chainly;
+using Chainly.Web;
+using Urbrural;
+using static Chainly.Nodal.Store;
+using static Chainly.Web.Modal;
 
-namespace Coverse
+namespace Urbrural
 {
     public abstract class OrgWork : WebWork
     {
@@ -134,157 +136,6 @@ namespace Coverse
                 using var dc = NewDbContext();
                 dc.Sql("INSERT INTO orgs ").colset(Org.Empty, Info.BORN)._VALUES_(Org.Empty, Info.BORN);
                 await dc.ExecuteAsync(p => o.Write(p, Info.BORN));
-                wc.GivePane(201); // created
-            }
-        }
-    }
-
-
-    [UserAuthorize(Org.TYP_MRT, 1)]
-#if ZHNT
-    [Ui("市场下属商户管理", "album")]
-#else
-    [Ui("市场下属商户管理", "album")]
-#endif
-    public class MrtlyOrgWork : OrgWork
-    {
-        protected override void OnCreate()
-        {
-            State = Org.TYP_BIZ;
-            CreateVarWork<MrtlyOrgVarWork>(state: Org.TYP_BIZ);
-        }
-
-        public async Task @default(WebContext wc)
-        {
-            var org = wc[-1].As<Org>();
-            using var dc = NewDbContext();
-            dc.Sql("SELECT ").collst(Org.Empty).T(" FROM orgs_vw WHERE sprid = @1 ORDER BY id");
-            var arr = await dc.QueryAsync<Org>(p => p.Set(org.id));
-            var regs = Grab<short, Reg>();
-            wc.GivePage(200, h =>
-            {
-                h.TOOLBAR();
-                h.TABLE(arr, o =>
-                {
-                    h.TDCHECK(o.Key);
-                    // h.TD_().A_("/mrtly/", o.Key, "/", css: "uk-button-link")._DIALOG_("return dialog(this,8,false,4,'');").T(o.name)._A()._TD();
-                    h.TD(regs[o.regid].name);
-                    h.TDFORM(() => { });
-                });
-            });
-        }
-
-        [Ui("添加"), Tool(ButtonShow)]
-        public async Task @new(WebContext wc)
-        {
-            var org = wc[-1].As<Org>();
-            var prin = (User) wc.Principal;
-            var regs = Grab<short, Reg>();
-
-            if (wc.IsGet)
-            {
-                var m = new Org
-                {
-                    created = DateTime.Now,
-                    creator = prin.name,
-                    status = Info.STA_ENABLED
-                };
-                m.Read(wc.Query, 0);
-                wc.GivePane(200, h =>
-                {
-                    h.FORM_().FIELDSUL_("主体信息");
-                    h.LI_().SELECT("类型", nameof(m.typ), m.typ, Org.Typs, filter: (k, v) => k == Org.TYP_BIZ, required: true)._LI();
-                    h.LI_().TEXT("名称", nameof(m.name), m.name, max: 8, required: true)._LI();
-                    h.LI_().TEXTAREA("简介", nameof(m.tip), m.tip, max: 30)._LI();
-                    h.LI_().SELECT("区域", nameof(m.regid), m.regid, regs, filter: (k, v) => v.typ == Reg.TYP_SECT)._LI();
-                    h.LI_().TEXT("编址", nameof(m.addr), m.addr, max: 20)._LI();
-                    h.LI_().SELECT("状态", nameof(m.status), m.status, Info.Statuses)._LI();
-                    h._FIELDSUL()._FORM();
-                });
-            }
-            else // POST
-            {
-                var o = await wc.ReadObjectAsync(0, new Org
-                {
-                    sprid = org.id,
-                    created = DateTime.Now,
-                    creator = prin.name,
-                });
-                using var dc = NewDbContext();
-                dc.Sql("INSERT INTO orgs ").colset(Org.Empty, 0)._VALUES_(Org.Empty, 0);
-                await dc.ExecuteAsync(p => o.Write(p));
-                wc.GivePane(201); // created
-            }
-        }
-    }
-
-    [UserAuthorize(Org.TYP_SRC, 1)]
-    [Ui("产源下属大户管理", "thumbnails")]
-    public class SrclyOrgWork : OrgWork
-    {
-        protected override void OnCreate()
-        {
-            CreateVarWork<SrclyOrgVarWork>();
-        }
-
-        public async Task @default(WebContext wc, int page)
-        {
-            var org = wc[-1].As<Org>();
-            using var dc = NewDbContext();
-            dc.Sql("SELECT ").collst(Org.Empty).T(" FROM orgs_vw WHERE sprid = @1 ORDER BY status DESC, id LIMIT 30 OFFSET 30 * @2");
-            var arr = await dc.QueryAsync<Org>(p => p.Set(org.id).Set(page));
-            wc.GivePage(200, h =>
-            {
-                h.TOOLBAR();
-                if (arr == null) return;
-
-                h.TABLE(arr, o =>
-                {
-                    h.TDCHECK(o.id);
-                    h.TD_().AVAR(o.Key, o.name).SP().ADIALOG_("/srcly/", o.id, "/", 8, false, Appear.Full).T("代办")._A()._TD();
-                    h.TD(Info.Statuses[o.status]);
-                    h.TD_("uk-visible@l").T(o.tip)._TD();
-                    h.TDFORM(() => h.TOOLGROUPVAR(o.Key));
-                });
-            });
-        }
-
-        [Ui("✚", "新建大户"), Tool(ButtonShow)]
-        public async Task @new(WebContext wc)
-        {
-            var org = wc[-1].As<Org>();
-            var prin = (User) wc.Principal;
-            var regs = Grab<short, Reg>();
-            var m = new Org
-            {
-                typ = Org.TYP_FRM,
-                sprid = org.id,
-                regid = org.regid,
-                created = DateTime.Now,
-                creator = prin.name,
-                status = Info.STA_ENABLED
-            };
-            if (wc.IsGet)
-            {
-                wc.GivePane(200, h =>
-                {
-                    h.FORM_().FIELDSUL_("大户信息");
-                    h.LI_().TEXT("主体名称", nameof(m.name), m.name, max: 10, required: true)._LI();
-                    h.LI_().TEXTAREA("简介", nameof(m.tip), m.tip, max: 30)._LI();
-                    h.LI_().TEXT("地址", nameof(m.addr), m.addr, max: 20)._LI();
-                    h.LI_().TEXT("电话", nameof(m.tel), m.tel, pattern: "[0-9]+", max: 11, min: 11, required: true);
-                    h.LI_().SELECT("状态", nameof(m.status), m.status, Info.Statuses).CHECKBOX("委托代办", nameof(m.trust), m.trust)._LI();
-                    h._FIELDSUL()._FORM();
-                });
-            }
-            else // POST
-            {
-                const short proj = Info.BORN;
-                var o = await wc.ReadObjectAsync(proj, instance: m);
-                using var dc = NewDbContext();
-                dc.Sql("INSERT INTO orgs ").colset(Org.Empty, proj)._VALUES_(Org.Empty, proj);
-                await dc.ExecuteAsync(p => o.Write(p, proj));
-
                 wc.GivePane(201); // created
             }
         }

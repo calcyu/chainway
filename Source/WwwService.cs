@@ -1,12 +1,13 @@
 using System;
 using System.Threading.Tasks;
 using System.Web;
-using SkyChain;
-using SkyChain.Web;
-using static Coverse.WeChatUtility;
-using static SkyChain.Nodal.Home;
+using Chainly;
+using Chainly.Web;
+using Urbrural;
+using static Urbrural.WeChatUtility;
+using static Chainly.Nodal.Store;
 
-namespace Coverse
+namespace Urbrural
 {
     [UserAuthenticate]
     public class WwwService : WebService
@@ -15,11 +16,9 @@ namespace Coverse
         {
             CreateVarWork<WwwVarWork>(); // market home page
 
-            CreateWork<PublyPieceWork>("piece");
+            CreateWork<PublyProjWork>("proj");
 
-            CreateWork<PublyItemWork>("item");
-
-            CreateWork<PublyBookWork>("code");
+            CreateWork<PublyDealWork>("deal");
 
             CreateWork<MyWork>("my");
         }
@@ -157,7 +156,7 @@ namespace Coverse
                 url = f[nameof(url)];
 
                 using var dc = NewDbContext();
-                var credential = RuralUtility.ComputeCredential(tel, password);
+                var credential = CoverseUtility.ComputeCredential(tel, password);
                 dc.Sql("SELECT ").collst(User.Empty).T(" FROM users WHERE tel = @1");
                 var prin = dc.QueryTop<User>(p => p.Set(tel));
                 if (prin == null || !credential.Equals(prin.credential))
