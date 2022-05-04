@@ -34,17 +34,10 @@ namespace Urbrural
                 var last = 0;
                 foreach (var o in arr)
                 {
-                    if (o.sprid != last)
-                    {
-                        var spr = GrabObject<int, Org>(o.sprid);
-                        h.TR_().TD_("uk-label uk-padding-tiny-left", colspan: 3).T(spr.name)._TD()._TR();
-                    }
                     h.TR_();
                     h.TD(o.dt);
                     h.TD(o.name);
                     h._TR();
-
-                    last = o.sprid;
                 }
                 h._TABLE();
                 h.PAGINATION(arr.Length == 40);
@@ -84,17 +77,10 @@ namespace Urbrural
                     var last = 0;
                     foreach (var o in arr)
                     {
-                        if (o.sprid != last)
-                        {
-                            var spr = GrabObject<int, Org>(o.sprid);
-                            h.TR_().TD_("uk-label uk-padding-tiny-left", colspan: 3).T(spr.name)._TD()._TR();
-                        }
                         h.TR_();
                         h.TD(o.dt);
                         h.TD(o.name);
                         h._TR();
-
-                        last = o.sprid;
                     }
                     h._TABLE();
                     h.PAGINATION(arr.Length == 40);

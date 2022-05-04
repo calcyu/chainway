@@ -18,11 +18,11 @@ namespace Urbrural
 
             CreateWork<OrglyCreditWork>("credit");
 
-            CreateWork<OrglyDealWork>("deal");
+            CreateWork<OrglyPlayWork>("deal");
 
             CreateWork<OrglyClearWork>("clear");
 
-            CreateWork<OrglyMsgWork>("msg");
+            CreateWork<OrglyPostWork>("msg");
         }
 
         public void @default(WebContext wc)
@@ -39,22 +39,8 @@ namespace Urbrural
                 h.UL_("uk-card-body uk-list uk-list-divider");
                 h.LI_().FIELD("主体名称", org.name)._LI();
                 h.LI_().FIELD("类型", Org.Typs[org.typ])._LI();
-                h.LI_().FIELD(org.IsMrt ? "地址" : "编址", org.addr)._LI();
-                if (org.sprid > 0)
-                {
-                    var spr = GrabObject<int, Org>(org.sprid);
-                    h.LI_().FIELD("所在市场", spr.name)._LI();
-                }
+                h.LI_().FIELD("地址", org.addr)._LI();
                 h.LI_().FIELD2("管理员", org.mgrname, org.mgrtel)._LI();
-                if (org.ctras != null)
-                {
-                    var ctr = GrabObject<int, Org>(org.ctras[0]);
-                    h.LI_().FIELD("关联中枢", ctr.name)._LI();
-                }
-                if (org.IsBiz)
-                {
-                    h.LI_().FIELD("委托代办", org.trust)._LI();
-                }
                 h._UL();
                 h._FORM();
 

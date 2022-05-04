@@ -3,7 +3,6 @@ using System.Data;
 using System.Threading.Tasks;
 using Chainly;
 using Chainly.Web;
-using Urbrural;
 using static Chainly.Nodal.Store;
 using static Chainly.Web.Modal;
 
@@ -63,20 +62,9 @@ namespace Urbrural
                     h.FORM_().FIELDSUL_(typname + "机构信息");
                     h.LI_().TEXT(typname + "名称", nameof(m.name), m.name, min: 2, max: 12, required: true)._LI();
                     h.LI_().TEXTAREA("简介", nameof(m.tip), m.tip, max: 30)._LI();
-                    if (m.IsSrc)
-                    {
-                        h.LI_().SELECT("物流投放", nameof(m.fork), m.fork, Org.Forks, required: true).SELECT("业务版块", nameof(m.zone), m.zone, Org.Zones, required: true)._LI();
-                    }
-                    h.LI_().SELECT(m.HasLocality ? "所在地市" : "所在省份", nameof(m.regid), m.regid, regs, filter: (k, v) => m.HasLocality ? v.IsDist : v.IsProv, required: !m.IsSrc)._LI();
+                    h.LI_().SELECT("所在省份", nameof(m.regid), m.regid, regs)._LI();
                     h.LI_().TEXT("地址", nameof(m.addr), m.addr, max: 20)._LI();
-                    if (m.HasXy)
-                    {
-                        h.LI_().NUMBER("经度", nameof(m.x), m.x, min: 0.000, max: 180.000).NUMBER("纬度", nameof(m.y), m.y, min: -90.000, max: 90.000)._LI();
-                    }
-                    if (m.IsSpr)
-                    {
-                        h.LI_().SELECT("关联中枢", nameof(m.ctras), m.ctras, orgs, filter: (k, v) => v.IsCtr, multiple: m.IsSrc, required: true)._LI();
-                    }
+                    h.LI_().NUMBER("经度", nameof(m.x), m.x, min: 0.000, max: 180.000).NUMBER("纬度", nameof(m.y), m.y, min: -90.000, max: 90.000)._LI();
                     h.LI_().SELECT("状态", nameof(m.status), m.status, Info.Statuses, filter: (k, v) => k > 0)._LI();
                     h._FIELDSUL()._FORM();
                 });
@@ -177,7 +165,7 @@ namespace Urbrural
                     h.LI_().SELECT("所在省份", nameof(m.regid), m.regid, regs, filter: (k, v) => v.IsProv, required: true)._LI();
                     h.LI_().TEXT("地址", nameof(m.addr), m.addr, max: 20)._LI();
                     h.LI_().TEXT("电话", nameof(m.tel), m.tel, pattern: "[0-9]+", max: 11, min: 11, required: true);
-                    h.LI_().SELECT("状态", nameof(m.status), m.status, Info.Statuses).CHECKBOX("委托代办", nameof(m.trust), m.trust)._LI();
+                    h.LI_().SELECT("状态", nameof(m.status), m.status, Info.Statuses)._LI();
                     h._FIELDSUL()._FORM();
                 });
             }
@@ -211,7 +199,7 @@ namespace Urbrural
             else
             {
                 using var dc = NewDbContext();
-                dc.Sql("DELETE FROM orgs WHERE id = @1 AND typ = ").T(Org.TYP_FRM);
+                dc.Sql("DELETE FROM orgs WHERE id = @1 AND typ = ").T(Org.TYP_STA);
                 await dc.ExecuteAsync(p => p.Set(id));
 
                 wc.GivePane(200);

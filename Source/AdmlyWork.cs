@@ -37,7 +37,7 @@ namespace Urbrural
             {
                 h.TOOLBAR(tip: prin.name + "（" + wc.Role + "）");
 
-                h.FORM_("uk-card uk-card-primary");
+                h.FORM_("uk-card uk-card-default");
                 h.UL_("uk-card-body uk-list uk-list-divider");
                 if (o != null)
                 {

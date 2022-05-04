@@ -7,7 +7,6 @@
         <PackageVersion>2.0.1</PackageVersion>
         <AssemblyVersion>2.0.1</AssemblyVersion>
         <Copyright>Jzg Research</Copyright>
-        <RootNamespace>Coverse</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -28,6 +27,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Chainly\Chainly.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Source\Library" />
     </ItemGroup>
 
 </Project>

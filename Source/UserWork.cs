@@ -87,7 +87,7 @@ namespace Urbrural
         }
     }
 
-    [UserAuthorize(Org.TYP_MRT, 1)]
+    [UserAuthorize(1, 1)]
     [Ui("市场消费者管理", "users")]
     public class OrglyUserWork : UserWork
     {

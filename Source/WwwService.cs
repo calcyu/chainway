@@ -64,10 +64,6 @@ namespace Urbrural
                     for (int i = 0; i < orgs.Count; i++)
                     {
                         var o = orgs.ValueAt(i);
-                        if (!o.IsMrt || o.regid != regid)
-                        {
-                            continue;
-                        }
                         h.LI_("uk-flex");
                         PutMrt(h, o);
                         h._LI();
@@ -156,7 +152,7 @@ namespace Urbrural
                 url = f[nameof(url)];
 
                 using var dc = NewDbContext();
-                var credential = CoverseUtility.ComputeCredential(tel, password);
+                var credential = UrbruralUtility.ComputeCredential(tel, password);
                 dc.Sql("SELECT ").collst(User.Empty).T(" FROM users WHERE tel = @1");
                 var prin = dc.QueryTop<User>(p => p.Set(tel));
                 if (prin == null || !credential.Equals(prin.credential))

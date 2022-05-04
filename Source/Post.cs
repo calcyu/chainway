@@ -3,20 +3,20 @@
 namespace Urbrural
 {
     /// <summary>
-    /// A reportive record of daily transaction for goods.
+    /// A blog post for upon a certain project.
     /// </summary>
-    public class Msg : Info
+    public class Post : Info
     {
-        public static readonly Msg Empty = new Msg();
+        public static readonly Post Empty = new Post();
 
         public const short
-            TYP_MRT = 1,
-            TYP_PRV = 2;
+            TYP_ACK = 1,
+            TYP_CMT = 2;
 
         public static readonly Map<short, string> Typs = new Map<short, string>
         {
-            {TYP_MRT, "市场"},
-            {TYP_PRV, "供给"},
+            {TYP_ACK, "点赞"},
+            {TYP_CMT, "评论"},
         };
 
 

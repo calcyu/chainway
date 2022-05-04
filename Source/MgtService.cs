@@ -31,7 +31,6 @@ namespace Urbrural
                 for (int i = 0; i < orgs.Count; i++)
                 {
                     var org = orgs.ValueAt(i);
-                    if (!org.IsCtr) continue;
                     h.LI_("uk-flex");
                     h.A_(org.Key, "/", end: true, css: "uk-button uk-button-link uk-flex-left").T(org.name).T("组")._A();
                     h._LI();
@@ -110,7 +109,7 @@ namespace Urbrural
                 url = f[nameof(url)];
 
                 using var dc = NewDbContext();
-                var credential = CoverseUtility.ComputeCredential(tel, password);
+                var credential = UrbruralUtility.ComputeCredential(tel, password);
                 dc.Sql("SELECT ").collst(User.Empty).T(" FROM users WHERE tel = @1");
                 var prin = dc.QueryTop<User>(p => p.Set(tel));
                 if (prin == null || !credential.Equals(prin.credential))

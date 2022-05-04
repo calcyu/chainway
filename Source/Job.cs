@@ -8,6 +8,6 @@
         string name;
 
 
-        Fact[] affected;
+        Factor[] affected;
     }
 }

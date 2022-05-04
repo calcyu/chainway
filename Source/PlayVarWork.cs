@@ -11,11 +11,11 @@ using static Chainly.Web.Application;
 
 namespace Urbrural
 {
-    public class DealVarWork : WebWork
+    public class PlayVarWork : WebWork
     {
     }
 
-    public class MyDealVarWork : DealVarWork
+    public class MyPlayVarWork : PlayVarWork
     {
         [Ui("✎", "✎ 填写日志"), Tool(ButtonShow)]
         public async Task log(WebContext wc, int dt)
@@ -97,7 +97,7 @@ namespace Urbrural
         }
     }
 
-    public class BizlyDealVarWork : DealVarWork
+    public class BizlyPlayVarWork : PlayVarWork
     {
         [Ui("☰", "☰ 明细"), Tool(ButtonOpen, Half)]
         public async Task dtl(WebContext wc)
@@ -105,8 +105,8 @@ namespace Urbrural
             short orgid = wc[-2];
             int orderid = wc[0];
             using var dc = NewDbContext();
-            dc.Sql("SELECT ").collst(Deal.Empty).T(" FROM orderlgs WHERE orderid = @1 ORDER BY dt");
-            var arr = await dc.QueryAsync<Deal>(p => p.Set(orderid));
+            dc.Sql("SELECT ").collst(Play.Empty).T(" FROM orderlgs WHERE orderid = @1 ORDER BY dt");
+            var arr = await dc.QueryAsync<Play>(p => p.Set(orderid));
             wc.GivePane(200, h =>
             {
                 var today = DateTime.Today;

@@ -5,9 +5,9 @@ namespace Urbrural
     /// <summary>
     /// An online or offline retail order
     /// </summary>
-    public class Deal : Info, IKeyable<long>
+    public class Play : Info, IKeyable<long>
     {
-        public static readonly Deal Empty = new Deal();
+        public static readonly Play Empty = new Play();
 
         public const short
             TYP_ONLINE = 1,

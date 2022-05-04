@@ -7,7 +7,7 @@ using static Chainly.CryptoUtility;
 
 namespace Urbrural
 {
-    public static class CoverseUtility
+    public static class UrbruralUtility
     {
         public static double ComputeDistance(double lat1, double lng1, double lat2, double lng2)
         {

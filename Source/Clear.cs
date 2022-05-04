@@ -34,7 +34,6 @@ namespace Urbrural
         internal int id;
         internal int orgid;
         internal DateTime dt;
-        internal int sprid;
         internal short count;
         internal decimal amt;
         internal int qty;
@@ -49,7 +48,6 @@ namespace Urbrural
             }
             s.Get(nameof(orgid), ref orgid);
             s.Get(nameof(dt), ref dt);
-            s.Get(nameof(sprid), ref sprid);
             s.Get(nameof(count), ref count);
             s.Get(nameof(amt), ref amt);
             s.Get(nameof(qty), ref qty);
@@ -65,7 +63,6 @@ namespace Urbrural
             }
             s.Put(nameof(orgid), orgid);
             s.Put(nameof(dt), dt);
-            s.Put(nameof(sprid), sprid);
             s.Put(nameof(count), count);
             s.Put(nameof(amt), amt);
             s.Put(nameof(qty), qty);

@@ -1,40 +1,58 @@
-﻿<mpml>
-    <head>
-        <factx type="">
-            <fact/>
-            <fact/>
-            <fact/>
-        </factx>
-        <jobx type="">
-            <job/>
-        </jobx>
-    </head>
-    <body>
-        <stage label="准备" tip="选种整地施肥" pay="1200.00">
-            <factx type="add">
-                <fact/>
-                <fact/>
-            </factx>
-            <jobx>
-            </jobx>
+﻿<mpml ver="1.0">
+    <view ref="Plantg">
+        <box ref="Weather">
+            <var ref="Clear" arg="2"/>
+            <var ref="Temperature" arg="2"/>
+        </box>
+        <box ref="Crop" mode="sum">
+            <var ref="Rice" arg="2"/>
+        </box>
+        <box ref="Soil">
+            <var ref="SoilPh"/>
+        </box>
+        <box ref="Pest" mode="max">
+            <var ref="Psyllidae"/>
+            <var ref="Xylostella"/>
+        </box>
+    </view>
+    <plan unit="亩">
+        <stage label="准备工作" tip="选种整地施肥" period="5" pay="1200.00" method="ecny" onstart="Rice = 0">
+            <job label="整地">
+                <item label="人工" price="200.00" qty="2"/>
+                <item label="种子" price="70.00" qty="5"/>
+            </job>
+            <job label="施肥" onend="Soil += 0.2">
+                <item label="人工" unit="人天" price="200.00" qty="2"/>
+                <item label="肥料" tip="农家肥" unit="公斤" price="5.00" qty="20"/>
+            </job>
         </stage>
-        <stage label="播种" tip="护种播种">
-            <factx>
-            </factx>
-            <jobx>
-            </jobx>
+        <stage label="播种育苗" period="15" pay="300" method="ecny">
+            <job label="种子处理" tip="晒种、选种、浸种、催芽">
+                <item label="人工" price="200.00" qty="2"/>
+                <item label="种子" price="70.00" qty="5"/>
+            </job>
+            <job label="播种" onend="Rice = 1">
+                <item label="人工" price="200.00" qty="1"/>
+            </job>
+            <job label="育苗" onend="Rice = 2"/>
         </stage>
-        <stage label="管理" tip="施肥除虫灌溉">
-            <factx>
-            </factx>
-            <jobx>
-            </jobx>
+        <stage label="田间管理" tip="施肥除虫灌溉" period="3" pay="300" method="ecny" onend="Rice = 3">
+            <job if="Pest > 0.2" label="无害除虫" tip="">
+                <item label="人工" price="200.00" qty="2"/>
+            </job>
+            <job while="Pest > 0.2" label="有毒除虫" tip="有毒除虫" bet="80%">
+                <item label="人工" price="200.00" qty="2"/>
+                <item label="杀虫剂" price="70.00" qty="5"/>
+            </job>
+            <job label="施肥" tip="">
+
+            </job>
         </stage>
-        <stage label="收获" tip="成熟收获晒储">
-            <factx>
-            </factx>
-            <jobx>
-            </jobx>
+        <stage label="成熟收获" tip="成熟收获晒储" period="3" pay="300" method="ecny" onend="Rice = 4">
+            <job label="收割" tip="有毒除虫" bet="80%">
+                <item label="人工" unit="人天" price="200.00" qty="1"/>
+                <item label="农机" unit="小时" price="70.00" qty="1.5"/>
+            </job>
         </stage>
-    </body>
+    </plan>
 </mpml>

@@ -9,9 +9,6 @@ namespace Urbrural
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = false)]
     public class UserAuthorizeAttribute : AuthorizeAttribute
     {
-        // org typ requirement (bitwise) 
-        readonly short orgtyp;
-
         // org role requirement (bitwise)
         readonly short orgly;
 
@@ -19,9 +16,8 @@ namespace Urbrural
         readonly short admly;
 
 
-        public UserAuthorizeAttribute(short orgtyp = 0, short orgly = 0, short admly = 0)
+        public UserAuthorizeAttribute(short orgly = 0, short admly = 0)
         {
-            this.orgtyp = orgtyp;
             this.orgly = orgly;
             this.admly = admly;
         }
@@ -41,7 +37,7 @@ namespace Urbrural
             }
 
             // require sign-in only
-            if (orgtyp == 0 || orgly == 0) return true;
+            if (orgly == 0) return true;
 
             // check access to org
             var org = wc[typeof(OrglyVarWork)].As<Org>();
@@ -58,7 +54,7 @@ namespace Urbrural
             }
 
             // is of any role for the org
-            if (org.id == prin.orgid && (org.typ & orgtyp) == orgtyp && (prin.orgly & orgly) == orgly)
+            if (org.id == prin.orgid && (prin.orgly & orgly) == orgly)
             {
                 if (!mock)
                 {

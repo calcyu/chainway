@@ -20,7 +20,7 @@ namespace Urbrural
         }
     }
 
-    [UserAuthorize(Org.TYP_MRT, User.ORGLY_)]
+    [UserAuthorize(1, User.ORGLY_)]
     [Ui("市场业务日报")]
     public class MrtlyDailyWork : DailyWork
     {
@@ -48,7 +48,6 @@ namespace Urbrural
             }, false, 3);
         }
 
-        [UserAuthorize(Org.TYP_MRT, User.ORGLY_FIN)]
         [Ui("生成"), Tool(Modal.ButtonShow)]
         public async Task gen(WebContext wc, int page)
         {
@@ -77,7 +76,6 @@ namespace Urbrural
         }
     }
 
-    [UserAuthorize(Org.TYP_SRC, User.ORGLY_)]
     [Ui("产源业务日报")]
     public class SrclyDailyWork : DailyWork
     {
@@ -105,7 +103,6 @@ namespace Urbrural
             }, false, 3);
         }
 
-        [UserAuthorize(Org.TYP_SRC, User.ORGLY_FIN)]
         [Ui("生成"), Tool(Modal.ButtonShow)]
         public async Task gen(WebContext wc, int page)
         {

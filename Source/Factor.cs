@@ -1,6 +1,6 @@
 ﻿namespace Urbrural
 {
-    public class Fact
+    public class Factor
     {
         // aggregation
 
@@ -9,6 +9,6 @@
         string tip;
 
 
-        FactCase[] conditions;
+        FactorCase[] conditions;
     }
 }

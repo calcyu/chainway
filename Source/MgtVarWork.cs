@@ -20,7 +20,7 @@ namespace Urbrural
             // get list of assocated sources
             var orgs = Grab<int, Org>();
             var ids = new ValueList<int>();
-            orgs.ForEach((k, v) => v.HasCtr(ctrid), (k, v) => ids.Add(k));
+            // orgs.ForEach((k, v) => v.HasCtr(ctrid), (k, v) => ids.Add(k));
 
             using var dc = NewDbContext();
         }
@@ -34,7 +34,7 @@ namespace Urbrural
             // get list of assocated sources
             var orgs = Grab<int, Org>();
             var ids = new ValueList<int>();
-            orgs.ForEach((k, v) => v.HasCtr(ctrid), (k, v) => ids.Add(k));
+            // orgs.ForEach((k, v) => v.HasCtr(ctrid), (k, v) => ids.Add(k));
         }
 
         public async Task search(WebContext wc, int cur)

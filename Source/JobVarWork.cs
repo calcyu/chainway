@@ -9,15 +9,15 @@ using static Chainly.Web.Modal;
 
 namespace Urbrural
 {
-    public class BookVarWork : WebWork
+    public class JobVarWork : WebWork
     {
     }
 
-    public abstract class BizlyBookVarWork : BookVarWork
+    public abstract class BizlyJobVarWork : JobVarWork
     {
     }
 
-    public class AgriBizlyBookVarWork : BizlyBookVarWork
+    public class AgriBizlyJobVarWork : BizlyJobVarWork
     {
         [Ui, Tool(ButtonOpen)]
         public async Task act(WebContext wc, int cmd)
@@ -27,8 +27,8 @@ namespace Urbrural
             if (wc.IsGet)
             {
                 using var dc = NewDbContext();
-                dc.Sql("SELECT ").collst(Book.Empty).T(" FROM lots_vw WHERE id = @1");
-                var m = await dc.QueryTopAsync<Book>(p => p.Set(lotid));
+                // dc.Sql("SELECT ").collst(Book.Empty).T(" FROM lots_vw WHERE id = @1");
+                // var m = await dc.QueryTopAsync<Book>(p => p.Set(lotid));
             }
             else // POST
             {
@@ -63,25 +63,11 @@ namespace Urbrural
             if (wc.IsGet)
             {
                 using var dc = NewDbContext();
-                dc.Sql("SELECT ").collst(Book.Empty).T(" FROM lots_vw WHERE id = @1");
-                var m = await dc.QueryTopAsync<Book>(p => p.Set(id));
+                // dc.Sql("SELECT ").collst(Book.Empty).T(" FROM lots_vw WHERE id = @1");
+                // var m = await dc.QueryTopAsync<Book>(p => p.Set(id));
             }
             else // POST
             {
-                var f = await wc.ReadAsync<Form>();
-                short typ = f[nameof(typ)];
-                var m = new Book
-                {
-                };
-                m.Read(f);
-                using var dc = NewDbContext();
-                dc.Sql("UPDATE lots ")._SET_(m, 0).T(" WHERE id = @1");
-                await dc.ExecuteAsync(p =>
-                {
-                    m.Write(p, 0);
-                    p.Set(id);
-                });
-
                 wc.GivePane(201);
             }
         }
@@ -129,24 +115,24 @@ namespace Urbrural
         // [Ui("核实"), Tool(Modal.ButtonShow)]
     }
 
-    public class DietBizlyBookVarWork : BizlyBookVarWork
+    public class DietBizlyJobVarWork : BizlyJobVarWork
     {
     }
 
-    public abstract class CtrlyBookVarWork : BookVarWork
+    public abstract class CtrlyJobVarWork : JobVarWork
     {
     }
 
-    public class CtrlyAgriBookVarWork : CtrlyBookVarWork
+    public class CtrlyAgriJobVarWork : CtrlyJobVarWork
     {
     }
 
-    public class DietCtrlyBookVarWork : CtrlyBookVarWork
+    public class DietCtrlyJobVarWork : CtrlyJobVarWork
     {
     }
 
 
-    public class FrmlyBookVarWork : BookVarWork
+    public class FrmlyJobVarWork : JobVarWork
     {
     }
 }

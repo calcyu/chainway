@@ -5,26 +5,20 @@ using System.Threading;
 using System.Threading.Tasks;
 using Chainly;
 using Chainly.Web;
-using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Urbrural.Source;
 using static System.Data.IsolationLevel;
 
 namespace Urbrural
 {
-    public class Point
-    {
-        public int X { get; set; }
-        public int Y;
-    }
-
     public class UrbruralApplication : Application
     {
-        static readonly Map<short, Scheme> schemas = new Map<short, Scheme>();
+        static readonly Map<short, Scene> schemas = new Map<short, Scene>();
 
         static readonly Map<short, Reg> regions = new Map<short, Reg>();
 
-        static readonly ConcurrentDictionary<int, Proj> projects = new ConcurrentDictionary<int, Proj>();
+        static readonly ConcurrentDictionary<int, Project> projects = new ConcurrentDictionary<int, Project>();
 
-        static readonly ConcurrentDictionary<int, Deal> deals = new ConcurrentDictionary<int, Deal>();
+        static readonly ConcurrentDictionary<int, Play> deals = new ConcurrentDictionary<int, Play>();
 
         // periodic polling and concluding ended lots 
         static readonly Thread cycler = new Thread(Cycle);
@@ -34,19 +28,10 @@ namespace Urbrural
         /// </summary>
         public static async Task Main(string[] args)
         {
-            var result = await CSharpScript.EvaluateAsync<int>("2 + 3");
-            Console.WriteLine(result);
-
-
-            var now = await CSharpScript.EvaluateAsync("System.DateTime.Now");
-            Console.WriteLine(now);
-
-            var point = new Point {X = 3, Y = 5};
-            var ps = await CSharpScript.EvaluateAsync<int>("X*2 + Y*2", globals: point);
-            Console.WriteLine(ps);
-
             // start the concluder thead
             // cycler.Start();
+            
+            ScriptTest.Test();
 
             if (args.Length == 0 || args.Contains("main"))
             {
@@ -55,6 +40,8 @@ namespace Urbrural
                 CreateService<WwwService>("www");
 
                 CreateService<MgtService>("mgt");
+
+                CreateService<FedService>("fed");
             }
             else
             {
@@ -91,7 +78,7 @@ namespace Urbrural
 
             Cache(dc =>
                 {
-                    dc.Sql("SELECT ").collst(Org.Empty).T(" FROM orgs_vw WHERE typ >= ").T(Org.TYP_CTR);
+                    dc.Sql("SELECT ").collst(Org.Empty).T(" FROM orgs_vw WHERE status > 0");
                     return dc.Query<int, Org>();
                 }, 60 * 15
             );
