@@ -1,6 +1,6 @@
 ﻿namespace Urbrural
 {
-    public class ProjSite
+    public class Site
     {
         // lattitude and longitude
         double x, y;

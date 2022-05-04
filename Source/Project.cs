@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using Chainly;
 using Urbrural.Core;
 
@@ -7,8 +8,6 @@ namespace Urbrural
     public class Project : Info, IMvView, IMvProcess
     {
         public static readonly Project Empty = new Project();
-
-        private Scene _scene;
 
         // scheme id
         private short typ;
@@ -27,25 +26,23 @@ namespace Urbrural
         {
         }
 
-        public ProjSite SiteAt(int p)
+        public Site SiteAt(int p)
         {
             throw new NotImplementedException();
         }
 
         //
+        // MPML
+
         // view
-
-        // layout
-
-        MvBox[] panels;
-
-        //
-        // process
+        MvView view;
 
         // stages
         MvStage[] stages;
 
-        // sites
-        ProjSite[] sites;
+
+        //
+        // sites belong to this project
+        ConcurrentDictionary<int, Site> sites;
     }
 }

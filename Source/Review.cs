@@ -5,9 +5,9 @@ namespace Urbrural
     /// <summary>
     /// A blog post for upon a certain project.
     /// </summary>
-    public class Post : Info
+    public class Review : Info
     {
-        public static readonly Post Empty = new Post();
+        public static readonly Review Empty = new Review();
 
         public const short
             TYP_ACK = 1,

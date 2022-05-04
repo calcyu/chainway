@@ -4,6 +4,6 @@ namespace Coverse.Metaverse
 {
     public interface IContainer
     {
-        ProjSite SiteAt(int p);
+        Site SiteAt(int p);
     }
 }

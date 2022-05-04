@@ -4,14 +4,14 @@ using static Chainly.Nodal.Store;
 
 namespace Urbrural
 {
-    public class ProjVarWork : WebWork
+    public class ProjectVarWork : WebWork
     {
     }
 
     /// 
     /// post
     /// 
-    public class PublyProjVarWork : ProjVarWork
+    public class PublyProjectVarWork : ProjectVarWork
     {
         public async Task @default(WebContext wc)
         {
@@ -34,7 +34,7 @@ namespace Urbrural
         }
     }
 
-    public class OrglyProjVarWork : ProjVarWork
+    public class OrglyProjectVarWork : ProjectVarWork
     {
         public async Task @default(WebContext wc)
         {

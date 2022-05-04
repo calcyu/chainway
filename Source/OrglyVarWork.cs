@@ -14,7 +14,7 @@ namespace Urbrural
 
             CreateWork<MrtlyDailyWork>("daily");
 
-            CreateWork<OrglyProjWork>("proj");
+            CreateWork<OrglyProjectWork>("proj");
 
             CreateWork<OrglyCreditWork>("credit");
 
@@ -22,7 +22,7 @@ namespace Urbrural
 
             CreateWork<OrglyClearWork>("clear");
 
-            CreateWork<OrglyPostWork>("msg");
+            CreateWork<OrglyReviewWork>("msg");
         }
 
         public void @default(WebContext wc)

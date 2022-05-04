@@ -16,7 +16,7 @@ namespace Urbrural
         {
             CreateVarWork<WwwVarWork>(); // market home page
 
-            CreateWork<PublyProjWork>("proj");
+            CreateWork<PublyProjectWork>("proj");
 
             CreateWork<PublyDealWork>("deal");
 

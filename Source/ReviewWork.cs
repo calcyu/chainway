@@ -5,13 +5,13 @@ using Chainly.Web;
 
 namespace Urbrural
 {
-    public abstract class PostWork : WebWork
+    public abstract class ReviewWork : WebWork
     {
     }
 
-    public class OrglyPostWork : PostWork
+    public class OrglyReviewWork : ReviewWork
     {
-        static readonly ConcurrentDictionary<int, Queue<Post>> queues = new ConcurrentDictionary<int, Queue<Post>>();
+        static readonly ConcurrentDictionary<int, Queue<Review>> queues = new ConcurrentDictionary<int, Queue<Review>>();
 
         public void @default(WebContext wc, int page)
         {
@@ -22,7 +22,7 @@ namespace Urbrural
                 var jc = new JsonContent(true, 16);
                 lock (q)
                 {
-                    Post o;
+                    Review o;
                     jc.ARR_();
                     while ((o = q.Dequeue()) != null)
                     {
@@ -38,20 +38,20 @@ namespace Urbrural
             }
         }
 
-        public static void Append(int orgid, Post post)
+        public static void Append(int orgid, Review review)
         {
             var q = queues[orgid];
             if (q == null)
             {
-                q = new Queue<Post>();
-                q.Enqueue(post);
+                q = new Queue<Review>();
+                q.Enqueue(review);
                 queues.TryAdd(orgid, q);
             }
             else
             {
                 lock (q)
                 {
-                    q.Enqueue(post);
+                    q.Enqueue(review);
                 }
             }
         }

@@ -6,15 +6,15 @@ using static Chainly.Web.Modal;
 
 namespace Urbrural
 {
-    public abstract class ProjWork : WebWork
+    public abstract class ProjectWork : WebWork
     {
     }
 
-    public class PublyProjWork : ProjWork
+    public class PublyProjectWork : ProjectWork
     {
         protected override void OnCreate()
         {
-            CreateVarWork<PublyProjVarWork>();
+            CreateVarWork<PublyProjectVarWork>();
         }
 
         public void @default(WebContext wc, int page)
@@ -23,11 +23,11 @@ namespace Urbrural
     }
 
     [Ui("商户线上货架设置", "thumbnails")]
-    public class OrglyProjWork : ProjWork
+    public class OrglyProjectWork : ProjectWork
     {
         protected override void OnCreate()
         {
-            CreateVarWork<OrglyProjVarWork>();
+            CreateVarWork<OrglyProjectVarWork>();
         }
 
         [Ui("上架", group: 1), Tool(Anchor)]

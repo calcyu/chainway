@@ -1,4 +1,5 @@
-﻿using Chainly;
+﻿using System.Collections.Concurrent;
+using Chainly;
 using Coverse.Metaverse;
 
 namespace Urbrural
@@ -54,9 +55,13 @@ namespace Urbrural
 
         public override string ToString() => name;
 
-        public ProjSite SiteAt(int p)
+        public Site SiteAt(int p)
         {
             throw new System.NotImplementedException();
         }
+
+
+        // sites contained
+        ConcurrentDictionary<int, Site> sites;
     }
 }
