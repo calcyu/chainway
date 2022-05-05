@@ -1,6 +1,6 @@
 ﻿namespace Urbrural
 {
-    public class Job
+    public class Labor
     {
         short id;
         

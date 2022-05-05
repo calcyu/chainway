@@ -1,11 +1,12 @@
 ﻿using Chainly;
+using Urbrural.Mv;
 
 namespace Urbrural
 {
     /// <summary>
-    /// An online or offline retail order
+    /// An actual contract or order execution.
     /// </summary>
-    public class Play : Info, IKeyable<long>
+    public class Play : Info, IKeyable<long>, IMvScope<Site>
     {
         public static readonly Play Empty = new Play();
 
@@ -74,5 +75,8 @@ namespace Urbrural
         }
 
         public long Key => id;
+
+
+        public Site ParentScope { get; }
     }
 }

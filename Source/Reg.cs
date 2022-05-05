@@ -5,7 +5,7 @@ using Urbrural.Mv;
 
 namespace Urbrural
 {
-    public class Reg : Info, IKeyable<short>, IMvScope
+    public class Reg : Info, IKeyable<short>, IMvScope<Reg>
     {
         public static readonly Reg Empty = new Reg();
 
@@ -64,5 +64,7 @@ namespace Urbrural
 
         // sites contained
         ConcurrentDictionary<int, Site> sites;
+
+        public Reg ParentScope { get; }
     }
 }

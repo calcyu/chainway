@@ -9,6 +9,6 @@
         string tip;
 
 
-        FactorCase[] conditions;
+        FactorSta[] conditions;
     }
 }

@@ -3,7 +3,7 @@ using Urbrural.Mv;
 
 namespace Urbrural
 {
-    public class Site : Info, IKeyable<int>, IMvScope
+    public class Site : Info, IKeyable<int>, IMvScope<Reg>
     {
         int id;
 
@@ -22,5 +22,8 @@ namespace Urbrural
         }
 
         public int Key => id;
+
+
+        public Reg ParentScope { get; }
     }
 }

@@ -5,7 +5,7 @@ using Urbrural.Mv;
 
 namespace Urbrural
 {
-    public class Project : Info, IMvView, IMvScope
+    public class Project : Info, IMvView
     {
         public static readonly Project Empty = new Project();
 
