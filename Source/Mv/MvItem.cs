@@ -1,4 +1,4 @@
-﻿namespace Urbrural.Core
+﻿namespace Urbrural.Mv
 {
     public class MvItem
     {

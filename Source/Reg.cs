@@ -1,10 +1,11 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using Chainly;
-using Coverse.Metaverse;
+using Urbrural.Mv;
 
 namespace Urbrural
 {
-    public class Reg : Info, IKeyable<short>, IContainer
+    public class Reg : Info, IKeyable<short>, IMvScope
     {
         public static readonly Reg Empty = new Reg();
 
@@ -57,7 +58,7 @@ namespace Urbrural
 
         public Site SiteAt(int p)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
 
