@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.Scripting;
 
 namespace Urbrural
 {
-    public class FactorSta
+    public class FactorState
     {
         // one, many, 
         short cardinality;
@@ -18,7 +18,7 @@ namespace Urbrural
 
         private Script<bool> predicate;
 
-        FactorSta()
+        FactorState()
         {
             var d = CSharpScript.Create<bool>("");
         }

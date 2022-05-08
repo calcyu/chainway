@@ -14,22 +14,22 @@ namespace Urbrural
     {
         protected override void OnCreate()
         {
-            CreateVarWork<MyPlayVarWork>();
+            CreateVarWork<MyDealVarWork>();
         }
 
         public async Task @default(WebContext wc, int page)
         {
             var prin = (User) wc.Principal;
             using var dc = NewDbContext();
-            dc.Sql("SELECT ").collst(Play.Empty).T(" FROM buys WHERE uid = @1 AND status > 0  ORDER BY id DESC LIMIT 5 OFFSET 5 * @2");
-            var arr = await dc.QueryAsync<Play>(p => p.Set(prin.id).Set(page));
+            dc.Sql("SELECT ").collst(Deal.Empty).T(" FROM buys WHERE uid = @1 AND status > 0  ORDER BY id DESC LIMIT 5 OFFSET 5 * @2");
+            var arr = await dc.QueryAsync<Deal>(p => p.Set(prin.id).Set(page));
             wc.GivePage(200, h =>
             {
                 h.TOOLBAR();
                 h.TABLE(arr, o =>
                 {
                     h.TD_().A_TEL(o.uname, o.utel)._TD();
-                    h.TD(o.mrtname, true);
+                    // h.TD(o.mrtname, true);
                     // h.TD(Statuses[o.status]);
                 });
             });
@@ -51,22 +51,22 @@ namespace Urbrural
     {
         protected override void OnCreate()
         {
-            CreateVarWork<BizlyPlayVarWork>();
+            CreateVarWork<BizlyDealVarWork>();
         }
 
         public async Task @default(WebContext wc)
         {
             var org = wc[-1].As<Org>();
             using var dc = NewDbContext();
-            dc.Sql("SELECT ").collst(Play.Empty).T(" FROM buys WHERE toid = @1 AND status > 0 ORDER BY id DESC");
-            var arr = await dc.QueryAsync<Play>(p => p.Set(org.id));
+            dc.Sql("SELECT ").collst(Deal.Empty).T(" FROM buys WHERE toid = @1 AND status > 0 ORDER BY id DESC");
+            var arr = await dc.QueryAsync<Deal>(p => p.Set(org.id));
             wc.GivePage(200, h =>
             {
                 h.TOOLBAR();
                 h.TABLE(arr, o =>
                 {
                     h.TD_().A_TEL(o.uname, o.utel)._TD();
-                    h.TD(o.mrtname, true);
+                    // h.TD(o.mrtname, true);
                     // h.TD(Statuses[o.status]);
                 });
             });
@@ -76,15 +76,15 @@ namespace Urbrural
         {
             short orgid = wc[-1];
             using var dc = NewDbContext();
-            dc.Sql("SELECT ").collst(Play.Empty).T(" FROM buys WHERE toid = @1 AND status > 0 ORDER BY id DESC");
-            var arr = await dc.QueryAsync<Play>(p => p.Set(orgid));
+            dc.Sql("SELECT ").collst(Deal.Empty).T(" FROM buys WHERE toid = @1 AND status > 0 ORDER BY id DESC");
+            var arr = await dc.QueryAsync<Deal>(p => p.Set(orgid));
             wc.GivePage(200, h =>
             {
                 h.TOOLBAR();
                 h.TABLE(arr, o =>
                 {
                     h.TD_().A_TEL(o.uname, o.utel)._TD();
-                    h.TD(o.mrtname, true);
+                    // h.TD(o.mrtname, true);
                     // h.TD(Statuses[o.status]);
                 });
             });

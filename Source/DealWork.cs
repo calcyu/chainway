@@ -5,7 +5,7 @@ using static Chainly.Web.Modal;
 
 namespace Urbrural
 {
-    public class PlayWork : WebWork
+    public class DealWork : WebWork
     {
     }
 
@@ -23,15 +23,15 @@ namespace Urbrural
         public async Task @default(WebContext wc, int code)
         {
             using var dc = NewDbContext();
-            dc.Sql("SELECT ").collst(Play.Empty).T(" FROM books WHERE id = @1 LIMIT 1");
-            var o = await dc.QueryTopAsync<Play>(p => p.Set(code));
+            dc.Sql("SELECT ").collst(Deal.Empty).T(" FROM books WHERE id = @1 LIMIT 1");
+            var o = await dc.QueryTopAsync<Deal>(p => p.Set(code));
             wc.GivePage(200, h => { }, title: "中惠农通溯源系统");
         }
     }
 
     [UserAuthorize(Org.TYP_PRI, 1)]
     [Ui("商户线上订货", "file-text")]
-    public class OrglyPlayWork : PlayWork
+    public class OrglyDealWork : DealWork
     {
         [Ui("当前", group: 1), Tool(Anchor)]
         public async Task @default(WebContext wc, int page)

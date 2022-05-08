@@ -3,9 +3,9 @@
     public class MvView : MvControlTag
     {
         // declared boxes
-        MvBox[] boxes;
+        MvGroup[] boxes;
         
         
-        Scene scene;
+        MvScene scene;
     }
 }

@@ -56,15 +56,18 @@ namespace Urbrural
 
         public override string ToString() => name;
 
-        public Site SiteAt(int p)
+        public Project SiteAt(int p)
         {
             throw new NotImplementedException();
         }
 
 
         // sites contained
-        ConcurrentDictionary<int, Site> sites;
+        ConcurrentDictionary<int, Project> sites;
 
-        public Reg ParentScope { get; }
+        public Variable GetVariable(string varName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

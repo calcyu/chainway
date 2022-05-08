@@ -2,6 +2,6 @@
 {
     public interface IMvScope<out P>
     {
-        P ParentScope { get; }
+        Variable GetVariable(string varName);
     }
 }

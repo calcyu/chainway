@@ -5,20 +5,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using Chainly;
 using Chainly.Web;
-using Urbrural.Source;
 using static System.Data.IsolationLevel;
 
 namespace Urbrural
 {
     public class UrbruralApplication : Application
     {
-        static readonly Map<short, Scene> schemas = new Map<short, Scene>();
-
-        static readonly Map<short, Reg> regions = new Map<short, Reg>();
+        static readonly Map<short, Reg> regs = new Map<short, Reg>();
 
         static readonly ConcurrentDictionary<int, Project> projects = new ConcurrentDictionary<int, Project>();
 
-        static readonly ConcurrentDictionary<int, Play> deals = new ConcurrentDictionary<int, Play>();
+        static readonly ConcurrentDictionary<int, Deal> plays = new ConcurrentDictionary<int, Deal>();
 
         // periodic polling and concluding ended lots 
         static readonly Thread cycler = new Thread(Cycle);
@@ -30,7 +27,7 @@ namespace Urbrural
         {
             // start the concluder thead
             // cycler.Start();
-            
+
             ScriptTest.Test();
 
             if (args.Length == 0 || args.Contains("main"))
@@ -84,6 +81,40 @@ namespace Urbrural
             );
         }
 
+        static async void LoadProjects(object state)
+        {
+            var lst = new List<int>(64);
+            try
+            {
+                using (var dc = NewDbContext())
+                {
+                    // dc.Sql("SELECT id FROM lots WHERE status = ").T(Flow_.STATUS_CREATED).T(" AND ended < @1 AND qtys >= min");
+                    // await dc.QueryAsync(p => p.Set(today));
+                    while (dc.Next())
+                    {
+                        dc.Let(out int id);
+                        lst.Add(id);
+                    }
+                }
+                foreach (var lotid in lst)
+                {
+                    using var dc = NewDbContext(ReadCommitted);
+                    try
+                    {
+                    }
+                    catch (Exception e)
+                    {
+                        dc.Rollback();
+                        Err(e.Message);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Err(nameof(Cycle) + ": " + e.Message);
+            }
+        }
+
         static async void Cycle(object state)
         {
             var lst = new List<int>(64);
@@ -92,64 +123,15 @@ namespace Urbrural
                 Thread.Sleep(60 * 1000);
 
                 var today = DateTime.Today;
+
+                foreach (var pair in plays)
+                {
+                    var play = pair.Value;
+                    
+                }
                 // WAR("cycle: " + today);
 
                 // to succeed
-                lst.Clear();
-                try
-                {
-                    using (var dc = NewDbContext())
-                    {
-                        // dc.Sql("SELECT id FROM lots WHERE status = ").T(Flow_.STATUS_CREATED).T(" AND ended < @1 AND qtys >= min");
-                        await dc.QueryAsync(p => p.Set(today));
-                        while (dc.Next())
-                        {
-                            dc.Let(out int id);
-                            lst.Add(id);
-                        }
-                    }
-                    foreach (var lotid in lst)
-                    {
-                        using var dc = NewDbContext(ReadCommitted);
-                        try
-                        {
-                        }
-                        catch (Exception e)
-                        {
-                            dc.Rollback();
-                            Err(e.Message);
-                        }
-                    }
-
-                    // to abort
-                    lst.Clear();
-                    using (var dc = NewDbContext())
-                    {
-                        // dc.Sql("SELECT id FROM lots WHERE status = ").T(Flow_.STATUS_CREATED).T(" AND ended < @1 AND qtys < min");
-                        await dc.QueryAsync(p => p.Set(today));
-                        while (dc.Next())
-                        {
-                            dc.Let(out int id);
-                            lst.Add(id);
-                        }
-                    }
-                    foreach (var lotid in lst)
-                    {
-                        using var dc = NewDbContext(ReadCommitted);
-                        try
-                        {
-                        }
-                        catch (Exception e)
-                        {
-                            dc.Rollback();
-                            Err(e.Message);
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    Err(nameof(Cycle) + ": " + e.Message);
-                }
             }
         }
     }

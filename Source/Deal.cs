@@ -6,9 +6,9 @@ namespace Urbrural
     /// <summary>
     /// An actual contract or order execution.
     /// </summary>
-    public class Play : Info, IKeyable<long>, IMvScope<Site>
+    public class Deal : Info, IKeyable<int>, IMvScope<Project>
     {
-        public static readonly Play Empty = new Play();
+        public static readonly Deal Empty = new Deal();
 
         public const short
             TYP_ONLINE = 1,
@@ -22,18 +22,19 @@ namespace Urbrural
         };
 
 
-        internal long id;
-        internal int bizid;
-        internal string bizname;
-        internal int mrtid;
-        internal decimal mrtname;
+        internal int id;
+        internal int orgid;
         internal int uid;
         internal string uname;
         internal string utel;
         internal string uim;
-        internal decimal totalp;
+        internal string unit;
+        internal decimal price;
+        internal decimal qty;
         internal decimal fee;
         internal decimal pay;
+        internal JObj log;
+
 
         public override void Read(ISource s, short proj = 0xff)
         {
@@ -41,15 +42,14 @@ namespace Urbrural
             {
                 s.Get(nameof(id), ref id);
             }
-            s.Get(nameof(bizid), ref bizid);
-            s.Get(nameof(bizname), ref bizname);
-            s.Get(nameof(mrtid), ref mrtid);
-            s.Get(nameof(mrtname), ref mrtname);
+            s.Get(nameof(orgid), ref orgid);
             s.Get(nameof(uid), ref uid);
             s.Get(nameof(uname), ref uname);
             s.Get(nameof(utel), ref utel);
             s.Get(nameof(uim), ref uim);
-            s.Get(nameof(totalp), ref totalp);
+            s.Get(nameof(unit), ref unit);
+            s.Get(nameof(price), ref price);
+            s.Get(nameof(qty), ref qty);
             s.Get(nameof(fee), ref fee);
             s.Get(nameof(pay), ref pay);
         }
@@ -61,22 +61,24 @@ namespace Urbrural
                 s.Put(nameof(id), id);
             }
 
-            s.Put(nameof(bizid), bizid);
-            s.Put(nameof(bizname), bizname);
-            s.Put(nameof(mrtid), mrtid);
-            s.Put(nameof(mrtname), mrtname);
+            s.Put(nameof(orgid), orgid);
             s.Put(nameof(uid), uid);
             s.Put(nameof(uname), uname);
             s.Put(nameof(utel), utel);
             s.Put(nameof(uim), uim);
-            s.Put(nameof(totalp), totalp);
+            s.Put(nameof(unit), unit);
+            s.Put(nameof(price), price);
+            s.Put(nameof(qty), qty);
             s.Put(nameof(fee), fee);
             s.Put(nameof(pay), pay);
         }
 
-        public long Key => id;
+        public int Key => id;
 
 
-        public Site ParentScope { get; }
+        Map<string, Variable> variables = new Map<string, Variable>();
+
+
+        public Variable GetVariable(string varName) => variables[varName];
     }
 }

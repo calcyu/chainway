@@ -1,13 +1,12 @@
-﻿namespace Urbrural
+﻿using Chainly;
+
+namespace Urbrural
 {
-    public class Labor
+    public class Labor : Info
     {
-        short id;
-        
-        
-        string name;
+        string id;
 
 
-        Factor[] affected;
+        LaborState[] states;
     }
 }

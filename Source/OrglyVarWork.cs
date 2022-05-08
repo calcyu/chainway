@@ -18,7 +18,7 @@ namespace Urbrural
 
             CreateWork<OrglyCreditWork>("credit");
 
-            CreateWork<OrglyPlayWork>("deal");
+            CreateWork<OrglyDealWork>("deal");
 
             CreateWork<OrglyClearWork>("clear");
 

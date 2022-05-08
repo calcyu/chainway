@@ -1,14 +1,18 @@
-﻿namespace Urbrural
+﻿using Chainly;
+
+namespace Urbrural
 {
-    public class Factor
+    public class Factor : Info, IKeyable<string>
     {
-        // aggregation
+        string id;
 
-        string label;
+        string sel;
 
-        string tip;
+        Selector selector;
+
+        FactorState[] states;
 
 
-        FactorSta[] conditions;
+        public string Key => id;
     }
 }

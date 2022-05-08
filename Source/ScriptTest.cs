@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
 
-namespace Urbrural.Source
+namespace Urbrural
 {
     public class Point
     {
@@ -16,13 +17,21 @@ namespace Urbrural.Source
         {
             var point = new Point {X = 3, Y = 5};
 
-            var result = await CSharpScript.EvaluateAsync<int>("public class Abc { public int Value {get;set;}=120; }; new Abc().Value");
+            var scripta = CSharpScript.Create<Type>("public class Abc : Urbrural.Point { public int Z => 120; }; return typeof(Abc);", ScriptOptions.Default.WithReferences("Urbrural"));
+            scripta.Compile();
+            var state = (await scripta.RunAsync());
+            var clazz = state.ReturnValue;
+            var assembly = clazz.Assembly.GetName().Name;
 
-            var now = await CSharpScript.EvaluateAsync("System.DateTime.Now");
-            Console.WriteLine(now);
+            var obj = Activator.CreateInstance(clazz);
 
-            var ps = await CSharpScript.EvaluateAsync<int>("X*2 + Y*2", globals: point);
-            Console.WriteLine(ps);
+
+            var scriptb = CSharpScript.Create<int>("Z",ScriptOptions.Default.AddReferences(assembly), globalsType: clazz);
+            scriptb.Compile();
+            var ret = (await scriptb.RunAsync(globals: obj)).ReturnValue;
+
+
+            Console.WriteLine("");
         }
     }
 }

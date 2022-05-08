@@ -5,7 +5,7 @@ using Urbrural.Mv;
 
 namespace Urbrural
 {
-    public class Project : Info, IMvView
+    public class Project : Info, IMvScope<Reg>
     {
         public static readonly Project Empty = new Project();
 
@@ -43,20 +43,29 @@ namespace Urbrural
 
         //
         // sites belong to this project
-        ConcurrentDictionary<int, Site> sites;
+        ConcurrentDictionary<int, Deal> sites;
 
-        public Site SiteAt(int p)
+        public Deal SiteAt(int p)
         {
             throw new NotImplementedException();
         }
 
-        public void AddSite(Site v)
+        public void AddSite(Deal v)
         {
             if (sites == null)
             {
-                sites = new ConcurrentDictionary<int, Site>();
+                sites = new ConcurrentDictionary<int, Deal>();
             }
             sites.TryAdd(v.Key, v);
         }
+
+
+        public Reg ParentScope { get; }
+        
+        Map<string, Variable> variables = new Map<string, Variable>();
+
+        public Variable GetVariable(string varName) => variables[varName];
+
+
     }
 }
