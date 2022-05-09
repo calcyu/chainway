@@ -3,19 +3,19 @@
     public class OpContext_000001 : OpContext
     {
 
-        public Variable Weather
+        public Var Weather
         {
             get
             {
-                return project.GetVariable(nameof(Weather));
+                return project.GetVar(nameof(Weather));
             }
         }
 
-        public Variable Water
+        public Var Water
         {
             get
             {
-                return deal.GetVariable(nameof(Water));
+                return deal.GetVar(nameof(Water));
             }
         }
     }

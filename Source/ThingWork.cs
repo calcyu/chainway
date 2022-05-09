@@ -2,7 +2,7 @@
 
 namespace Urbrural
 {
-    public class LaborWork : WebWork
+    public class ThingWork : WebWork
     {
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Urbrural
 {
-    public class FactorUtility
+    public class ThingUtility
     {
-        Map<string, Factor> All = new Map<string, Factor>();
+        Map<string, Thing> All = new Map<string, Thing>();
         
         // Map<string, 
     }

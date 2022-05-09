@@ -3,15 +3,15 @@ using Chainly;
 
 namespace Urbrural
 {
-    public class Selector : IKeyable<string>
+    public class Switch : IKeyable<string>
     {
         private Func<float, OpContext, short> func;
 
         public string Key { get; }
 
-        public static Map<string, Selector> All = new Map<string, Selector>
+        public static Map<string, Switch> All = new Map<string, Switch>
         {
-            new Selector()
+            new Switch()
             {
                 func = (v, ctx) => { return 0; }
             }

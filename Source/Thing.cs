@@ -2,15 +2,15 @@
 
 namespace Urbrural
 {
-    public class Factor : Info, IKeyable<string>
+    public class Thing : Info, IKeyable<string>
     {
         string id;
 
         string sel;
 
-        Selector selector;
+        Switch _switch;
 
-        FactorState[] states;
+        ThingState[] states;
 
 
         public string Key => id;

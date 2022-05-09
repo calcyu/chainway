@@ -1,21 +1,21 @@
-﻿<mpml ver="1.0" unit="亩">
+﻿<mpml ver="1.0">
     <view scene="Plantg">
-        <group rule="Weather">
-            <var of="Clear" arg="2"/>
-            <var of="Temperature" arg="2"/>
-        </group>
-        <group rule="Crop" mode="sum">
-            <var of="Rice" arg="2"/>
-        </group>
-        <group rule="Soil">
-            <var of="SoilPh"/>
-        </group>
-        <group rule="Pest" mode="max">
-            <var of="Psyllidae"/>
-            <var of="Xylostella"/>
-        </group>
+        <box rule="Weather">
+            <var as="Clear" arg="2"/>
+            <var as="Temperature" arg="2"/>
+        </box>
+        <box rule="Crop" mode="sum">
+            <var as="Rice" arg="2"/>
+        </box>
+        <box rule="Soil">
+            <var as="SoilPh"/>
+        </box>
+        <box rule="Pest" mode="max">
+            <var as="Psyllidae"/>
+            <var as="Xylostella"/>
+        </box>
     </view>
-    <process>
+    <flow>
         <stage label="准备工作" tip="选种整地施肥" period="5" pay="1200.00" method="ecny" onstart="Rice = 0">
             <job of="" label="整地">
                 <item label="人工" price="200.00" qty="2"/>
@@ -54,5 +54,5 @@
                 <item label="农机" unit="小时" price="70.00" qty="1.5"/>
             </job>
         </stage>
-    </process>
+    </flow>
 </mpml>

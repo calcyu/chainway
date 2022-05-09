@@ -9,15 +9,15 @@ using static Chainly.Web.Modal;
 
 namespace Urbrural
 {
-    public class LaborVarWork : WebWork
+    public class TechVarWork : WebWork
     {
     }
 
-    public abstract class BizlyLaborVarWork : LaborVarWork
+    public abstract class BizlyTechVarWork : TechVarWork
     {
     }
 
-    public class AgriBizlyLaborVarWork : BizlyLaborVarWork
+    public class AgriBizlyTechVarWork : BizlyTechVarWork
     {
         [Ui, Tool(ButtonOpen)]
         public async Task act(WebContext wc, int cmd)
@@ -115,24 +115,24 @@ namespace Urbrural
         // [Ui("核实"), Tool(Modal.ButtonShow)]
     }
 
-    public class DietBizlyLaborVarWork : BizlyLaborVarWork
+    public class DietBizlyTechVarWork : BizlyTechVarWork
     {
     }
 
-    public abstract class CtrlyLaborVarWork : LaborVarWork
+    public abstract class CtrlyTechVarWork : TechVarWork
     {
     }
 
-    public class CtrlyAgriLaborVarWork : CtrlyLaborVarWork
+    public class CtrlyAgriTechVarWork : CtrlyTechVarWork
     {
     }
 
-    public class DietCtrlyLaborVarWork : CtrlyLaborVarWork
+    public class DietCtrlyTechVarWork : CtrlyTechVarWork
     {
     }
 
 
-    public class FrmlyLaborVarWork : LaborVarWork
+    public class FrmlyTechVarWork : TechVarWork
     {
     }
 }

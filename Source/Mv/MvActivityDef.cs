@@ -2,7 +2,7 @@
 
 namespace Urbrural.Mv
 {
-    public abstract class MvActivityTag : MvTag
+    public abstract class MvActivityDef : MvDef
     {
         
         

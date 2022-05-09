@@ -2,11 +2,11 @@
 
 namespace Urbrural
 {
-    public class Labor : Info
+    public class Tech : Info
     {
         string id;
 
 
-        LaborState[] states;
+        TechState[] states;
     }
 }

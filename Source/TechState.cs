@@ -1,6 +1,6 @@
 ﻿namespace Urbrural
 {
-    public class LaborState
+    public class TechState
     {
         
     }

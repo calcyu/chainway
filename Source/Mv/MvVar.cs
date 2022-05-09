@@ -1,8 +1,8 @@
 ﻿namespace Urbrural.Mv
 {
-    public class MvVariable
+    public class MvVar
     {
-        Factor factor;
+        Thing _thing;
 
         short scope;
 

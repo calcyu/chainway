@@ -65,7 +65,7 @@ namespace Urbrural
         // sites contained
         ConcurrentDictionary<int, Project> sites;
 
-        public Variable GetVariable(string varName)
+        public Var GetVar(string varName)
         {
             throw new NotImplementedException();
         }

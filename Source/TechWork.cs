@@ -2,7 +2,7 @@
 
 namespace Urbrural
 {
-    public class FactorVarWork : WebWork
+    public class TechWork : WebWork
     {
     }
 }

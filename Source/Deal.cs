@@ -76,9 +76,9 @@ namespace Urbrural
         public int Key => id;
 
 
-        Map<string, Variable> variables = new Map<string, Variable>();
+        Map<string, Var> variables = new Map<string, Var>();
 
 
-        public Variable GetVariable(string varName) => variables[varName];
+        public Var GetVar(string varName) => variables[varName];
     }
 }

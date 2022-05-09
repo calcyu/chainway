@@ -1,6 +1,6 @@
 ﻿namespace Urbrural.Mv
 {
-    public class MvStage : MvActivityTag
+    public class MvStage : MvActivityDef
     {
         MvJob[] jobs;
     }

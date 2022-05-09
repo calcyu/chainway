@@ -1,9 +1,9 @@
 ﻿namespace Urbrural.Mv
 {
-    public class MvView : MvControlTag
+    public class MvView : MvControlDef
     {
         // declared boxes
-        MvGroup[] boxes;
+        MvBox[] boxes;
         
         
         MvScene scene;
