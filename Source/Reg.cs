@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using Chainly;
-using Urbrural.Mv;
+using Urbrural.Mpml;
 
 namespace Urbrural
 {
-    public class Reg : Info, IKeyable<short>, IMvScope<Reg>
+    public class Reg : Info, IKeyable<short>, IVarScope<Reg>
     {
         public static readonly Reg Empty = new Reg();
 
@@ -24,22 +24,22 @@ namespace Urbrural
         internal short id;
         internal short idx;
 
-        public override void Read(ISource s, short proj = 0xff)
+        public override void Read(ISource s, short msk = 0xff)
         {
-            base.Read(s, proj);
+            base.Read(s, msk);
 
-            if ((proj & ID) == ID)
+            if ((msk & ID) == ID)
             {
                 s.Get(nameof(id), ref id);
             }
             s.Get(nameof(idx), ref idx);
         }
 
-        public override void Write(ISink s, short proj = 0xff)
+        public override void Write(ISink s, short msk = 0xff)
         {
-            base.Write(s, proj);
+            base.Write(s, msk);
 
-            if ((proj & ID) == ID)
+            if ((msk & ID) == ID)
             {
                 s.Put(nameof(id), id);
             }

@@ -44,11 +44,11 @@ namespace Urbrural
         internal string mgrim;
         internal bool img;
 
-        public override void Read(ISource s, short proj = 0xff)
+        public override void Read(ISource s, short msk = 0xff)
         {
-            base.Read(s, proj);
+            base.Read(s, msk);
 
-            if ((proj & ID) == ID)
+            if ((msk & ID) == ID)
             {
                 s.Get(nameof(id), ref id);
             }
@@ -59,7 +59,7 @@ namespace Urbrural
             s.Get(nameof(x), ref x);
             s.Get(nameof(y), ref y);
             s.Get(nameof(tel), ref tel);
-            if ((proj & LATER) == LATER)
+            if ((msk & LATER) == LATER)
             {
                 s.Get(nameof(mgrid), ref mgrid);
                 s.Get(nameof(mgrname), ref mgrname);
@@ -69,11 +69,11 @@ namespace Urbrural
             }
         }
 
-        public override void Write(ISink s, short proj = 0xff)
+        public override void Write(ISink s, short msk = 0xff)
         {
-            base.Write(s, proj);
+            base.Write(s, msk);
 
-            if ((proj & ID) == ID)
+            if ((msk & ID) == ID)
             {
                 s.Put(nameof(id), id);
             }
@@ -85,7 +85,7 @@ namespace Urbrural
             s.Put(nameof(x), x);
             s.Put(nameof(y), y);
             s.Put(nameof(tel), tel);
-            if ((proj & LATER) == LATER)
+            if ((msk & LATER) == LATER)
             {
                 s.Put(nameof(mgrid), mgrid);
                 s.Put(nameof(mgrname), mgrname);

@@ -61,17 +61,17 @@ namespace Urbrural
         internal short orgly;
         internal string idcard;
 
-        public override void Read(ISource s, short proj = 0xff)
+        public override void Read(ISource s, short msk = 0xff)
         {
-            base.Read(s, proj);
+            base.Read(s, msk);
 
-            if ((proj & ID) == ID)
+            if ((msk & ID) == ID)
             {
                 s.Get(nameof(id), ref id);
             }
             s.Get(nameof(tel), ref tel);
             s.Get(nameof(im), ref im);
-            if ((proj & LATER) == LATER)
+            if ((msk & LATER) == LATER)
             {
                 s.Get(nameof(credential), ref credential);
                 s.Get(nameof(admly), ref admly);
@@ -81,17 +81,17 @@ namespace Urbrural
             }
         }
 
-        public override void Write(ISink s, short proj = 0xff)
+        public override void Write(ISink s, short msk = 0xff)
         {
-            base.Write(s, proj);
+            base.Write(s, msk);
 
-            if ((proj & ID) == ID)
+            if ((msk & ID) == ID)
             {
                 s.Put(nameof(id), id);
             }
             s.Put(nameof(tel), tel);
             s.Put(nameof(im), im);
-            if ((proj & LATER) == LATER)
+            if ((msk & LATER) == LATER)
             {
                 s.Put(nameof(credential), credential);
                 s.Put(nameof(admly), admly);

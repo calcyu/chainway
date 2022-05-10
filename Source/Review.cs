@@ -20,14 +20,14 @@ namespace Urbrural
         };
 
 
-        public override void Read(ISource s, short proj = 0xff)
+        public override void Read(ISource s, short msk = 0xff)
         {
-            base.Read(s, proj);
+            base.Read(s, msk);
         }
 
-        public override void Write(ISink s, short proj = 0xff)
+        public override void Write(ISink s, short msk = 0xff)
         {
-            base.Write(s, proj);
+            base.Write(s, msk);
         }
     }
 }

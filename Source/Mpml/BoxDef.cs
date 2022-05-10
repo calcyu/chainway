@@ -1,11 +1,11 @@
 ﻿using Chainly;
 
-namespace Urbrural.Mv
+namespace Urbrural.Mpml
 {
-    public class MvBox : MvControlDef
+    public class BoxDef : ControlDef
     {
         // declared variables
-        Map<string, MvVar> vars;
+        Map<string, VarDef> vars;
 
         // grouping rule
         short rule;

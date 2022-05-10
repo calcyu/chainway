@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using Chainly;
-using Urbrural.Mv;
+using Urbrural.Mpml;
 
 namespace Urbrural
 {
-    public class Project : Info, IKeyable<int>, IMvScope<Reg>
+    public class Project : Info, IKeyable<int>, IVarScope<Reg>
     {
         #region IDATA
 
@@ -20,11 +20,11 @@ namespace Urbrural
         short step;
         JObj mpml;
 
-        public override void Read(ISource s, short proj = 255)
+        public override void Read(ISource s, short msk = 255)
         {
-            base.Read(s, proj);
+            base.Read(s, msk);
 
-            if ((proj & ID) == ID)
+            if ((msk & ID) == ID)
             {
                 s.Get(nameof(id), ref id);
             }
@@ -37,11 +37,11 @@ namespace Urbrural
             s.Get(nameof(mpml), ref mpml);
         }
 
-        public override void Write(ISink s, short proj = 255)
+        public override void Write(ISink s, short msk = 255)
         {
-            base.Write(s, proj);
+            base.Write(s, msk);
 
-            if ((proj & ID) == ID)
+            if ((msk & ID) == ID)
             {
                 s.Put(nameof(id), id);
             }
@@ -61,16 +61,26 @@ namespace Urbrural
 
         #region MPML
 
-        // view
-        MvView view;
+        // viewn
+        ViewDef _view;
 
         // stages
-        MvStage[] stages;
+        StageDef[] _stages;
 
 
         Map<string, Var> vars = new Map<string, Var>();
 
         public Var GetVar(string varName) => vars[varName];
+
+
+        public Deal NewDeal()
+        {
+            var o = new Deal();
+
+            // deal-level vars
+
+            return null;
+        }
 
         #endregion
     }

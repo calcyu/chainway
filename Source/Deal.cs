@@ -1,12 +1,12 @@
 ﻿using Chainly;
-using Urbrural.Mv;
+using Urbrural.Mpml;
 
 namespace Urbrural
 {
     /// <summary>
     /// An actual contract or order execution.
     /// </summary>
-    public class Deal : Info, IKeyable<int>, IMvScope<Project>
+    public class Deal : Info, IKeyable<int>, IVarScope<Project>
     {
         public static readonly Deal Empty = new Deal();
 
@@ -36,9 +36,9 @@ namespace Urbrural
         internal JObj log;
 
 
-        public override void Read(ISource s, short proj = 0xff)
+        public override void Read(ISource s, short msk = 0xff)
         {
-            if ((proj & ID) == ID)
+            if ((msk & ID) == ID)
             {
                 s.Get(nameof(id), ref id);
             }
@@ -54,9 +54,9 @@ namespace Urbrural
             s.Get(nameof(pay), ref pay);
         }
 
-        public override void Write(ISink s, short proj = 0xff)
+        public override void Write(ISink s, short msk = 0xff)
         {
-            if ((proj & ID) == ID)
+            if ((msk & ID) == ID)
             {
                 s.Put(nameof(id), id);
             }
@@ -76,9 +76,18 @@ namespace Urbrural
         public int Key => id;
 
 
-        Map<string, Var> variables = new Map<string, Var>();
+        Map<string, Var> vars = new Map<string, Var>();
 
 
-        public Var GetVar(string varName) => variables[varName];
+        public Var GetVar(string varName) => vars[varName];
+
+
+        #region IMPLICIT VARS
+
+        internal string Stage;
+
+        internal string job;
+
+        #endregion
     }
 }

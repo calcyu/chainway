@@ -38,11 +38,11 @@ namespace Urbrural
         internal decimal amt;
         internal int qty;
 
-        public override void Read(ISource s, short proj = 0xff)
+        public override void Read(ISource s, short msk = 0xff)
         {
-            base.Read(s, proj);
+            base.Read(s, msk);
 
-            if ((proj & EXTRA) == EXTRA)
+            if ((msk & EXTRA) == EXTRA)
             {
                 s.Get(nameof(id), ref id);
             }
@@ -53,11 +53,11 @@ namespace Urbrural
             s.Get(nameof(qty), ref qty);
         }
 
-        public override void Write(ISink s, short proj = 0xff)
+        public override void Write(ISink s, short msk = 0xff)
         {
-            base.Write(s, proj);
+            base.Write(s, msk);
 
-            if ((proj & EXTRA) == EXTRA)
+            if ((msk & EXTRA) == EXTRA)
             {
                 s.Put(nameof(id), id);
             }

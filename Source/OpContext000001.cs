@@ -1,6 +1,6 @@
 ﻿namespace Urbrural
 {
-    public class OpContext_000001 : OpContext
+    public class OpContext000001 : OpContext
     {
 
         public Var Weather

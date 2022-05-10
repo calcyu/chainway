@@ -30,9 +30,9 @@ namespace Urbrural
 
         internal decimal amt;
 
-        public override void Read(ISource s, short proj = 0xff)
+        public override void Read(ISource s, short msk = 0xff)
         {
-            base.Read(s, proj);
+            base.Read(s, msk);
 
             s.Get(nameof(orgid), ref orgid);
             s.Get(nameof(dt), ref dt);
@@ -41,9 +41,9 @@ namespace Urbrural
             s.Get(nameof(amt), ref amt);
         }
 
-        public override void Write(ISink s, short proj = 0xff)
+        public override void Write(ISink s, short msk = 0xff)
         {
-            base.Write(s, proj);
+            base.Write(s, msk);
 
             s.Put(nameof(orgid), orgid);
             s.Put(nameof(dt), dt);
