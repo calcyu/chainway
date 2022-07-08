@@ -1,58 +1,49 @@
 ﻿<mpml ver="1.0">
-    <view scene="Plantg">
-        <box rule="Weather">
-            <var as="Clear" arg="2"/>
-            <var as="Temperature" arg="2"/>
-        </box>
-        <box rule="Crop" mode="sum">
-            <var as="Rice" arg="2"/>
-        </box>
-        <box rule="Soil">
-            <var as="SoilPh"/>
-        </box>
-        <box rule="Pest" mode="max">
-            <var as="Psyllidae"/>
-            <var as="Xylostella"/>
-        </box>
-    </view>
-    <flow>
-        <stage label="准备工作" tip="选种整地施肥" period="5" pay="1200.00" method="ecny" onstart="Rice = 0">
-            <job of="" label="整地">
-                <item label="人工" price="200.00" qty="2"/>
-                <item label="种子" price="70.00" qty="5"/>
-            </job>
-            <job label="施肥" onend="Soil += 0.2">
-                <item label="人工" unit="人天" price="200.00" qty="2"/>
-                <item label="肥料" tip="农家肥" unit="公斤" price="5.00" qty="20"/>
-            </job>
-        </stage>
-        <stage label="播种育苗" period="15" pay="300" method="ecny">
-            <job label="种子处理" tip="晒种、选种、浸种、催芽">
-                <item label="人工" price="200.00" qty="2"/>
-                <item label="种子" price="70.00" qty="5"/>
-            </job>
-            <job label="播种" onend="Rice = 1">
-                <item label="人工" price="200.00" qty="1"/>
-            </job>
-            <job label="育苗" onend="Rice = 2"/>
-        </stage>
-        <stage label="田间管理" tip="施肥除虫灌溉" period="3" pay="300" method="ecny" onend="Rice = 3">
-            <job if="Pest > 0.2" label="无害除虫" tip="">
-                <item label="人工" price="200.00" qty="2"/>
-            </job>
-            <job while="Pest > 0.2" label="有毒除虫" tip="有毒除虫" bet="80%">
-                <item label="人工" price="200.00" qty="2"/>
-                <item label="杀虫剂" price="70.00" qty="5"/>
-            </job>
-            <job label="施肥" tip="">
 
-            </job>
-        </stage>
-        <stage label="成熟收获" tip="成熟收获晒储" period="3" pay="300" method="ecny" onend="Rice = 4">
-            <job label="收割" tip="有毒除虫" bet="80%">
-                <item label="人工" unit="人天" price="200.00" qty="1"/>
-                <item label="农机" unit="小时" price="70.00" qty="1.5"/>
-            </job>
-        </stage>
-    </flow>
+    <shared-obj proto="Clear" args="2" group="1"/>
+
+    <obj as="Temperature" args="2" group="2">
+        <obj as="Rice" args="2" group="2"/>
+        <obj as="SoilPh" group="2"/>
+        <obj as="Psyllidae" group="3"/>
+        <obj as="Xylostella" group="3"/>
+    </obj>
+
+    <task label="准备工作" period="5" pay="1200.00" method="ecny" onstart="Rice = 0">
+        <task abel="整地">
+            <cost as="Labor" price="200.00" qty="2"/>
+            <cost as="Seed" price="70.00" qty="5"/>
+        </task>
+        <task label="施肥" onend="Soil += 0.2">
+            <cost label="人工" unit="人天" price="200.00" qty="2"/>
+            <cost label="肥料" tip="农家肥" unit="公斤" price="5.00" qty="20"/>
+        </task>
+    </task>
+
+    <task label="播种育苗" period="15" pay="300" method="ecny">
+        <task label="种子处理" tip="晒种、选种、浸种、催芽">
+            <cost label="人工" price="200.00" qty="2"/>
+            <cost label="种子" price="70.00" qty="5"/>
+        </task>
+        <task label="播种" onend="Rice = 1">
+            <cost label="人工" price="200.00" qty="1"/>
+        </task>
+        <task label="育苗" onend="Rice = 2"/>
+    </task>
+
+    <task label="田间管理" tip="施肥除虫灌溉" period="3" pay="300" method="ecny" onend="Rice = 3">
+        <task if="Pest > 0.2" label="无害除虫" tip="">
+            <cost label="人工" price="200.00" qty="2"/>
+        </task>
+        <task while="Pest > 0.2" label="有毒除虫" tip="有毒除虫" bet="80%">
+            <cost label="人工" price="200.00" qty="2"/>
+            <cost label="杀虫剂" price="70.00" qty="5"/>
+        </task>
+    </task>
+
+    <task label="成熟收获" tip="成熟收获晒储" period="3" pay="300" method="ecny" onend="Rice = 4">
+        <cost label="人工" unit="人天" price="200.00" qty="1"/>
+        <cost label="农机" unit="小时" price="70.00" qty="1.5"/>
+    </task>
+
 </mpml>

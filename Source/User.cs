@@ -1,9 +1,9 @@
 ﻿using System;
-using Chainly;
+using CoChain;
 
 namespace Urbrural
 {
-    public class User : Info, IKeyable<int>
+    public class User : Info, IKeyable<int>, IUser
     {
         public static readonly User Empty = new User();
 

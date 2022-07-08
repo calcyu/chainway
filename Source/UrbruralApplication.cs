@@ -3,19 +3,28 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Chainly;
-using Chainly.Web;
+using CoChain;
+using CoChain.Web;
+using Urbrural.Core;
 using static System.Data.IsolationLevel;
 
 namespace Urbrural
 {
     public class UrbruralApplication : Application
     {
-        static readonly Map<short, Reg> regs = new Map<short, Reg>();
+        // contextual objects
+        //
 
-        static readonly ConcurrentDictionary<int, Project> projects = new ConcurrentDictionary<int, Project>();
+        static readonly ConcurrentDictionary<int, MvProj> projects = new ConcurrentDictionary<int, MvProj>();
 
-        static readonly ConcurrentDictionary<int, Deal> plays = new ConcurrentDictionary<int, Deal>();
+        static readonly ConcurrentDictionary<int, Deal> deals = new ConcurrentDictionary<int, Deal>();
+
+
+        public static MvContext NewOpContext(Deal v)
+        {
+            var p = projects[v.projectid];
+            return new MvContext000001();
+        }
 
         // periodic polling and concluding ended lots 
         static readonly Thread cycler = new Thread(Cycle);
@@ -28,7 +37,7 @@ namespace Urbrural
             // start the concluder thead
             // cycler.Start();
 
-            ScriptTest.Test();
+            // ScriptTest.Test();
 
             if (args.Length == 0 || args.Contains("main"))
             {
@@ -75,7 +84,7 @@ namespace Urbrural
 
             Cache(dc =>
                 {
-                    dc.Sql("SELECT ").collst(Org.Empty).T(" FROM orgs_vw WHERE status > 0");
+                    dc.Sql("SELECT ").collst(Org.Empty).T(" FROM orgs_vw WHERE state > 0");
                     return dc.Query<int, Org>();
                 }, 60 * 15
             );
@@ -124,10 +133,9 @@ namespace Urbrural
 
                 var today = DateTime.Today;
 
-                foreach (var pair in plays)
+                foreach (var pair in deals)
                 {
                     var play = pair.Value;
-                    
                 }
                 // WAR("cycle: " + today);
 

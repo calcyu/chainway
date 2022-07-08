@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Chainly.Web;
-using static Chainly.Nodal.Store;
+using CoChain.Web;
+using Urbrural.Core;
+using static CoChain.Nodal.Store;
 
 namespace Urbrural
 {
@@ -17,8 +18,8 @@ namespace Urbrural
         {
             int id = wc[0];
             using var dc = NewDbContext();
-            dc.Sql("SELECT ").collst(Project.Empty).T(" FROM posts WHERE id = @1");
-            var o = await dc.QueryTopAsync<Project>(p => p.Set(id));
+            dc.Sql("SELECT ").collst(MvProj.Empty).T(" FROM posts WHERE id = @1");
+            var o = await dc.QueryTopAsync<MvProj>(p => p.Set(id));
             wc.GivePage(200, h =>
             {
                 // org

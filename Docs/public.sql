@@ -1,23 +1,7 @@
-create schema public;
-
-alter schema public owner to postgres;
-
-create type dat_type as
-(
-	clock smallint,
-	a1 real,
-	a2 real,
-	a3 real,
-	a4 real,
-	a5 real
-);
-
-alter type dat_type owner to postgres;
-
 create table infos
 (
 	typ smallint not null,
-	status smallint default 0 not null,
+	state smallint default 0 not null,
 	name varchar(12) not null,
 	tip varchar(30),
 	created timestamp(0),
@@ -100,12 +84,19 @@ inherits (ledgrs_);
 
 alter table peerledgrs_ owner to postgres;
 
-create table plays
+create table deals
 (
-	id bigserial not null
+	id serial not null,
+	projectid integer,
+	orgid integer,
+	uid integer,
+	uname varchar(12),
+	utel varchar(11),
+	uim varchar(28),
+	state jsonb
 );
 
-alter table plays owner to postgres;
+alter table deals owner to postgres;
 
 create table peers_
 (
@@ -138,15 +129,7 @@ inherits (infos);
 
 alter table accts_ owner to postgres;
 
-create table jobs
-(
-	id varchar(8),
-	column_2 integer
-);
-
-alter table jobs owner to postgres;
-
-create table factorcas
+create table mvarconds
 (
 	factid varchar(8),
 	idx smallint,
@@ -156,76 +139,95 @@ create table factorcas
 	expr varchar(30)
 );
 
-alter table factorcas owner to postgres;
+alter table mobjconds owner to postgres;
 
-create table factors
+create table mvars
 (
 	id varchar(8)
 )
 inherits (infos);
 
-alter table factors owner to postgres;
+alter table mobjs owner to postgres;
 
-create table sitedats
+create table dats
 (
-	siteidx integer,
-	dats dat_type[],
-	dt date
+	stamp timestamp(0),
+	var varchar(12),
+	state smallint,
+	value double precision,
+	quality money,
+	quantity money
 );
 
-alter table sitedats owner to postgres;
+alter table dats owner to postgres;
 
-create table sites
+create table mopconds
 (
-	id serial not null
-		constraint sites_pkey
-			primary key,
-	vars varchar(8) []
-)
-inherits (infos);
+);
 
-alter table sites owner to postgres;
+alter table mtaskconds owner to postgres;
 
-create table projects
+create table projs
 (
 	id serial not null,
-	factrefs varchar(8) [],
+	orgid integer,
 	unit varchar(4),
 	price money,
 	min smallint,
 	max smallint,
-	step smallint
+	step smallint,
+	mpml xml
 )
 inherits (infos);
 
-alter table projects owner to postgres;
+alter table projs owner to postgres;
 
-create view orgs_vw(typ, status, name, tip, created, creator, adapted, adapter, id, fork, license, regid, addr, x, y, tel, mgrid, mgrname, mgrtel, mgrim, img) as
-SELECT o.typ,
-       o.status,
-       o.name,
-       o.tip,
-       o.created,
-       o.creator,
-       o.adapted,
-       o.adapter,
-       o.id,
-       o.fork,
-       o.license,
-       o.regid,
-       o.addr,
-       o.x,
-       o.y,
-       o.tel,
-       o.mgrid,
-       m.name            AS mgrname,
-       m.tel             AS mgrtel,
-       m.im              AS mgrim,
-       o.img IS NOT NULL AS img
-FROM orgs o
-         LEFT JOIN users m
-                   ON o.mgrid =
-                      m.id;
+create table projdats
+(
+	projid integer
+)
+inherits (dats);
 
-alter table orgs_vw owner to postgres;
+alter table projdats owner to postgres;
+
+create table regdats
+(
+	regid smallint
+)
+inherits (dats);
+
+alter table regdats owner to postgres;
+
+create table clazzdats
+(
+	classid varchar(12)
+)
+inherits (dats);
+
+alter table classdats owner to postgres;
+
+create table mops
+(
+	id varchar(8),
+	column_2 integer
+)
+inherits (infos);
+
+alter table mtasks owner to postgres;
+
+create table clazzs
+(
+	id varchar(20)
+);
+
+alter table classs owner to postgres;
+
+create table dealdats
+(
+	dealid integer,
+	typ smallint
+)
+inherits (dats);
+
+alter table dealdats owner to postgres;
 

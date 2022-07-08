@@ -1,6 +1,6 @@
 
 html {
-    font-family: -apple-system, Droidsansfallback, "Microsoft YaHei";
+    font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei UI,Microsoft YaHei,Arial,sans-serif;
     font-size: 16px;
     font-weight: normal;
     line-height: normal;
@@ -29,6 +29,7 @@ body.uk-pane {
 
 form {
     display: block;
+    padding: 4px; 
 }
 
 a {
@@ -604,7 +605,7 @@ a.uk-link-reset:hover,
 }
 
 .uk-list-divider > li:nth-child(n+2) {
-    border-top: 1px solid rgb(143 195 33 / 15%);
+    border-top: 1px solid #f8f8f8;
 }
 
 /*
@@ -694,18 +695,19 @@ a.uk-link-reset:hover,
 .uk-description-list-divider > dt:nth-child(n+2) {
     margin-top: 16px;
     padding-top: 16px;
-    border-top: 1px solid #ededed;
+    border-top: 1px solid #f8f8f8;
 }
 
 .uk-table {
     border-collapse: collapse;
     border-spacing: 0;
     width: -webkit-fill-available;
-    background-color: #fff;
     overflow-x: auto;
-    margin: 4px 0;
-    border-top: 1px solid #ededed;
-    border-bottom: 1px solid #ededed;
+    margin: 4px;
+}
+
+.uk-table tbody {
+    background-color: #fff;
 }
 
 .uk-table th {
@@ -728,11 +730,14 @@ a.uk-link-reset:hover,
 }
 
 .uk-table caption {
-    text-align: left;
     text-transform: uppercase;
     color: #333;
-    padding: 0.5rem;
-    font-size: 0.875rem;
+    padding: 4px;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    font-size: .875rem;
+    box-sizing: border-box;
 }
 
 .uk-table > tr.uk-active,
@@ -744,7 +749,7 @@ a.uk-link-reset:hover,
 /* .uk-table-divider > :not(:first-child) > tr, */
 .uk-table-divider > :first-child > tr:not(:first-child) 
 {
-    border-top: 1px solid rgb(143 195 33 / 15%);
+    border-top: 1px solid #ededed;
 }
 
 .uk-table-middle,
@@ -1098,9 +1103,18 @@ button.uk-icon:not(:disabled) {
     border-bottom: 1px solid #ccc;
 }
 
+.uk-top-bar.uk-large {
+    height: 4rem;
+    min-height: 4rem;
+}
 
 .uk-top-placeholder {
     height: 3rem;
+    width: 100%;
+}
+
+.uk-top-placeholder.uk-large {
+    height: 4rem;
     width: 100%;
 }
 
@@ -1140,7 +1154,7 @@ button.uk-icon:not(:disabled) {
 
 form legend {
     text-transform: uppercase;
-    color: #8fc321;
+    color: #333;
     padding: 4px;
     min-height: 2.5rem;
     display: flex;
@@ -1150,8 +1164,6 @@ form legend {
 }
 
 .uk-fieldset > ul {
-    border-top: 1px solid #ededed;
-    border-bottom: 1px solid #ededed;
     padding: 0;
     background-color: #fff;
 }
@@ -2336,9 +2348,7 @@ form > li,
 
 .uk-card-default {
     margin: 4px;
-    padding: 0;
     background-color: #fff;
-    border: 1px solid #ededed;
     border-radius: 2px;
 }
 
@@ -2710,15 +2720,15 @@ form > li,
 .uk-label {
     text-transform: uppercase;
     white-space: nowrap;
-    color: #8fc321;
     font-size: 0.875rem;
 }
 
 label.uk-label {
     display: flex;
-    margin-right: 0.5rem;
-    width: 5rem;
-    min-width: 5rem;
+    color: #f59604;
+    margin-right: 0.25rem;
+    width: 5.25rem;
+    min-width: 5.25rem;
     justify-content: flex-end;
 }
 
@@ -5638,29 +5648,26 @@ ul.uk-nav-sub {
 }
 /* Pixel */
 .uk-width-micro {
-    width: 32px;
+    width: 2rem;
 }
 .uk-width-tiny {
-    width: 48px;
+    width: 3rem;
 }
 .uk-width-xsmall {
-    width: 80px !important;
-    min-width: 80px !important;
+    width: 4rem !important;
+    min-width: 4rem !important;
 }
 .uk-width-small {
-    width: 90px !important;
-    min-width: 90px !important;
+    width: 5.25rem !important;
+    min-width: 5.25rem !important;
 }
 .uk-width-medium {
-    width: 120px !important;
-    min-width: 120px !important;
+    width: 7.5rem !important;
+    min-width: 7.5rem !important;
 }
 .uk-width-large {
-    width: 160px !important;
-    min-width: 160px !important;
-}
-.uk-width-xlarge {
-    width: 200px;
+    width: 10rem !important;
+    min-width: 10rem !important;
 }
 
 /* Auto */

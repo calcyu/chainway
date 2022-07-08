@@ -1,9 +1,10 @@
 using System;
 using System.Threading.Tasks;
-using Chainly;
-using Chainly.Web;
-using static Chainly.Nodal.Store;
-using static Chainly.Web.Modal;
+using CoChain;
+using CoChain.Web;
+using Urbrural.Core;
+using static CoChain.Nodal.Store;
+using static CoChain.Web.Modal;
 
 namespace Urbrural
 {
@@ -35,7 +36,7 @@ namespace Urbrural
                     h.TD_().AVAR(o.Key, o.name)._TD();
                     h.TD_("uk-visible@s").T(o.addr)._TD();
                     h.TD_().A_TEL(o.mgrname, o.Tel)._TD();
-                    h.TD(Info.Symbols[o.status]);
+                    h.TD(Info.States[o.state]);
                     h.TDFORM(() => h.TOOLGROUPVAR(o.Key));
                 });
             });
@@ -55,7 +56,7 @@ namespace Urbrural
                     typ = (short) typ,
                     created = DateTime.Now,
                     creator = prin.name,
-                    status = Info.STA_ENABLED
+                    state = Info.STA_ENABLED
                 };
                 m.Read(wc.Query, 0);
                 wc.GivePane(200, h =>
@@ -66,7 +67,7 @@ namespace Urbrural
                     h.LI_().TEXTAREA("简介", nameof(m.tip), m.tip, max: 30)._LI();
                     h.LI_().TEXT("地址", nameof(m.addr), m.addr, max: 20)._LI();
                     h.LI_().NUMBER("经度", nameof(m.x), m.x, min: 0.000, max: 180.000).NUMBER("纬度", nameof(m.y), m.y, min: -90.000, max: 90.000)._LI();
-                    h.LI_().SELECT("状态", nameof(m.status), m.status, Info.Statuses, filter: (k, v) => k > 0)._LI();
+                    h.LI_().SELECT("状态", nameof(m.state), m.state, Info.States, filter: (k, v) => k > 0)._LI();
                     h._FIELDSUL()._FORM();
                 });
             }

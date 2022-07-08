@@ -1,7 +1,7 @@
-﻿using Chainly.Web;
-using static Chainly.Web.Modal;
+﻿using CoChain.Web;
+using static CoChain.Web.Modal;
 using static Urbrural.User;
-using static Chainly.Nodal.Store;
+using static CoChain.Nodal.Store;
 
 namespace Urbrural
 {
@@ -39,7 +39,7 @@ namespace Urbrural
                         // h.T(orgs[o.orgid].name).SP().T(Orgly[o.orgly]);
                     }
                     h._TD();
-                    h.TD("⊘", @if: o.IsGone);
+                    h.TD("⊘", @if: o.IsDead);
                 });
                 h.PAGINATION(arr?.Length == 30);
             });
@@ -80,7 +80,7 @@ namespace Urbrural
                             // h.T(orgs[o.orgid].name).SP().T(Orgly[o.orgly]);
                         }
                         h._TD();
-                        h.TD("⊘", @if: o.IsGone);
+                        h.TD("⊘", @if: o.IsDead);
                     });
                 }, false, 3);
             }
@@ -117,7 +117,7 @@ namespace Urbrural
                         // h.T(orgs[o.orgid].name).SP().T(Orgly[o.orgly]);
                     }
                     h._TD();
-                    h.TD("⊘", @if: o.IsGone);
+                    h.TD("⊘", @if: o.IsDead);
                 });
                 h.PAGINATION(arr?.Length == 30);
             });
@@ -158,7 +158,7 @@ namespace Urbrural
                             // h.T(orgs[o.orgid].name).SP().T(Orgly[o.orgly]);
                         }
                         h._TD();
-                        h.TD("⊘", @if: o.IsGone);
+                        h.TD("⊘", @if: o.IsDead);
                         h.TDFORM(() => h.TOOLGROUPVAR(o.Key));
                     });
                 }, false, 3);

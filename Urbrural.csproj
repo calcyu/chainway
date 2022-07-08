@@ -26,7 +26,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Chainly\Chainly.csproj" />
+      <Folder Include="www\do" />
+      <Folder Include="www\var\celest" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CoChain\CoChain.csproj" />
     </ItemGroup>
 
 </Project>

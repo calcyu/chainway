@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Chainly.Web;
-using static Chainly.Nodal.Store;
+using CoChain.Web;
+using static CoChain.Nodal.Store;
 
 namespace Urbrural
 {

@@ -1,10 +1,10 @@
 using System;
 using System.Threading.Tasks;
 using System.Web;
-using Chainly;
-using Chainly.Web;
+using CoChain;
+using CoChain.Web;
 using static Urbrural.WeChatUtility;
-using static Chainly.Nodal.Store;
+using static CoChain.Nodal.Store;
 
 namespace Urbrural
 {
@@ -32,7 +32,7 @@ namespace Urbrural
                 {
                     var org = orgs.ValueAt(i);
                     h.LI_("uk-flex");
-                    h.A_(org.Key, "/", end: true, css: "uk-button uk-button-link uk-flex-left").T(org.name).T("组")._A();
+                    h.A_(org.Key, "/", css: "uk-button uk-button-link uk-flex-left").T(org.name).T("组")._A();
                     h._LI();
                 }
                 h._FIELDSUL();
@@ -42,7 +42,7 @@ namespace Urbrural
                 {
                     var wrk = Works.ValueAt(i);
                     h.LI_("uk-flex");
-                    h.A_(wrk.Key, wrk.HasVarWork ? "//" : "/", end: true, css: "uk-button uk-button-link uk-flex-left").T(wrk.Label)._A();
+                    h.A_(wrk.Key, wrk.HasVarWork ? "//" : "/", css: "uk-button uk-button-link uk-flex-left").T(wrk.Label)._A();
                     // h.P(wrk.Tip, "uk-padding uk-width-expand");
                     h._LI();
                 }
@@ -166,7 +166,7 @@ namespace Urbrural
                 url = f[nameof(url)];
                 var o = new User
                 {
-                    status = Info.STA_ENABLED,
+                    state = Info.STA_ENABLED,
                     name = f[nameof(name)],
                     tel = f[nameof(tel)],
                     im = openid,

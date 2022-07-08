@@ -1,11 +1,12 @@
 using System;
 using System.Threading.Tasks;
 using System.Web;
-using Chainly;
-using Chainly.Web;
+using CoChain;
+using CoChain.Web;
 using Urbrural;
+using Urbrural.Core;
 using static Urbrural.WeChatUtility;
-using static Chainly.Nodal.Store;
+using static CoChain.Nodal.Store;
 
 namespace Urbrural
 {
@@ -209,7 +210,7 @@ namespace Urbrural
                 url = f[nameof(url)];
                 var o = new User
                 {
-                    status = Info.STA_ENABLED,
+                    state = Info.STA_ENABLED,
                     name = f[nameof(name)],
                     tel = f[nameof(tel)],
                     im = openid,

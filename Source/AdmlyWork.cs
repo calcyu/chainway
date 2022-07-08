@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using Chainly;
-using Chainly.Nodal;
-using Chainly.Web;
-using static Chainly.Nodal.Store;
+using CoChain;
+using CoChain.Nodal;
+using CoChain.Web;
+using static CoChain.Nodal.Store;
 
 namespace Urbrural
 {
@@ -12,11 +12,11 @@ namespace Urbrural
     {
         protected override void OnCreate()
         {
+            CreateWork<AdmlyClassWork>("scheme");
+
             CreateWork<AdmlyRegWork>("reg");
 
             CreateWork<AdmlyOrgWork>("org");
-
-            CreateWork<AdmlyDealWork>("deal");
 
             CreateWork<AdmlyCreditWork>("carbon");
 

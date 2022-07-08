@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Chainly;
-using Chainly.Web;
-using static Chainly.Nodal.Store;
+using CoChain;
+using CoChain.Web;
+using static CoChain.Nodal.Store;
 
 namespace Urbrural
 {
@@ -12,8 +12,6 @@ namespace Urbrural
         {
             CreateWork<OrglyUserWork>("user");
 
-            CreateWork<MrtlyDailyWork>("daily");
-
             CreateWork<OrglyProjectWork>("proj");
 
             CreateWork<OrglyCreditWork>("credit");
@@ -21,6 +19,8 @@ namespace Urbrural
             CreateWork<OrglyDealWork>("deal");
 
             CreateWork<OrglyClearWork>("clear");
+
+            CreateWork<OrglyClassWork>("scheme");
 
             CreateWork<OrglyReviewWork>("msg");
         }
@@ -120,7 +120,7 @@ namespace Urbrural
                     h.FORM_().FIELDSUL_("修改基本设置");
                     h.LI_().TEXT("标语", nameof(org.tip), org.tip, max: 16)._LI();
                     h.LI_().TEXT("地址", nameof(org.addr), org.addr, max: 16)._LI();
-                    h.LI_().SELECT("状态", nameof(org.status), org.status, Info.Statuses, filter: (k, v) => k > 0)._LI();
+                    h.LI_().SELECT("状态", nameof(org.state), org.state, Info.States, filter: (k, v) => k > 0)._LI();
                     h._FIELDSUL()._FORM();
                 });
             }
@@ -130,7 +130,7 @@ namespace Urbrural
                 using var dc = NewDbContext();
                 // update the db record
                 await dc.ExecuteAsync("UPDATE orgs SET tip = @1, cttid = CASE WHEN @2 = 0 THEN NULL ELSE @2 END, status = @3 WHERE id = @4",
-                    p => p.Set(o.tip).Set(o.status).Set(org.id));
+                    p => p.Set(o.tip).Set(o.state).Set(org.id));
 
                 wc.GivePane(200);
             }

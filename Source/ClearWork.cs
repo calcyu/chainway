@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data;
 using System.Threading.Tasks;
-using Chainly;
-using Chainly.Web;
-using static Chainly.Nodal.Store;
-using static Chainly.Web.Modal;
+using CoChain;
+using CoChain.Web;
+using static CoChain.Nodal.Store;
+using static CoChain.Web.Modal;
 
 namespace Urbrural
 {
@@ -151,7 +151,7 @@ namespace Urbrural
                     h.TD_().T(o.dt, 3, 0)._TD();
                     h.TD(Clear.Typs[o.typ]);
                     h.TD(o.amt, currency: true);
-                    h.TD(Clear.Statuses[o.status]);
+                    h.TD(Clear.Statuses[o.state]);
                 });
                 h.PAGINATION(arr?.Length == 20);
             }, false, 3);
