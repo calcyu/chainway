@@ -2,17 +2,17 @@
 
 namespace Urbrural
 {
-    public class ClassWork : WebWork
+    public class CatWork : WebWork
     {
     }
 
     [UserAuthorize(admly: User.ADMLY_MGT)]
     [Ui("平台体系设置", "world")]
-    public class AdmlyClassWork : ClassWork
+    public class AdmlyCatWork : CatWork
     {
         protected override void OnCreate()
         {
-            CreateVarWork<AdmlyClassVarWork>();
+            CreateVarWork<AdmlyCatVarWork>();
         }
 
         public void @default(WebContext wc)
@@ -20,7 +20,7 @@ namespace Urbrural
             wc.GivePage(200, h =>
             {
                 h.TOOLBAR();
-                h.GRID(ClassUtility.All, o =>
+                h.GRID(CatUtility.All, o =>
                     {
                         h.DIV_("uk-card-default");
                         h.TOOLGROUPVAR(o.Key)._NAV();
@@ -31,11 +31,11 @@ namespace Urbrural
         }
     }
 
-    public class OrglyClassWork : ClassWork
+    public class OrglyCatWork : CatWork
     {
         protected override void OnCreate()
         {
-            CreateVarWork<OrglyClassVarWork>();
+            CreateVarWork<OrglyCatVarWork>();
         }
 
 
@@ -44,7 +44,7 @@ namespace Urbrural
             wc.GivePage(200, h =>
             {
                 h.TOOLBAR();
-                h.GRID(ClassUtility.All, o =>
+                h.GRID(CatUtility.All, o =>
                     {
                         h.DIV_("uk-card-default");
                         h.TOOLGROUPVAR(o.Key)._NAV();

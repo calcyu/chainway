@@ -5,7 +5,7 @@ namespace Urbrural
     /// <summary>
     /// A blog post for upon a certain project.
     /// </summary>
-    public class Review : Info
+    public class Review : Entity
     {
         public static readonly Review Empty = new Review();
 

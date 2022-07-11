@@ -2,13 +2,13 @@
 
 namespace Urbrural.Core
 {
-    public class MvProjDescr
+    public class MvDealDescr
     {
         MvObjDescr[] objs;
 
-        MvTaskDescr[] tasks;
+        MvJobDescr[] jobs;
 
-        public MvProjDescr(Type typ)
+        public MvDealDescr(Type typ)
         {
         }
     }

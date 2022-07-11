@@ -3,7 +3,7 @@ using CoChain;
 
 namespace Urbrural
 {
-    public class Clear : Info, IKeyable<int>
+    public class Clear : Entity, IKeyable<int>
     {
         public static readonly Clear Empty = new Clear();
 

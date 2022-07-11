@@ -3,7 +3,10 @@ using CoChain;
 
 namespace Urbrural.Core
 {
-    public class MvScene : Scope, IKeyable<short>
+    /// <summary>
+    /// An environment for project execution.
+    /// </summary>
+    public class Cat : Scope, IKeyable<short>
     {
         readonly short id;
 
@@ -11,11 +14,11 @@ namespace Urbrural.Core
 
         public Action DoLayout;
 
-        public MvScene()
+        public Cat()
         {
             
         }
-        MvScene(string id, string label)
+        Cat(string id, string label)
         {
             id = id;
             _label = label;

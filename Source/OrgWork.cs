@@ -36,7 +36,7 @@ namespace Urbrural
                     h.TD_().AVAR(o.Key, o.name)._TD();
                     h.TD_("uk-visible@s").T(o.addr)._TD();
                     h.TD_().A_TEL(o.mgrname, o.Tel)._TD();
-                    h.TD(Info.States[o.state]);
+                    h.TD(Entity.States[o.state]);
                     h.TDFORM(() => h.TOOLGROUPVAR(o.Key));
                 });
             });
@@ -56,7 +56,7 @@ namespace Urbrural
                     typ = (short) typ,
                     created = DateTime.Now,
                     creator = prin.name,
-                    state = Info.STA_ENABLED
+                    state = Entity.STA_ENABLED
                 };
                 m.Read(wc.Query, 0);
                 wc.GivePane(200, h =>
@@ -67,21 +67,21 @@ namespace Urbrural
                     h.LI_().TEXTAREA("简介", nameof(m.tip), m.tip, max: 30)._LI();
                     h.LI_().TEXT("地址", nameof(m.addr), m.addr, max: 20)._LI();
                     h.LI_().NUMBER("经度", nameof(m.x), m.x, min: 0.000, max: 180.000).NUMBER("纬度", nameof(m.y), m.y, min: -90.000, max: 90.000)._LI();
-                    h.LI_().SELECT("状态", nameof(m.state), m.state, Info.States, filter: (k, v) => k > 0)._LI();
+                    h.LI_().SELECT("状态", nameof(m.state), m.state, Entity.States, filter: (k, v) => k > 0)._LI();
                     h._FIELDSUL()._FORM();
                 });
             }
             else // POST
             {
-                var o = await wc.ReadObjectAsync(Info.BORN, new Org
+                var o = await wc.ReadObjectAsync(Entity.BORN, new Org
                 {
                     typ = (short) typ,
                     created = DateTime.Now,
                     creator = prin.name,
                 });
                 using var dc = NewDbContext();
-                dc.Sql("INSERT INTO orgs ").colset(Org.Empty, Info.BORN)._VALUES_(Org.Empty, Info.BORN);
-                await dc.ExecuteAsync(p => o.Write(p, Info.BORN));
+                dc.Sql("INSERT INTO orgs ").colset(Org.Empty, Entity.BORN)._VALUES_(Org.Empty, Entity.BORN);
+                await dc.ExecuteAsync(p => o.Write(p, Entity.BORN));
                 wc.GivePane(201); // created
             }
         }

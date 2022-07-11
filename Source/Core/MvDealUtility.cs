@@ -4,23 +4,23 @@ using CoChain;
 
 namespace Urbrural.Core
 {
-    public class ProjectUtility
+    public class MvDealUtility
     {
-        static readonly Map<short, MvProjDescr> All = new Map<short, MvProjDescr>();
+        static readonly Map<short, MvDealDescr> All = new Map<short, MvDealDescr>();
 
-        static ProjectUtility()
+        static MvDealUtility()
         {
             var typs = Assembly.GetExecutingAssembly().GetTypes();
             foreach (var typ in typs)
             {
-                if (typ.Namespace == nameof(Projects) && typ.Name.EndsWith("Proj"))
+                if (typ.Namespace == nameof(Deal) && typ.Name.EndsWith("Proj"))
                 {
-                    if (Activator.CreateInstance(typ) is MvProj sec)
+                    if (Activator.CreateInstance(typ) is MvDeal sec)
                     {
                         // init
 
                         //add
-                        All.Add(sec);
+                        // All.Add(sec);
                     }
                 }
             }

@@ -5,18 +5,11 @@
     /// </summary>
     public abstract class MvContext
     {
-        MvScene _class;
+        Cat _class;
         
         Reg _reg;
 
-        protected MvProj project;
-
-        protected Deal deal;
-
-
-        public string CurStage => deal.Stage;
-
-        public string CurJob => deal.job;
+        protected MvDeal project;
 
 
         IUser user;

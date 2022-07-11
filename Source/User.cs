@@ -1,9 +1,10 @@
 ﻿using System;
 using CoChain;
+using Urbrural.Core;
 
 namespace Urbrural
 {
-    public class User : Info, IKeyable<int>, IUser
+    public class User : Entity, IKeyable<int>, IUser
     {
         public static readonly User Empty = new User();
 

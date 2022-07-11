@@ -10,7 +10,7 @@ create table infos
 	adapter varchar(10)
 );
 
-alter table infos owner to postgres;
+alter table entities owner to postgres;
 
 create table regs
 (
@@ -19,7 +19,7 @@ create table regs
 			primary key,
 	idx smallint
 )
-inherits (infos);
+inherits (entities);
 
 alter table regs owner to postgres;
 
@@ -41,7 +41,7 @@ create table orgs
 	mgrid integer,
 	img bytea
 )
-inherits (infos);
+inherits (entities);
 
 alter table orgs owner to postgres;
 
@@ -58,7 +58,7 @@ create table users
 	orgly smallint default 0 not null,
 	idcard varchar(18)
 )
-inherits (infos);
+inherits (entities);
 
 alter table users owner to postgres;
 
@@ -107,7 +107,7 @@ create table peers_
 	fed smallint,
 	secret varchar(16)
 )
-inherits (infos);
+inherits (entities);
 
 alter table peers_ owner to postgres;
 
@@ -116,7 +116,7 @@ create table reviews
 	projid integer,
 	idx integer
 )
-inherits (infos);
+inherits (entities);
 
 alter table reviews owner to postgres;
 
@@ -125,7 +125,7 @@ create table accts_
 	no varchar(20),
 	v integer
 )
-inherits (infos);
+inherits (entities);
 
 alter table accts_ owner to postgres;
 
@@ -145,7 +145,7 @@ create table mvars
 (
 	id varchar(8)
 )
-inherits (infos);
+inherits (entities);
 
 alter table mobjs owner to postgres;
 
@@ -178,9 +178,9 @@ create table projs
 	step smallint,
 	mpml xml
 )
-inherits (infos);
+inherits (entities);
 
-alter table projs owner to postgres;
+alter table projects owner to postgres;
 
 create table projdats
 (
@@ -188,7 +188,7 @@ create table projdats
 )
 inherits (dats);
 
-alter table projdats owner to postgres;
+alter table dealdats owner to postgres;
 
 create table regdats
 (
@@ -204,14 +204,14 @@ create table clazzdats
 )
 inherits (dats);
 
-alter table classdats owner to postgres;
+alter table catdats owner to postgres;
 
 create table mops
 (
 	id varchar(8),
 	column_2 integer
 )
-inherits (infos);
+inherits (entities);
 
 alter table mtasks owner to postgres;
 
@@ -220,7 +220,7 @@ create table clazzs
 	id varchar(20)
 );
 
-alter table classs owner to postgres;
+alter table cats owner to postgres;
 
 create table dealdats
 (

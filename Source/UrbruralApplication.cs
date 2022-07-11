@@ -15,16 +15,9 @@ namespace Urbrural
         // contextual objects
         //
 
-        static readonly ConcurrentDictionary<int, MvProj> projects = new ConcurrentDictionary<int, MvProj>();
-
-        static readonly ConcurrentDictionary<int, Deal> deals = new ConcurrentDictionary<int, Deal>();
+        static readonly ConcurrentDictionary<int, MvDeal> projects = new ConcurrentDictionary<int, MvDeal>();
 
 
-        public static MvContext NewOpContext(Deal v)
-        {
-            var p = projects[v.projectid];
-            return new MvContext000001();
-        }
 
         // periodic polling and concluding ended lots 
         static readonly Thread cycler = new Thread(Cycle);
@@ -133,10 +126,6 @@ namespace Urbrural
 
                 var today = DateTime.Today;
 
-                foreach (var pair in deals)
-                {
-                    var play = pair.Value;
-                }
                 // WAR("cycle: " + today);
 
                 // to succeed
