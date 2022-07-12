@@ -13,7 +13,7 @@ namespace Urbrural.Core
             var typs = Assembly.GetExecutingAssembly().GetTypes();
             foreach (var typ in typs)
             {
-                if (typ.Namespace == nameof(Deal) && typ.Name.EndsWith("Proj"))
+                if (typ.Namespace == nameof(Deals) && typ.Name.EndsWith("Proj"))
                 {
                     if (Activator.CreateInstance(typ) is MvDeal sec)
                     {

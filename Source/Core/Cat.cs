@@ -6,7 +6,7 @@ namespace Urbrural.Core
     /// <summary>
     /// An environment for project execution.
     /// </summary>
-    public class Cat : Scope, IKeyable<short>
+    public class Cat : MvScope, IKeyable<short>
     {
         readonly short id;
 

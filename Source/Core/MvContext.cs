@@ -1,16 +1,20 @@
-﻿namespace Urbrural.Core
+﻿using CoChain.Nodal;
+using CoChain.Web;
+
+namespace Urbrural.Core
 {
     /// <summary>
     /// The scripting global states.
     /// </summary>
-    public abstract class MvContext
+    public class MvContext
     {
         Cat _class;
-        
+
         Reg _reg;
 
-        protected MvDeal project;
+        WebContext webctx;
 
+        DbContext dbctx;
 
         IUser user;
 

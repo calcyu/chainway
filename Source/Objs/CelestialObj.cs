@@ -1,7 +1,7 @@
 ﻿using CoChain;
 using Urbrural.Core;
 
-namespace Urbrural.Objs
+namespace Urbrural.Obj
 {
     public class CelestialObj : MvObj
     {

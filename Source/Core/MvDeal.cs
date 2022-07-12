@@ -2,7 +2,7 @@
 
 namespace Urbrural.Core
 {
-    public class MvDeal : Scope, IKeyable<int>
+    public class MvDeal : MvScope, IKeyable<int>
     {
         #region IDATA
 

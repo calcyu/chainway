@@ -1,6 +1,6 @@
 ﻿using Urbrural.Core;
 
-namespace Urbrural.Deal
+namespace Urbrural.Deals
 {
     public class GreenPowerDeal : MvDeal
     {

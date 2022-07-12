@@ -11,6 +11,7 @@ namespace Urbrural.Core
 
         internal int id;
         internal int orgid;
+        internal short catid;
         internal short regid;
         double x;
         double y;
@@ -24,6 +25,7 @@ namespace Urbrural.Core
                 s.Get(nameof(id), ref id);
             }
             s.Get(nameof(orgid), ref orgid);
+            s.Get(nameof(catid), ref catid);
             s.Get(nameof(regid), ref regid);
             s.Get(nameof(x), ref x);
             s.Get(nameof(y), ref y);
@@ -37,10 +39,11 @@ namespace Urbrural.Core
             {
                 s.Put(nameof(id), id);
             }
-            s.Put(nameof(orgid),  orgid);
-            s.Put(nameof(regid),  regid);
-            s.Put(nameof(x),  x);
-            s.Put(nameof(y),  y);
+            s.Put(nameof(orgid), orgid);
+            s.Put(nameof(catid), catid);
+            s.Put(nameof(regid), regid);
+            s.Put(nameof(x), x);
+            s.Put(nameof(y), y);
         }
 
         public int Key => id;

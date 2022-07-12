@@ -9,15 +9,15 @@ using static CoChain.Web.Modal;
 
 namespace Urbrural
 {
-    public class MetaJobVarWork : WebWork
+    public class PostVarWork : WebWork
     {
     }
 
-    public abstract class BizlyMetaJobVarWork : MetaJobVarWork
+    public abstract class BizlyPostVarWork : PostVarWork
     {
     }
 
-    public class AgriBizlyMetaJobVarWork : BizlyMetaJobVarWork
+    public class AgriBizlyPostVarWork : BizlyPostVarWork
     {
         [Ui, Tool(ButtonOpen)]
         public async Task act(WebContext wc, int cmd)
@@ -115,24 +115,24 @@ namespace Urbrural
         // [Ui("核实"), Tool(Modal.ButtonShow)]
     }
 
-    public class DietBizlyMetaJobVarWork : BizlyMetaJobVarWork
+    public class DietBizlyPostVarWork : BizlyPostVarWork
     {
     }
 
-    public abstract class CtrlyMetaJobVarWork : MetaJobVarWork
+    public abstract class CtrlyPostVarWork : PostVarWork
     {
     }
 
-    public class CtrlyAgriMetaJobVarWork : CtrlyMetaJobVarWork
+    public class CtrlyAgriPostVarWork : CtrlyPostVarWork
     {
     }
 
-    public class DietCtrlyMetaJobVarWork : CtrlyMetaJobVarWork
+    public class DietCtrlyPostVarWork : CtrlyPostVarWork
     {
     }
 
 
-    public class FrmlyMetaJobVarWork : MetaJobVarWork
+    public class FrmlyPostVarWork : PostVarWork
     {
     }
 }

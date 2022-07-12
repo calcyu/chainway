@@ -1,6 +1,6 @@
 ﻿namespace Urbrural.Core
 {
-    public class MvJobDescr
+    public class MvConf
     {
         
     }

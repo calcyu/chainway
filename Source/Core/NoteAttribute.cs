@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Threading.Tasks;
-using static CoChain.CryptoUtility;
 
 namespace Urbrural.Core
 {
     /// <summary>
     /// To determine principal identity based on current web context. The interaction with user, however, is not included.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    public abstract class NoteAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Method, Inherited = false)]
+    public class NoteAttribute : Attribute
     {
-        readonly bool async;
+        readonly string name;
 
-        protected NoteAttribute(bool async)
+        public NoteAttribute(string name)
         {
-            this.async = async;
+            this.name = name;
         }
 
-        public bool IsAsync => async;
+        public string IsName => name;
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
+using CoChain;
 
 namespace Urbrural.Core
 {
-    public abstract class MvObj : IEquatable<MvObj>, IComparable<MvObj>
+    public abstract class MvObj : IKeyable<string>, IEquatable<MvObj>, IComparable<MvObj>
     {
+        public string name;
+
         // last modified
         DateTime modified;
 
@@ -40,5 +43,7 @@ namespace Urbrural.Core
             if (v < 0) return -1;
             return 0;
         }
+
+        public string Key => name;
     }
 }

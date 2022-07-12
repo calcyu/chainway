@@ -2,7 +2,7 @@
 
 namespace Urbrural
 {
-    public class MetaJobWork : WebWork
+    public class PostWork : WebWork
     {
     }
 }

@@ -1,18 +1,17 @@
 ﻿using System;
-using CoChain.Web;
 
 namespace Urbrural.Core
 {
     /// <summary>
-    /// A meta prototype for certain kind of jobs.
+    /// The abstract root class of a metaverse job or task.
     /// </summary>
-    public class MvJob
+    public abstract class MvTask
     {
         string id;
 
         public string Key => id;
 
-        public MvJob Parent { get; set; }
+        public MvTask Parent { get; set; }
 
 
         public Func<bool> OnEnter { get; set; }

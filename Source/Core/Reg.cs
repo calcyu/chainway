@@ -5,7 +5,7 @@ namespace Urbrural.Core
     /// <summary>
     /// A predefined shared scope.
     /// </summary>
-    public class Reg : Scope
+    public class Reg : MvScope
     {
         public static readonly Reg Empty = new Reg();
 
