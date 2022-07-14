@@ -35,7 +35,7 @@ namespace Urbrural.Core
         internal decimal fee;
         internal decimal pay;
 
-        JObj config;
+        internal JObj conf;
 
         public override void Read(ISource s, short msk = 255)
         {
@@ -62,7 +62,7 @@ namespace Urbrural.Core
             s.Get(nameof(fee), ref fee);
             s.Get(nameof(pay), ref pay);
 
-            s.Get(nameof(config), ref config);
+            s.Get(nameof(conf), ref conf);
         }
 
         public override void Write(ISink s, short msk = 255)
@@ -91,7 +91,7 @@ namespace Urbrural.Core
             s.Put(nameof(fee), fee);
             s.Put(nameof(pay), pay);
 
-            s.Put(nameof(config), config);
+            s.Put(nameof(conf), conf);
         }
 
         public int Key => id;
@@ -108,8 +108,8 @@ namespace Urbrural.Core
         void Resolve()
         {
             string sch = null;
-            config.Get(nameof(_class), ref sch);
-            config.Get(nameof(ver), ref ver);
+            conf.Get(nameof(_class), ref sch);
+            conf.Get(nameof(ver), ref ver);
             _class = CatUtility.GetSchema(sch);
         }
 

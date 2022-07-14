@@ -30,28 +30,4 @@ namespace Urbrural
             });
         }
     }
-
-    public class OrglyCatWork : CatWork
-    {
-        protected override void OnCreate()
-        {
-            CreateVarWork<OrglyCatVarWork>();
-        }
-
-
-        public void @default(WebContext wc)
-        {
-            wc.GivePage(200, h =>
-            {
-                h.TOOLBAR();
-                h.GRID(CatUtility.All, o =>
-                    {
-                        h.DIV_("uk-card-default");
-                        h.TOOLGROUPVAR(o.Key)._NAV();
-                        h._DIV();
-                    }
-                );
-            });
-        }
-    }
 }

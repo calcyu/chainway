@@ -33,7 +33,7 @@ namespace Urbrural
         public static string GetUrlLink(string uri)
         {
             string url;
-            url = Application.Ext[nameof(url)];
+            url = WebApp.Prog[nameof(url)];
             if (uri == null)
             {
                 return url;

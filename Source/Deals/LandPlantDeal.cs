@@ -15,25 +15,32 @@ namespace Urbrural.Deals
         {
         };
 
-        [Note(nameof(celes))] 
-        MvObj tropo = new TropoObj()
+        [Note(nameof(celes))] MvObj tropo = new TropoObj()
         {
         };
+
+        //
+        // confs
+        //
+
+        public decimal Pay => conf[nameof(Pay)];
+
+        public short Level => conf[nameof(Level)];
+
 
         //
         // tasks 
         //
 
-        [Note(nameof(celes))] 
-        MvTask A, 
-            A1, 
+        [Note(nameof(celes))] MvTask A,
+            A1,
             B;
 
         public LandPlantDeal()
         {
             A = new WechatPayTask()
             {
-                Before = (x) => celes.Qty > 0
+                Before = (x) => celes.Ext > 0
             };
         }
     }

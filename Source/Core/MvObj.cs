@@ -18,9 +18,9 @@ namespace Urbrural.Core
         /// <summary>
         /// Functional wellness of the target, valued from 0.01 through 1.00
         /// </summary>
-        public decimal Cent { get; set; }
+        public short Cent { get; set; }
 
-        public decimal Qty { get; set; }
+        public decimal Ext { get; set; }
 
         public bool Equals(MvObj other)
         {

@@ -5,7 +5,7 @@ using static CoChain.Nodal.Store;
 
 namespace Urbrural
 {
-    [Ui("机构主体操作")]
+    [Ui("机构操作")]
     public class OrglyVarWork : WebWork
     {
         protected override void OnCreate()
@@ -14,13 +14,13 @@ namespace Urbrural
 
             CreateWork<OrglyProjectWork>("proj");
 
+            CreateWork<OrglyDealWork>("deal");
+
             CreateWork<OrglyCreditWork>("credit");
 
             CreateWork<OrglyClearWork>("clear");
 
-            CreateWork<OrglyCatWork>("scheme");
-
-            CreateWork<OrglyReviewWork>("msg");
+            CreateWork<OrglyReviewWork>("rev");
         }
 
         public void @default(WebContext wc)

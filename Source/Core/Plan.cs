@@ -3,20 +3,21 @@ using CoChain;
 
 namespace Urbrural.Core
 {
-    public class Plan : IData
+    public class Plan : Entity
     {
-        int projid;
+        int projectid;
 
         short idx;
-        
-        JObj config;
-        
-        public void Read(ISource s, short msk = 255)
+
+        // counterpart to the conf in deal
+        JObj confs;
+
+        public override void Read(ISource s, short msk = 255)
         {
             throw new NotImplementedException();
         }
 
-        public void Write(ISink s, short msk = 255)
+        public override void Write(ISink s, short msk = 255)
         {
             throw new NotImplementedException();
         }

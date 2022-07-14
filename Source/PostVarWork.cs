@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using CoChain;
 using CoChain.Web;
 using static CoChain.Nodal.Store;
-using static CoChain.Web.Application;
+using static CoChain.Web.WebApp;
 using static CoChain.Web.Modal;
 
 namespace Urbrural

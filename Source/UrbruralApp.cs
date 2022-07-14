@@ -10,7 +10,7 @@ using static System.Data.IsolationLevel;
 
 namespace Urbrural
 {
-    public class UrbruralApplication : Application
+    public class UrbruralApp : WebApp
     {
         // contextual objects
         //
