@@ -25,5 +25,10 @@ namespace Urbrural.Core
                 }
             }
         }
+
+        public static MvDeal GetDeal(int dealid)
+        {
+            return null;
+        }
     }
 }

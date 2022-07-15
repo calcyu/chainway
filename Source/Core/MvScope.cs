@@ -24,7 +24,7 @@ namespace Urbrural.Core
                 {
                     if (fi.GetValue(this) is MvObj o)
                     {
-                        objmap.Add(o.name, o);
+                        objmap.Add(o.key, o);
                     }
                 }
             }

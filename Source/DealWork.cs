@@ -1,4 +1,5 @@
 ﻿using CoChain.Web;
+using Urbrural.Core;
 
 namespace Urbrural
 {
@@ -8,5 +9,13 @@ namespace Urbrural
 
     public class OrglyDealWork : DealWork
     {
+        protected override void OnCreate()
+        {
+            CreateVarWork<MvWork>();
+        }
+
+        public void @default(WebContext wc)
+        {
+        }
     }
 }
