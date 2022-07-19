@@ -14,14 +14,14 @@ namespace Urbrural
         {
             int orgid = wc[0];
             var org = GrabObject<int, Org>(orgid);
-            var regs = Grab<short, Reg>();
+            var regs = Grab<short, MvScope>();
         }
 
         public async Task search(WebContext wc, int sect)
         {
             bool inner = wc.Query[nameof(inner)];
             int orgid = wc[0];
-            var regs = Grab<short, Reg>();
+            var regs = Grab<short, MvScope>();
             if (inner)
             {
                 using var dc = NewDbContext();
@@ -30,7 +30,7 @@ namespace Urbrural
             {
                 wc.GivePage(200, h =>
                 {
-                    h.TOPBAR_().SUBNAV(regs, string.Empty, sect, filter: (k, v) => v.typ == Reg.TYP_SECT);
+                    h.TOPBAR_().SUBNAV(regs, string.Empty, sect, filter: (k, v) => v.typ == MvScope.TYP_SECT);
                     h.T("");
                 }, true, 60);
             }

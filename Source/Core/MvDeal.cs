@@ -2,7 +2,7 @@
 
 namespace Urbrural.Core
 {
-    public class MvDeal : MvScope, IKeyable<int>
+    public class MvDeal : MvEntity, IKeyable<int>, ILifeCycle
     {
         #region IDATA
 
@@ -101,7 +101,7 @@ namespace Urbrural.Core
 
         #region MPML
 
-        Cat _class;
+        Reg _class;
 
         decimal ver;
 
@@ -114,5 +114,21 @@ namespace Urbrural.Core
         }
 
         #endregion
+
+
+        public void OnLoad()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnFullLoad()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnSave()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

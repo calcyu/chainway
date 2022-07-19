@@ -47,5 +47,14 @@ namespace Urbrural.Core
         }
 
         public string Key => key;
+
+        public virtual void Render(MvContext mc)
+        {
+            var web = mc.Web;
+        }
+
+        public virtual void Control(MvContext mc)
+        {
+        }
     }
 }

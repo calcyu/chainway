@@ -6,7 +6,7 @@ namespace Urbrural.Core
     /// <summary>
     /// An environment for project execution.
     /// </summary>
-    public class Cat : MvScope, IKeyable<short>
+    public class Mart : MvScope, IKeyable<short>
     {
         readonly short id;
 
@@ -14,11 +14,11 @@ namespace Urbrural.Core
 
         public Action DoLayout;
 
-        public Cat()
+        public Mart()
         {
-            
         }
-        Cat(string id, string label)
+
+        Mart(string id, string label)
         {
             id = id;
             _label = label;

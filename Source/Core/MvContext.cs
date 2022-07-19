@@ -8,9 +8,9 @@ namespace Urbrural.Core
     /// </summary>
     public class MvContext
     {
-        Cat _class;
+        Reg _class;
 
-        Reg _reg;
+        MvScope _reg;
 
         WebContext webctx;
 
@@ -19,5 +19,7 @@ namespace Urbrural.Core
         IUser user;
 
         public IUser User => user;
+
+        public WebContext Web => webctx;
     }
 }

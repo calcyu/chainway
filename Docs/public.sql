@@ -28,7 +28,7 @@ create table entities
 
 alter table entities owner to postgres;
 
-create table regs
+create table scopes
 (
     id smallint not null
         constraint regs_pk
@@ -37,7 +37,7 @@ create table regs
 )
     inherits (entities);
 
-alter table regs owner to postgres;
+alter table scopes owner to postgres;
 
 create table orgs
 (
@@ -47,7 +47,7 @@ create table orgs
     license varchar(20),
     regid smallint
         constraint orgs_regid_fk
-            references regs
+            references scopes
             on update cascade,
     addr varchar(30),
     x double precision,
@@ -165,28 +165,13 @@ create table dealdats
 
 alter table dealdats owner to postgres;
 
-create table regdats
+create table scopedats
 (
     regid smallint
 )
     inherits (dats);
 
-alter table regdats owner to postgres;
-
-create table catdats
-(
-    classid varchar(12)
-)
-    inherits (dats);
-
-alter table catdats owner to postgres;
-
-create table cats
-(
-    id varchar(20)
-);
-
-alter table cats owner to postgres;
+alter table scopedats owner to postgres;
 
 create table plans
 (

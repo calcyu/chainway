@@ -1,59 +1,47 @@
-﻿using CoChain;
+﻿using System;
+using CoChain;
 
 namespace Urbrural.Core
 {
     /// <summary>
-    /// A predefined shared scope.
+    /// An environment for project execution.
     /// </summary>
-    public class Reg : MvScope
+    public class Reg : MvScope, IKeyable<short>
     {
-        public static readonly Reg Empty = new Reg();
+        readonly short id;
 
-        public const short
-            TYP_PROV = 1,
-            TYP_DIST = 2,
-            TYP_SECT = 3;
+        readonly string _label;
 
-        public static readonly Map<short, string> Typs = new Map<short, string>
+        public Action DoLayout;
+
+        public Reg()
         {
-            {TYP_PROV, "省份"},
-            {TYP_DIST, "地区"},
-            {TYP_SECT, "场地"},
-        };
-
-        internal short id;
-        internal short idx;
-
-        public override void Read(ISource s, short msk = 0xff)
-        {
-            base.Read(s, msk);
-
-            if ((msk & ID) == ID)
-            {
-                s.Get(nameof(id), ref id);
-            }
-            s.Get(nameof(idx), ref idx);
         }
 
-        public override void Write(ISink s, short msk = 0xff)
+        Reg(string id, string label)
         {
-            base.Write(s, msk);
-
-            if ((msk & ID) == ID)
-            {
-                s.Put(nameof(id), id);
-            }
-            s.Put(nameof(idx), idx);
+            id = id;
+            _label = label;
         }
 
         public short Key => id;
 
-        public bool IsProv => typ == TYP_PROV;
+        public string Label => _label;
 
-        public bool IsDist => typ == TYP_DIST;
+        //
+        // processing cycles and logics
 
-        public bool IsSect => typ == TYP_SECT;
 
-        public override string ToString() => name;
+        // public static Map<string, Sector> All = new Map<string, Sector>()
+        // {
+        //     new Sector("land", "田园种植"),
+        //     new Sector("grnhs", "温室栽培"),
+        //     new Sector("orchard", "生态果园"),
+        //     new Sector("", "鱼菜共生"),
+        //     new Sector("", "生态畜牧"),
+        //     new Sector("cardon", "碳汇林业"),
+        //     new Sector("art", "田园文化艺术"),
+        //     new Sector("ggrid", "绿色电力"),
+        // };
     }
 }

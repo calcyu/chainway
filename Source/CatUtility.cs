@@ -5,10 +5,10 @@ namespace Urbrural
 {
     public class CatUtility
     {
-        public static Map<string, Cat> All = new Map<string, Cat>();
+        public static Map<string, Reg> All = new Map<string, Reg>();
 
 
-        public static Cat GetSchema(string name)
+        public static Reg GetSchema(string name)
         {
             return All[name];
         }

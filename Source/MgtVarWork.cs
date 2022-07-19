@@ -16,7 +16,7 @@ namespace Urbrural
         {
             int ctrid = wc[0];
             var org = GrabObject<int, Org>(ctrid);
-            var regs = Grab<short, Reg>();
+            var regs = Grab<short, MvScope>();
 
             // get list of assocated sources
             var orgs = Grab<int, Org>();
@@ -30,7 +30,7 @@ namespace Urbrural
         {
             int ctrid = wc[0];
             var org = GrabObject<int, Org>(ctrid);
-            var regs = Grab<short, Reg>();
+            var regs = Grab<short, MvScope>();
 
             // get list of assocated sources
             var orgs = Grab<int, Org>();

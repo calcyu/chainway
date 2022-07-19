@@ -63,8 +63,8 @@ namespace Urbrural
         {
             Cache(dc =>
                 {
-                    dc.Sql("SELECT ").collst(Reg.Empty).T(" FROM regs ORDER BY typ, id");
-                    return dc.Query<short, Reg>();
+                    dc.Sql("SELECT ").collst(MvScope.Empty).T(" FROM regs ORDER BY typ, id");
+                    return dc.Query<short, MvScope>();
                 }, 3600 * 24
             );
 
