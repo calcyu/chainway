@@ -6,7 +6,7 @@ namespace Urbrural.Core
     /// <summary>
     /// The descriptor for a class of metaverse deals.
     /// </summary>
-    public class MvDealDescr
+    public class MvDealInfo : MvEntityInfo<MvDeal>
     {
         Type dealTyp;
 
@@ -14,13 +14,13 @@ namespace Urbrural.Core
         Map<string, MvConf> confs;
 
         //
-        Map<string, MvObjDescr> objs;
+        Map<string, MvObjInfo> objs;
 
         //
-        Map<string, MvTaskDescr> tasks;
+        Map<string, MvTaskInfo> tasks;
 
 
-        public MvDealDescr(Type dealTyp)
+        public MvDealInfo(Type dealTyp)
         {
             this.dealTyp = dealTyp;
         }

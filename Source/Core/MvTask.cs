@@ -6,7 +6,7 @@ namespace Urbrural.Core
     /// <summary>
     /// The abstract root class for metaverse tasks.
     /// </summary>
-    public abstract class MvTask : IKeyable<string>, IEquatable<MvTask>, IComparable<MvTask>
+    public class MvTask : MvTuple
     {
         string name;
 

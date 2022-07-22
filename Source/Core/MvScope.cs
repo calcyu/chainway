@@ -1,59 +1,33 @@
-﻿using CoChain;
+﻿using System.Reflection;
+using CoChain;
 
 namespace Urbrural.Core
 {
     /// <summary>
-    /// A predefined shared scope.
+    /// Represents a metaverse entity, that has a set of metaverse objects
     /// </summary>
-    public class MvScope : MvEntity
+    public class MvScope : Entity
     {
-        public static readonly MvScope Empty = new MvScope();
+        readonly Map<string, MvObj> objmap = new Map<string, MvObj>(32);
 
-        public const short
-            TYP_PROV = 1,
-            TYP_DIST = 2,
-            TYP_SECT = 3;
+        public MvObj GetVar(string varName) => objmap[varName];
 
-        public static readonly Map<short, string> Typs = new Map<short, string>
+
+        internal void Init()
         {
-            {TYP_PROV, "省份"},
-            {TYP_DIST, "地区"},
-            {TYP_SECT, "场地"},
-        };
+            var type = GetType();
 
-        internal short id;
-        internal short idx;
-
-        public override void Read(ISource s, short msk = 0xff)
-        {
-            base.Read(s, msk);
-
-            if ((msk & ID) == ID)
+            // gather actions
+            foreach (var fi in type.GetFields(BindingFlags.Public | BindingFlags.Instance))
             {
-                s.Get(nameof(id), ref id);
+                if (typeof(MvObj).IsAssignableFrom(fi.FieldType)) // MvObj
+                {
+                    if (fi.GetValue(this) is MvObj o)
+                    {
+                        objmap.Add(o.key, o);
+                    }
+                }
             }
-            s.Get(nameof(idx), ref idx);
         }
-
-        public override void Write(ISink s, short msk = 0xff)
-        {
-            base.Write(s, msk);
-
-            if ((msk & ID) == ID)
-            {
-                s.Put(nameof(id), id);
-            }
-            s.Put(nameof(idx), idx);
-        }
-
-        public short Key => id;
-
-        public bool IsProv => typ == TYP_PROV;
-
-        public bool IsDist => typ == TYP_DIST;
-
-        public bool IsSect => typ == TYP_SECT;
-
-        public override string ToString() => name;
     }
 }

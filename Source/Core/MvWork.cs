@@ -10,7 +10,7 @@ namespace Urbrural.Core
 
             int dealid = wc[-1];
 
-            var deal = MvDealUtility.GetDeal(dealid);
+            var deal = MvDealFolder.GetDeal(dealid);
             
             // prepare
 

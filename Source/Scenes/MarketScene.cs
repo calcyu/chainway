@@ -1,12 +1,13 @@
 ﻿using System;
 using CoChain;
+using Urbrural.Core;
 
-namespace Urbrural.Core
+namespace Urbrural.Scenes
 {
     /// <summary>
     /// An environment for project execution.
     /// </summary>
-    public class Reg : MvScope, IKeyable<short>
+    public class MarketScene : MvScene, IKeyable<short>
     {
         readonly short id;
 
@@ -14,11 +15,11 @@ namespace Urbrural.Core
 
         public Action DoLayout;
 
-        public Reg()
+        public MarketScene()
         {
         }
 
-        Reg(string id, string label)
+        MarketScene(string id, string label)
         {
             id = id;
             _label = label;

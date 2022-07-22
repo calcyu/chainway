@@ -24,7 +24,7 @@ namespace Urbrural
         public void @default(WebContext wc, int cmd)
         {
             var orgs = Grab<int, Org>();
-            var regs = Grab<short, MvScope>();
+            var regs = Grab<short, MvScene>();
 
             short regid = wc.Query[nameof(regid)];
             int mrtid = wc.Query[nameof(mrtid)];

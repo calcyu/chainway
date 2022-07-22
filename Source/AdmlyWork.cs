@@ -12,7 +12,7 @@ namespace Urbrural
     {
         protected override void OnCreate()
         {
-            CreateWork<AdmlyCatWork>("cat");
+            CreateWork<AdmlyScopeWork>("cat");
 
             CreateWork<AdmlyRegWork>("reg");
 

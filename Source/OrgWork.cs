@@ -46,7 +46,7 @@ namespace Urbrural
         public async Task @new(WebContext wc, int typ)
         {
             var prin = (User) wc.Principal;
-            var regs = Grab<short, MvScope>();
+            var regs = Grab<short, MvScene>();
             var orgs = Grab<int, Org>();
 
             if (wc.IsGet)

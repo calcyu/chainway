@@ -50,7 +50,7 @@ namespace Urbrural
         {
             short id = wc[0];
             var prin = (User) wc.Principal;
-            var regs = Grab<short, MvScope>();
+            var regs = Grab<short, MvScene>();
             var orgs = Grab<int, Org>();
             if (wc.IsGet)
             {
@@ -151,7 +151,7 @@ namespace Urbrural
         public async Task @default(WebContext wc)
         {
             int id = wc[0];
-            var regs = Grab<short, MvScope>();
+            var regs = Grab<short, MvScene>();
             if (wc.IsGet)
             {
                 using var dc = NewDbContext();

@@ -4,11 +4,11 @@ using CoChain;
 
 namespace Urbrural.Core
 {
-    public class MvDealUtility
+    public class MvDealFolder : IFolder<MvDeal>
     {
-        static readonly Map<short, MvDealDescr> All = new Map<short, MvDealDescr>();
+        static readonly Map<short, MvDealInfo> All = new Map<short, MvDealInfo>();
 
-        static MvDealUtility()
+        static MvDealFolder()
         {
             var typs = Assembly.GetExecutingAssembly().GetTypes();
             foreach (var typ in typs)
@@ -29,6 +29,16 @@ namespace Urbrural.Core
         public static MvDeal GetDeal(int dealid)
         {
             return null;
+        }
+
+        public MvDeal GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Create(MvDeal ent)
+        {
+            throw new NotImplementedException();
         }
     }
 }

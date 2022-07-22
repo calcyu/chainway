@@ -8,9 +8,9 @@ namespace Urbrural.Core
     /// </summary>
     public class MvContext
     {
-        Reg _class;
+        MvScene _class;
 
-        MvScope _reg;
+        MvScene _reg;
 
         WebContext webctx;
 

@@ -2,7 +2,7 @@
 
 namespace Urbrural.Core
 {
-    public class MvDeal : MvEntity, IKeyable<int>, ILifeCycle
+    public class MvDeal : MvScope, IKeyable<int>, ILifeCycle
     {
         #region IDATA
 
@@ -10,13 +10,12 @@ namespace Urbrural.Core
 
         int id;
 
-        int projid;
+        int projectid;
 
         //
         // duplicate plan detail here
 
         private string planname;
-
 
         internal int orgid;
         internal short regid;
@@ -36,6 +35,9 @@ namespace Urbrural.Core
         internal decimal pay;
 
         internal JObj conf;
+
+
+        public JObj Conf => conf;
 
         public override void Read(ISource s, short msk = 255)
         {
@@ -99,21 +101,17 @@ namespace Urbrural.Core
         #endregion
 
 
-        #region MPML
-
-        Reg _class;
+        // RegionScope _class;
 
         decimal ver;
 
         void Resolve()
         {
             string sch = null;
-            conf.Get(nameof(_class), ref sch);
+            // conf.Get(nameof(_class), ref sch);
             conf.Get(nameof(ver), ref ver);
-            _class = CatUtility.GetSchema(sch);
+            // _class = CatUtility.GetSchema(sch);
         }
-
-        #endregion
 
 
         public void OnLoad()

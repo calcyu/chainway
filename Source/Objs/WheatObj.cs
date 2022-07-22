@@ -2,8 +2,7 @@
 
 namespace Urbrural.Objs
 {
-    public class TropoObj : MvObj
+    public class WheatObj : MvObj
     {
-        
     }
 }
