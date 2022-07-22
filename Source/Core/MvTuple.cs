@@ -3,7 +3,7 @@ using CoChain;
 
 namespace Urbrural.Core
 {
-    public class MvTuple : IKeyable<string>
+    public abstract class MvTuple : IKeyable<string>
     {
         public string key;
 

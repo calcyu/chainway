@@ -1,12 +1,11 @@
 ﻿using System;
-using CoChain;
 
 namespace Urbrural.Core
 {
     /// <summary>
     /// The abstract root class for metaverse tasks.
     /// </summary>
-    public class MvTask : MvTuple
+    public class MvTask : MvTuple, IVisual
     {
         string name;
 
@@ -31,6 +30,11 @@ namespace Urbrural.Core
         }
 
         public int CompareTo(MvTask other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Render(MvContext mc)
         {
             throw new NotImplementedException();
         }

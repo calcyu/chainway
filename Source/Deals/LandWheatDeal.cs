@@ -10,7 +10,7 @@ namespace Urbrural.Deals
         //
         // mv objects
         //
-        MvObj celes = new CelestialObj()
+        MvObj wheat = new GrainObj()
         {
         };
 
@@ -38,7 +38,7 @@ namespace Urbrural.Deals
         {
             A = new WechatPayTask()
             {
-                Before = (x) => celes.Ext > 0
+                Before = (x) => wheat.Ext > 0
             };
         }
     }

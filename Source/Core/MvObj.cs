@@ -2,7 +2,7 @@
 
 namespace Urbrural.Core
 {
-    public class MvObj : MvTuple, IEquatable<MvObj>, IComparable<MvObj>
+    public class MvObj : MvTuple, IEquatable<MvObj>, IComparable<MvObj>, IVisual
     {
         MvDeal parent;
 

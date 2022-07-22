@@ -5,7 +5,7 @@ namespace Urbrural.Core
     /// <summary>
     /// To determine principal identity based on current web context. The interaction with user, however, is not included.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Parameter, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Parameter, Inherited = false)]
     public class InfoAttribute : Attribute
     {
         readonly string name;

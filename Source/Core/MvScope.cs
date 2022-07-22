@@ -4,9 +4,9 @@ using CoChain;
 namespace Urbrural.Core
 {
     /// <summary>
-    /// Represents a metaverse entity, that has a set of metaverse objects
+    /// A metaverse scope of states, that copmrises of an object set.
     /// </summary>
-    public class MvScope : Entity
+    public abstract class MvScope : Entity, IVisual
     {
         readonly Map<string, MvObj> objmap = new Map<string, MvObj>(32);
 
@@ -28,6 +28,10 @@ namespace Urbrural.Core
                     }
                 }
             }
+        }
+
+        public void Render(MvContext mc)
+        {
         }
     }
 }
