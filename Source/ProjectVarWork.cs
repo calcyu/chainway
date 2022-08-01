@@ -18,8 +18,8 @@ namespace Urbrural
         {
             int id = wc[0];
             using var dc = NewDbContext();
-            dc.Sql("SELECT ").collst(MvDeal.Empty).T(" FROM posts WHERE id = @1");
-            var o = await dc.QueryTopAsync<MvDeal>(p => p.Set(id));
+            dc.Sql("SELECT ").collst(Project.Empty).T(" FROM posts WHERE id = @1");
+            var o = await dc.QueryTopAsync<Project>(p => p.Set(id));
             wc.GivePage(200, h =>
             {
                 // org

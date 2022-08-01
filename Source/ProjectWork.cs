@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using CoChain.Web;
-using Urbrural;
 using Urbrural.Core;
 using static CoChain.Nodal.Store;
 using static CoChain.Web.Modal;
@@ -36,8 +35,8 @@ namespace Urbrural
         {
             var org = wc[-1].As<Org>();
             using var dc = NewDbContext();
-            dc.Sql("SELECT ").collst(MvDeal.Empty).T(" FROM pieces WHERE orgid = @1 AND status >= 2 ORDER BY status DESC");
-            var arr = await dc.QueryAsync<MvDeal>(p => p.Set(org.id));
+            dc.Sql("SELECT ").collst(Project.Empty).T(" FROM pieces WHERE orgid = @1 AND status >= 2 ORDER BY status DESC");
+            var arr = await dc.QueryAsync<Project>(p => p.Set(org.id));
             wc.GivePage(200, h =>
             {
                 h.TOOLBAR();
@@ -55,8 +54,8 @@ namespace Urbrural
         {
             var org = wc[-1].As<Org>();
             using var dc = NewDbContext();
-            dc.Sql("SELECT ").collst(MvDeal.Empty).T(" FROM peices WHERE orgid = @1 AND status <= 1 ORDER BY status DESC");
-            var arr = await dc.QueryAsync<MvDeal>(p => p.Set(org.id));
+            dc.Sql("SELECT ").collst(Project.Empty).T(" FROM peices WHERE orgid = @1 AND status <= 1 ORDER BY status DESC");
+            var arr = await dc.QueryAsync<Project>(p => p.Set(org.id));
             wc.GivePage(200, h =>
             {
                 h.TOOLBAR();

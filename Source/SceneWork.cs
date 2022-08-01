@@ -9,17 +9,17 @@ using static CoChain.Web.Modal;
 
 namespace Urbrural
 {
-    public abstract class RegWork : WebWork
+    public abstract class SceneWork : WebWork
     {
     }
 
     [UserAuthorize(admly: ADMLY_MGT)]
     [Ui("平台地域设置", "world")]
-    public class AdmlyRegWork : RegWork
+    public class AdmlySceneWork : SceneWork
     {
         protected override void OnCreate()
         {
-            CreateVarWork<AdmlyRegVarWork>();
+            CreateVarWork<AdmlySceneVarWork>();
         }
 
         public void @default(WebContext wc)

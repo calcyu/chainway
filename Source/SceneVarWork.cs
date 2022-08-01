@@ -8,11 +8,11 @@ using static CoChain.Web.Modal;
 
 namespace Urbrural
 {
-    public abstract class RegVarWork : WebWork
+    public abstract class SceneVarWork : WebWork
     {
     }
 
-    public class AdmlyRegVarWork : RegVarWork
+    public class AdmlySceneVarWork : SceneVarWork
     {
         [Ui(group: 7), Tool(ButtonShow)]
         public async Task @default(WebContext wc, int typ)

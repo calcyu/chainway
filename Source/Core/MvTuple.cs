@@ -11,6 +11,12 @@ namespace Urbrural.Core
         DateTime modified;
 
 
+        private double x, y, z;
+        private double scale;
+        DateTime stamp;
+            
+            
+
         public short State { get; internal set; }
 
         public decimal Value { get; set; }

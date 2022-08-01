@@ -1,5 +1,5 @@
 ﻿using Urbrural.Core;
-using Urbrural.Objs;
+using Urbrural.Library;
 using Urbrural.Tasks;
 
 namespace Urbrural.Deals

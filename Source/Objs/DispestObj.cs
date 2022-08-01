@@ -1,6 +1,6 @@
 ﻿using Urbrural.Core;
 
-namespace Urbrural.Objs
+namespace Urbrural.Library
 {
     [Info("病虫害")]
     public class DispestObj : MvObj

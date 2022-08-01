@@ -1,6 +1,6 @@
 ﻿using Urbrural.Core;
 
-namespace Urbrural.Objs
+namespace Urbrural.Library
 {
     public class TropoObj : MvObj
     {

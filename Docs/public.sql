@@ -37,7 +37,7 @@ create table scopes
 )
     inherits (entities);
 
-alter table scopes owner to postgres;
+alter table scenes owner to postgres;
 
 create table orgs
 (
@@ -47,7 +47,7 @@ create table orgs
     license varchar(20),
     regid smallint
         constraint orgs_regid_fk
-            references scopes
+            references scenes
             on update cascade,
     addr varchar(30),
     x double precision,
@@ -171,7 +171,7 @@ create table scopedats
 )
     inherits (dats);
 
-alter table scopedats owner to postgres;
+alter table scenedats owner to postgres;
 
 create table plans
 (

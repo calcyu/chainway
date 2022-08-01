@@ -1,6 +1,6 @@
 ﻿using Urbrural.Core;
 
-namespace Urbrural.Objs
+namespace Urbrural.Library
 {
     [Info("谷物")]
     public class GrainObj : MvObj
