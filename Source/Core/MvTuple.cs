@@ -1,7 +1,7 @@
 ﻿using System;
-using CoChain;
+using ChainFx;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     public abstract class MvTuple : IKeyable<string>
     {
@@ -11,11 +11,10 @@ namespace Urbrural.Core
         DateTime modified;
 
 
-        private double x, y, z;
-        private double scale;
+        double x, y, z;
+        double scale;
         DateTime stamp;
-            
-            
+
 
         public short State { get; internal set; }
 

@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
-using CoChain;
+using ChainFx;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     /// <summary>
     /// A metaverse scope of states, that copmrises of an object set.

@@ -3,14 +3,14 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CoChain;
-using CoChain.Web;
-using Urbrural.Core;
+using ChainFx;
+using ChainFx.Web;
+using ChainVerse.Core;
 using static System.Data.IsolationLevel;
 
-namespace Urbrural
+namespace ChainVerse
 {
-    public class UrbruralApp : WebApp
+    public class UrbruralApp : Application
     {
         // contextual objects
         //

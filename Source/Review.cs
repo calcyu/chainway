@@ -1,6 +1,6 @@
-﻿using CoChain;
+﻿using ChainFx;
 
-namespace Urbrural
+namespace ChainVerse
 {
     /// <summary>
     /// A blog post for upon a certain project.

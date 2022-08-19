@@ -1,7 +1,7 @@
-﻿using CoChain;
-using CoChain.Nodal;
+﻿using ChainFx;
+using ChainFx.Nodal;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     public class RegUtility
     {

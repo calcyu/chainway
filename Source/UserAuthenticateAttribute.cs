@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CoChain.Web;
-using static CoChain.Nodal.Store;
+using ChainFx.Web;
+using static ChainFx.Nodal.Store;
 
-namespace Urbrural
+namespace ChainVerse
 {
     /// <summary>
     /// To establish principal identity. 

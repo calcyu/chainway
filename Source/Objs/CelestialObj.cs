@@ -1,7 +1,7 @@
-﻿using CoChain;
-using Urbrural.Core;
+﻿using ChainFx;
+using ChainVerse.Core;
 
-namespace Urbrural.Objs
+namespace ChainVerse.Objs
 {
     public class CelestialObj : MvObj
     {

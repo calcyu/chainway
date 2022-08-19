@@ -1,9 +1,9 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
-using CoChain;
-using CoChain.Web;
+using ChainFx;
+using ChainFx.Web;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public abstract class ReviewWork : WebWork
     {

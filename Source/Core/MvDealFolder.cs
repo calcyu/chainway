@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
-using CoChain;
+using ChainFx;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     public class MvDealFolder : IFolder<MvDeal>
     {

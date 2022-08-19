@@ -1,6 +1,6 @@
-﻿using CoChain.Web;
+﻿using ChainFx.Web;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public abstract class DailyWork : WebWork
     {

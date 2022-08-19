@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
-using CoChain;
-using CoChain.Web;
+using ChainFx;
+using ChainFx.Web;
 using static System.String;
-using static CoChain.Nodal.Store;
-using static CoChain.Web.Modal;
+using static ChainFx.Nodal.Store;
+using static ChainFx.Web.Modal;
 
-namespace Urbrural
+namespace ChainVerse
 {
     [UserAuthorize]
     [Ui("账号信息")]

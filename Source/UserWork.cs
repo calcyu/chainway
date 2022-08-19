@@ -1,9 +1,9 @@
-﻿using CoChain.Web;
-using static CoChain.Web.Modal;
-using static Urbrural.User;
-using static CoChain.Nodal.Store;
+﻿using ChainFx.Web;
+using static ChainFx.Web.Modal;
+using static ChainVerse.User;
+using static ChainFx.Nodal.Store;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public abstract class UserWork : WebWork
     {

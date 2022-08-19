@@ -1,7 +1,7 @@
-﻿using CoChain.Web;
-using Urbrural.Core;
+﻿using ChainFx.Web;
+using ChainVerse.Core;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public class DealWork : WebWork
     {

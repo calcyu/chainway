@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using CoChain;
-using CoChain.Web;
-using static CoChain.Nodal.Store;
-using static CoChain.Web.Modal;
+using ChainFx;
+using ChainFx.Web;
+using static ChainFx.Nodal.Store;
+using static ChainFx.Web.Modal;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public abstract class UserVarWork : WebWork
     {

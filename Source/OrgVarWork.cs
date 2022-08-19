@@ -1,13 +1,13 @@
 using System;
 using System.Data;
 using System.Threading.Tasks;
-using CoChain;
-using CoChain.Web;
-using Urbrural.Core;
-using static CoChain.Nodal.Store;
-using static CoChain.Web.Modal;
+using ChainFx;
+using ChainFx.Web;
+using ChainVerse.Core;
+using static ChainFx.Nodal.Store;
+using static ChainFx.Web.Modal;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public abstract class OrgVarWork : WebWork
     {

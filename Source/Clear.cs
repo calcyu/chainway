@@ -1,7 +1,7 @@
 ﻿using System;
-using CoChain;
+using ChainFx;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public class Clear : Entity, IKeyable<int>
     {

@@ -1,7 +1,7 @@
-﻿using CoChain.Nodal;
-using CoChain.Web;
+﻿using ChainFx.Nodal;
+using ChainFx.Web;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     /// <summary>
     /// The scripting global states.

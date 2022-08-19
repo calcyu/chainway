@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     public class MvTupleInfo<T> where T : MvTuple, new()
     {

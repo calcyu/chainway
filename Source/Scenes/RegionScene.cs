@@ -1,9 +1,9 @@
-﻿using CoChain;
-using Urbrural.Core;
-using Urbrural.Library;
-using Urbrural.Objs;
+﻿using ChainFx;
+using ChainVerse.Core;
+using ChainVerse.Library;
+using ChainVerse.Objs;
 
-namespace Urbrural.Scenes
+namespace ChainVerse.Scenes
 {
     /// <summary>
     /// A geographic region that includes projects.

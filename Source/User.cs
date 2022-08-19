@@ -1,8 +1,8 @@
 ﻿using System;
-using CoChain;
-using Urbrural.Core;
+using ChainFx;
+using ChainVerse.Core;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public class User : Entity, IKeyable<int>, IUser
     {

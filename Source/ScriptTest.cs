@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public class Point
     {
@@ -17,7 +17,7 @@ namespace Urbrural
         {
             var point = new Point {X = 3, Y = 5};
 
-            var scripta = CSharpScript.Create<Type>("public class Abc : Urbrural.Point { public int Z => 120; }; return typeof(Abc);", ScriptOptions.Default.WithReferences("Urbrural"));
+            var scripta = CSharpScript.Create<Type>("public class Abc : ChainVerse.Point { public int Z => 120; }; return typeof(Abc);", ScriptOptions.Default.WithReferences("ChainVerse"));
             scripta.Compile();
             var state = (await scripta.RunAsync());
             var clazz = state.ReturnValue;

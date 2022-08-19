@@ -1,4 +1,4 @@
-﻿namespace Urbrural.Core
+﻿namespace ChainVerse.Core
 {
     public interface IFolder<E> where E : MvScope
     {

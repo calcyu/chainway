@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     /// <summary>
     /// The abstract root class for metaverse tasks.

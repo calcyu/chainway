@@ -1,7 +1,7 @@
-﻿using CoChain;
-using CoChain.Web;
+﻿using ChainFx;
+using ChainFx.Web;
 
-namespace Urbrural
+namespace ChainVerse
 {
     /// <summary>
     /// The data model for an organizational unit.

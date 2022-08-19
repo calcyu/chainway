@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using CoChain.Web;
+using ChainFx.Web;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     public class MvWork : WebWork
     {

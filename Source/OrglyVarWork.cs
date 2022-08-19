@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using CoChain;
-using CoChain.Web;
-using static CoChain.Nodal.Store;
+using ChainFx;
+using ChainFx.Web;
+using static ChainFx.Nodal.Store;
 
-namespace Urbrural
+namespace ChainVerse
 {
     [Ui("机构操作")]
     public class OrglyVarWork : WebWork

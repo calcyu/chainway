@@ -1,8 +1,8 @@
-﻿using Urbrural.Core;
-using Urbrural.Library;
-using Urbrural.Tasks;
+﻿using ChainVerse.Core;
+using ChainVerse.Library;
+using ChainVerse.Tasks;
 
-namespace Urbrural.Deals
+namespace ChainVerse.Deals
 {
     // [Note]
     public class LandWheatDeal : MvDeal

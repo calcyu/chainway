@@ -1,7 +1,7 @@
 ﻿using System;
-using CoChain;
+using ChainFx;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     /// <summary>
     /// The descriptor for a class of metaverse deals.

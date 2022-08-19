@@ -1,6 +1,6 @@
-﻿using CoChain;
+﻿using ChainFx;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     /// <summary>
     /// A predefined shared scope.

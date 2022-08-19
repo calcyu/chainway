@@ -1,6 +1,6 @@
-﻿using Urbrural.Core;
+﻿using ChainVerse.Core;
 
-namespace Urbrural.Library
+namespace ChainVerse.Library
 {
     public class TropoObj : MvObj
     {

@@ -1,6 +1,6 @@
-﻿using Urbrural.Core;
+﻿using ChainVerse.Core;
 
-namespace Urbrural.Deals
+namespace ChainVerse.Deals
 {
     public class ArtistryDeal : MvDeal
     {

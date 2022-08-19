@@ -3,13 +3,13 @@ using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using CoChain;
-using CoChain.Web;
-using static CoChain.CryptoUtility;
-using static CoChain.Web.WebApp;
+using ChainFx;
+using ChainFx.Web;
+using static ChainFx.CryptoUtility;
+using static ChainFx.Application;
 using WebUtility = System.Net.WebUtility;
 
-namespace Urbrural
+namespace ChainVerse
 {
     /// <summary>
     /// A hub of operation that has its own weixin official acount.
@@ -36,7 +36,7 @@ namespace Urbrural
 
         static WeChatUtility()
         {
-            var s = Prog;
+            var s = Application.Prog;
             s.Get(nameof(url), ref url);
             s.Get(nameof(appid), ref appid);
             s.Get(nameof(appsecret), ref appsecret);

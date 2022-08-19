@@ -1,8 +1,8 @@
-using CoChain;
-using CoChain.Web;
-using static CoChain.Nodal.Store;
+using ChainFx;
+using ChainFx.Web;
+using static ChainFx.Nodal.Store;
 
-namespace Urbrural
+namespace ChainVerse
 {
     [Ui("机构主体操作")]
     public class OrglyWork : WebWork

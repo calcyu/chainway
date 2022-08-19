@@ -1,7 +1,7 @@
 ﻿using System;
-using CoChain;
+using ChainFx;
 
-namespace Urbrural
+namespace ChainVerse
 {
     /// <summary>
     /// A reportive record of daily transaction for goods.

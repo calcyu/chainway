@@ -1,9 +1,9 @@
 ﻿using System;
-using CoChain.Web;
+using ChainFx.Web;
 
-namespace Urbrural
+namespace ChainVerse
 {
-    public class FedService : CoChain.Nodal.FedService
+    public class FedService : ChainFx.Nodal.FedService
     {
         public override void dir(WebContext wc)
         {

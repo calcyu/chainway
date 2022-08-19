@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using CoChain;
-using CoChain.Nodal;
-using CoChain.Web;
-using static CoChain.Nodal.Store;
+using ChainFx;
+using ChainFx.Nodal;
+using ChainFx.Web;
+using static ChainFx.Nodal.Store;
 
-namespace Urbrural
+namespace ChainVerse
 {
     [UserAuthorize(admly: User.ADMLY_)]
     [Ui("平台管理")]

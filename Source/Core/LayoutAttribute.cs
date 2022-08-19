@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     /// <summary>
     /// To determine principal identity based on current web context. The interaction with user, however, is not included.

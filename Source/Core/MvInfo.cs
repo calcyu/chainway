@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Urbrural.Core
+namespace ChainVerse.Core
 {
     public class MvInfo<T> where T : class, new()
     {

@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using CoChain;
-using CoChain.Web;
-using Urbrural.Core;
-using static CoChain.Nodal.Store;
+using ChainFx;
+using ChainFx.Web;
+using ChainVerse.Core;
+using static ChainFx.Nodal.Store;
 
-namespace Urbrural
+namespace ChainVerse
 {
     /// <summary>
     /// The home page for regionnal view of supply

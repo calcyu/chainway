@@ -1,7 +1,7 @@
 ﻿using System;
-using CoChain.Web;
+using ChainFx.Web;
 
-namespace Urbrural
+namespace ChainVerse
 {
     /// <summary>
     /// To implement principal authorization of access to the target resources.

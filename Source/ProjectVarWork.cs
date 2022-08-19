@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using CoChain.Web;
-using Urbrural.Core;
-using static CoChain.Nodal.Store;
+using ChainFx.Web;
+using ChainVerse.Core;
+using static ChainFx.Nodal.Store;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public class ProjectVarWork : WebWork
     {

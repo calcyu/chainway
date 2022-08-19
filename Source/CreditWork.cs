@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
-using CoChain.Web;
-using Urbrural.Core;
-using static Urbrural.User;
-using static CoChain.Nodal.Store;
+using ChainFx.Web;
+using static ChainVerse.User;
+using static ChainFx.Nodal.Store;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public abstract class CreditWork : WebWork
     {

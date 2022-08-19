@@ -1,12 +1,11 @@
 using System;
 using System.Text;
-using CoChain;
-using CoChain.Web;
-using Urbrural;
-using Urbrural.Core;
-using static CoChain.CryptoUtility;
+using ChainFx;
+using ChainFx.Web;
+using ChainVerse.Core;
+using static ChainFx.CryptoUtility;
 
-namespace Urbrural
+namespace ChainVerse
 {
     public static class UrbruralUtility
     {
@@ -33,7 +32,7 @@ namespace Urbrural
         public static string GetUrlLink(string uri)
         {
             string url;
-            url = WebApp.Prog[nameof(url)];
+            url = Application.Prog[nameof(url)];
             if (uri == null)
             {
                 return url;
