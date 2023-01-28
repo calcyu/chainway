@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using ChainFx.Web;
-using ChainVerse.Core;
-using static ChainFx.Nodal.Store;
+using ChainPort.Core;
+using static ChainFx.Fabric.Nodality;
 using static ChainFx.Web.Modal;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public abstract class ProjectWork : WebWork
     {
@@ -42,7 +42,6 @@ namespace ChainVerse
                 h.TOOLBAR();
                 h.TABLE(arr, o =>
                 {
-                    h.TD_().A_TEL(o.name, o.tip)._TD();
                     // h.TD(o.price, true);
                     // h.TD(Statuses[o.status]);
                 });

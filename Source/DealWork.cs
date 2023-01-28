@@ -1,7 +1,7 @@
 ﻿using ChainFx.Web;
-using ChainVerse.Core;
+using ChainPort.Core;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public class DealWork : WebWork
     {

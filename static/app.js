@@ -1,82 +1,202 @@
 
-// Registering Service Worker
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js', {scope: '/'});
-}
 
-var WCPay = function (data, lot) {
+// sup: supply or retail
+//
+var WCPay = function (data, sup) {
     WeixinJSBridge.invoke(
         'getBrandWCPayRequest',
         data,
         function (res) {
             if (res.err_msg == "get_brand_wcpay_request:ok") {
-                if (lot) {
-                    location.href = '/lot/result';
-                } else {
-                    location.href = '/diet/result';
+
+                if (sup) {
+                    alert('下单成功');
                 }
-            } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
-            } else {
-                if (lot) {
-                    location.href = '/lot/result-2';
-                } else {
-                    location.href = '/diet/result-2';
+                else {
+                    alert('下单成功，查看订单在「我的消费」');
                 }
+                // close without refresh
+                window.parent.closeUp(false);
+            }
+            else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+            }
+            else { // error
+                alert('支付功能异常');
             }
         }
     );
 };
 
-function bybuy(trig) {
+function fixPrice(trig, evt, price, off) {
+
+    var url = window.location.href;
+    var endp = url.lastIndexOf('/', url.length - 1);
+    var startp = url.lastIndexOf('/', endp - 1);
+    var n = parseInt(url.substring(startp + 1, endp));
+
+    var vip = false;
+    if (evt.detail) {
+
+        // to-path matched
+        var lst = evt.detail.split(' ');
+        for (var i = 0; i < lst.length; i++) {
+            if (n == parseInt(lst[i])) {
+                vip = true;
+                break;
+            }
+        }
+    }
+
+    // fill fprice
+    var out_fprice = trig.querySelector('.fprice');
+    if (vip) {
+        out_fprice.value = (price - off).toFixed(2);
+
+        // pad with the normal price
+        if (off > 0) {
+            var badge = trig.parentElement.querySelector('.uk-badge');
+            badge.innerHTML = '<s>￥' + price.toFixed(2) + '</s>&nbsp;' + badge.innerHTML;
+        }
+    }
+    else {
+        out_fprice.value = price.toFixed(2);
+    }
+
+}
+
+function sumQtyDetails(trig, unitx) {
+
+    var footer = trig.parentElement;
+
+    var output_qtyx = footer.querySelector('.qtyx');
+    var output_fprice = footer.querySelector('.fprice');
+    var output_subtotal = footer.querySelector('.subtotal');
+
+    var fprice = parseFloat(output_fprice.value);
+
+    output_qtyx.value = (unitx * trig.value).toFixed(1);
+    output_subtotal.value = (unitx * trig.value * fprice).toFixed(2);
+
+    var span = footer.querySelector('.qtydetail');
+
+    // toggle visibility
+    if (trig.value == 0) {
+        span.classList.add("uk-invisible");
+    }
+    else {
+        span.classList.remove("uk-invisible");
+    }
+
+    // sum up topay
+    var sum = 0.00;
+    var lst = trig.form.querySelectorAll('.subtotal');
+    for (var i = 0; i < lst.length; i++) {
+        var v = lst[i].value;
+        if (v) {
+            sum += parseFloat(v);
+        }
+    }
+    trig.form.topay.value = sum.toFixed(2);
+
+}
+
+function qtyFill(trig, min, max, step) {
+
+    var n = 0;
+
+    for (var i = min; i <= max; i += (n >= 50 ? step * 10 : n >= 30 ? step * 5 : step)) {
+        var opt = document.createElement("option");
+        opt.value = i;
+        opt.text = i + ' 件';
+        trig.add(opt);
+
+        n++;
+    }
+}
+
+function call_smsvcode(trig) {
+
+    var method = trig.formMethod;
+    var action = trig.formAction || trig.name;
+    var form = trig.form;
+    // validate form before submit
+    if (!form || !form.reportValidity()) return false;
+
+    trig.disabled = true;
+
+    // get prepare id
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function (e) {
+        form.vcode.required = true; // set voce as required
+    };
+    xhr.open(method, action, false);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(serialize(trig.form));
+
+    return false;
+}
+
+function call_buy(trig) {
+
+    var topay = parseFloat(trig.querySelector('output').value);
+    if (topay <= 0) {
+        alert('请先选择商品及件数');
+        return;
+    }
+
     var method = 'post';
     var action = trig.formAction || trig.name;
     var form = trig.form;
     // validate form before submit
     if (!form || !form.reportValidity()) return false;
 
-    // check if ptid exists
-    if (!form.ptid) return false;
+    // reap of cookies
+    var inps = trig.form.querySelectorAll('input[cookie');
+    for (var i = 0; i < inps.length; i++) {
+        var inp = inps[i];
+        var cookieName = inp.getAttribute('cookie');
 
-    var ok = false;
-    for (var i = 0; i < form.elements.length; i++) {
-        var inp = form.elements[i];
-        if ((inp.type === "checkbox" || inp.type === "radio") && inp.checked) {
-            ok = true;
-            break;
-        }
+        document.cookie = cookieName + '=' + inp.value + ';max-age=31104000';
     }
-    if (!ok) return false; // nothing checked
 
     // get prepare id
     var xhr = new XMLHttpRequest();
     xhr.onload = function (e) {
         var data = JSON.parse(this.responseText);
+
         window.top.WCPay(data, false); // call top windows's weixin pay bridge
     };
     xhr.open(method, action, false);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(serialize(trig.form));
+
     return false;
 }
 
-function byact(trig) {
+function call_book(trig) {
+
     var method = 'post';
     var action = trig.formAction || trig.name;
     // validate form before submit
     if (!trig.form || !trig.form.reportValidity()) return false;
+
     // get prepare id
     var xhr = new XMLHttpRequest();
     xhr.onload = function (e) {
         if (this.responseText) {
+
             var data = JSON.parse(this.responseText);
+
             window.top.WCPay(data, true); // call top windows's weixin pay bridge
-        } else {
-            location.href = '/lot/result';
+        }
+        else {
+            alert('服务器端无返回数据');
         }
     };
     xhr.open(method, action, false);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(serialize(trig.form));
+
     return false;
 }
 
@@ -113,7 +233,7 @@ function childOf(el, name) {
 }
 
 function subscriptUri(uri, num) {
-    var a = uri.split('?'); 
+    var a = uri.split('?');
     var p = a[0].length - 1;
     var dash;
     while (p > 0) {
@@ -140,6 +260,38 @@ function subscriptUri(uri, num) {
             ret += '?' + a[1];
         }
         return ret;
+    }
+}
+
+
+function fixAll() {
+    var cookies = {};
+    // parse all cookies
+    if (document.cookie && document.cookie != '') {
+        var split = document.cookie.split(';');
+        for (var i = 0; i < split.length; i++) {
+            var name_value = split[i].split('=');
+            name_value[0] = name_value[0].replace(/^ /, '');
+            cookies[name_value[0]] = decodeURIComponent(name_value[1]);
+        }
+    }
+    // traverse
+    var elst = document.querySelectorAll("[onfix]");
+    for (var e of elst) {
+        var scpt = e.getAttribute("onfix");
+
+        var cookie_name = e.getAttribute('cookie');
+        var cookie_val = cookies[cookie_name];
+        if (cookie_val) {
+            // cookie
+            var evt = new CustomEvent('fix', { detail: cookie_val });
+            e.addEventListener('fix', new Function(scpt));
+            e.dispatchEvent(evt);
+        } else {
+            var evt = new CustomEvent('fix');
+            e.addEventListener('fix', new Function(scpt));
+            e.dispatchEvent(evt);
+        }
     }
 }
 
@@ -206,6 +358,33 @@ function serialize(form) {
     return q.length == 0 ? null : q.join("&");
 }
 
+function askSend(trig, tip) {
+
+    if (!window.confirm(tip)) return false;
+
+    var method = "post";
+    var action = trig.formAction || trig.name;
+    var form = trig.form;
+
+    if (!form || !form.reportValidity()) return false;
+
+    var xhr = new XMLHttpRequest;
+    xhr.onreadystatechange = function () {
+        if (4 == this.readyState) {
+            if (200 == this.status || 205 == this.status) { // reset content
+                window.location.reload();
+            }
+            else if (204 == this.status) {
+                window.parent.closeUp(true);
+            }
+        }
+    };
+    xhr.open(method, action, false);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(serialize(trig.form));
+
+    return false;
+}
 
 function appendTo(parent, html) {
     var e = document.createElement('div');
@@ -213,27 +392,71 @@ function appendTo(parent, html) {
     return parent.appendChild(e.firstChild)
 }
 
+// anchor without adding history
+function goto(trigOrUrl, evt) {
+
+    evt.preventDefault();
+
+    if (trigOrUrl.tagName == 'A') {
+        location.replace(trigOrUrl.href);
+    }
+    else {
+        location.replace(trigOrUrl);
+    }
+
+    return false;
+}
+
+function markAndGo(cookieName, el) {
+    document.cookie = cookieName + '=' + el.id + ';max-age=31104000';
+    return true;
+}
+
+function setActive(evt, el) {
+    if (el.id == evt.detail) {
+        el.classList.add('uk-active');
+    }
+}
+
+// SELECT element triggered
+function formRefresh(trig, evt) {
+
+    var b = serialize(trig.form);
+
+    evt.preventDefault();
+
+    if (trig.tagName = 'BUTTON') {
+        var a = trig.formAction;
+        var url = a + '?' + b;
+        location.replace(url);
+    }
+    else {
+        var a = location.href.split('?');
+        var url = a[0] + '?' + b + (a.length == 1 ? '' : '&' + a[1]);
+        location.replace(url);
+    }
+
+}
+
+
 // build and open a reveal dialog
 // trig - a button, input_button or anchor element
 
-// mode
+// modes
 const
-    CONFIRM = 1,
-    PROMPT = 2,
-    SHOW = 4,
-    OPEN = 8;
-const
-    HALF = 1,
-    SMALL = 2,
-    LARGE = 3,
-    FULL = 4;
+    SCRIPT = 1, CONFIRM = 2, CROP = 4, PROMPT = 8, SHOW = 16, OPEN = 32, ASTACK = 64;
 
-function dialog(trig, mode, pick, appear, title) {
-    var stylec =
-        appear == HALF ? ' uk-modal-half uk-animation-slide-bottom' :
-            appear == SMALL ? ' uk-modal-small' :
-                appear == LARGE ? ' uk-modal-large' :
-                    ' uk-modal-full uk-animation-slide-right';
+function dialog(trig, mode, pick, title) {
+    var modalc =
+        mode == PROMPT ? ' uk-modal-small' :
+            mode == OPEN ? ' uk-modal-large' :
+                mode == SHOW || mode == CROP ? ' uk-modal-tall' :
+                    mode == ASTACK ? ' uk-modal-full' : null;
+    var annimc =
+        mode == PROMPT ? '' :
+            mode == OPEN ? ' uk-animation-scale-up' :
+                mode == SHOW || mode == CROP ? ' uk-animation-slide-bottom' :
+                    mode == ASTACK ? ' uk-animation-slide-right' : null;
     // keep the trigger info
     var formid = trig.form ? trig.form.id : '';
     var tag = trig.tagName;
@@ -250,6 +473,9 @@ function dialog(trig, mode, pick, appear, title) {
             qstr = serialize(trig.form);
             if (!qstr) return false;
         }
+        if (mode == ASTACK) {
+            qstr = qstr ? qstr + '&astack=true' : 'astack=true';
+        }
         if (qstr) {
             src = action.indexOf('?') == -1 ? action + '?' + qstr : action + '&' + qstr;
         } else {
@@ -257,51 +483,106 @@ function dialog(trig, mode, pick, appear, title) {
         }
         trigc = ' button-trig';
     } else if (tag == 'A') {
-        src = action = trig.href;
+        src = action = decodeURI(trig.href);
         method = 'get';
-        if (mode == OPEN && appear == FULL) {
+        if (mode == ASTACK) {
             src += src.indexOf('?') == -1 ? '?astack=true' : '&astack=true';
         }
         src += src.indexOf('?') == -1 ? '?inner=true' : '&inner=true';
         trigc = ' anchor-trig';
     }
 
-    title = title || trig.innerHTML;
+    title = title || '';
 
-    var div = '<div id="dialog" class="' + stylec + trigc + '" uk-modal>';
-    div += '<section class="uk-modal-dialog uk-margin-auto-vertical">';
-    if (appear == LARGE || appear == SMALL) {
-        div += '<header class="uk-modal-header"><span class="uk-modal-title">' + title + '</span><button class="uk-modal-close-default" type="button" uk-close></button></header>';
+    var div = '<div id="dialog" class="' + modalc + trigc + '" uk-modal>';
+    div += '<section class="uk-modal-dialog uk-margin-auto-vertical' + annimc + '">';
+    if (mode == PROMPT || mode == OPEN || mode == CROP) {
+        div += '<header class="uk-modal-header"><span class="uk-modal-title">' + title + '</span><button class="uk-modal-xclose" type="button" uk-icon=\"close\" onclick="closeUp(false);"></button></header>';
     }
     div += '<main class="uk-modal-body uk-padding-remove"><iframe id="modalbody" src="' + src + '" style="width: 100%; height: 100%; border: 0"></iframe></main>';
-    if (mode != OPEN) {
-        div += '<footer class="uk-modal-footer uk-text-center"><button id="okbtn" class="uk-button uk-button-default" type="button" onclick="ok(this,' + mode + ',\'' + formid + '\',\'' + tag + '\',\'' + action + '\',\'' + method + '\');" disabled>确定</button></footer>'
+    if (mode == PROMPT) {
+        div += '<footer class="uk-modal-footer uk-text-center"><button id="okbtn" class="uk-button uk-button-default" type="button" onclick="event.preventDefault(); return ok(this,' + mode + ',\'' + formid + '\',\'' + tag + '\',\'' + action + '\',\'' + method + '\');" disabled>确定</button></footer>'
     }
     div += '</section></div>';
 
     var e = appendTo(document.body, div);
 
-    // destroy in DOM on close
-    e.addEventListener('hidden', function (e) {
+    // history
+    window.addEventListener('popstate', (evt) => {
 
         var dlg = $('#dialog');
         if (dlg) {
-            if (dlg.classList.contains('button-trig')) {
-                document.body.removeChild(dlg);
-                if (dlg.classList.contains('uk-modal-full')) {
-                    location.reload(false);
-                }
+
+            // // if reload
+            if (modified) {
+
+                // NOTE trick for page reload
+                var ifr = window.frameElement;
+                window.location.replace(ifr.src);
             } else {
-                document.body.removeChild(dlg);
+                UIkit.modal(dlg).hide().then(function () {
+                    document.body.removeChild(dlg);
+                });
             }
         }
-    }, false);
+    });
 
     // display the modal
-    UIkit.modal(e).show();
+    UIkit.modal(e).show().then(function () {
+        // add to navigation history
+        if (mode != SHOW) { // show has no history
+            var srcurl = new URL(src);
+            history.pushState(null, null, srcurl.hostname == location.hostname ? action : 'extern');
+        }
+    });
 
     return false;
 }
+
+// need of refresh
+var modified;
+
+function closeUp(reload, delta) {
+
+    // set flags on parents
+    if (reload) {
+        var win = window;
+        while (win != win.parent) {
+
+            win.modified = true;
+
+            var d = win.$('#dialog');
+            if (d && d.classList.contains('uk-modal-full')) break;
+
+            win = win.parent;
+        };
+    }
+
+    var dlg = $('#dialog');
+    if (dlg) {
+
+        if (dlg.classList.contains('uk-modal-tall')) {
+            // // if reload
+            if (modified && reload) {
+
+                // NOTE trick for page reload
+                var ifr = window.frameElement;
+                // window.location.replace(ifr.src);
+                ifr.contentWindow.location.reload();
+
+                history.go(-1);
+
+            } else {
+                UIkit.modal(dlg).hide().then(function () {
+                    document.body.removeChild(dlg);
+                });
+            }
+        } else {
+            history.go(delta ? delta : -1);
+        }
+    }
+}
+
 
 // when clicked on the OK button
 function ok(okbtn, mode, formid, tag, action, method) {
@@ -314,7 +595,8 @@ function ok(okbtn, mode, formid, tag, action, method) {
             qstr = serialize(form);
             if (qstr) {
                 uri = action.indexOf('?') == -1 ? action + '?' + qstr : action + '&' + qstr;
-                location.href = uri;
+                history.back();
+                location.replace(uri);
             }
         } else if (tag == 'BUTTON') { // merge to the parent and submit
             if (method == 'get') {
@@ -324,7 +606,8 @@ function ok(okbtn, mode, formid, tag, action, method) {
                     UIkit.modal(div).hide();
                     UIkit.remove(div);
                     // load page
-                    location.href = action.split("?")[0] + '?' + qstr;
+                    history.back();
+                    location.replace(action.split("?")[0] + '?' + qstr);
                 }
             } else if (method == 'post') {
                 var mform = $('#' + formid);
@@ -344,62 +627,63 @@ function ok(okbtn, mode, formid, tag, action, method) {
                 mform.submit();
             }
         }
-    } else if (mode == SHOW) {
-        if (form) {
-            if (!form.reportValidity()) return;
-            okbtn.disabled = true;
-            form.submit();
-        }
     }
+    return false;
 }
 
 
-function crop(trig, appear, title) {
+function crop(trig, siz, title, subs) {
     var wid,
         hei,
         sizg;
-    var trigc = trig.tagName == 'BUTTON' ? ' button-trig' : ' anchor-trig';
-    title = title || trig.innerHTML;
+    var trigc = trig.tagName == 'BUTTON' ? 'button-trig' : 'anchor-trig';
     var action = trig.href || trig.formAction;
-    var stylec;
-    switch (appear) {
-        case SMALL:
-            wid = 120;
-            hei = 120;
-            stylec = ' uk-modal-large';
+    switch (siz) {
+        case 1:
+            wid = 120; hei = 120;
             break;
-        case LARGE:
-            wid = 420;
-            hei = 280;
-            stylec = ' uk-modal-large';
+        case 2:
+            wid = 400; hei = 200;
             break;
-        case FULL:
-            wid = 420;
-            hei = 420;
-            stylec = ' uk-modal-large';
+        case 3:
+            wid = 600; hei = 800;
             break;
     }
-    var html = '<div id="dialog" class="' + stylec + trigc + '" uk-modal>';
-    html += '<section class="uk-modal-dialog uk-margin-auto-vertical">';
-    html += '<header class="uk-modal-header">';
+    var html = '<div id="dialog" class="uk-modal-tall ' + trigc + '" uk-modal>';
+    html += '<section class="uk-modal-dialog uk-margin-auto-vertical uk-animation-slide-bottom">';
 
-    html += '<nav class="uk-button-group">';
-    html += '<span class="uk-modal-title" style="position: absolute; left: 4px">' + title + '</span>';
-    html += '<button class="uk-button uk-button-primary" onclick="$(\'#imginp\').click()">选择</button>';
-    html += '<button class="uk-button uk-button-primary" onclick="upload($(\'#imginp\'), \'' + action + '\', true);">确定</button>';
-    html += '</nav>'; // control group
-
-    html += '<button class="uk-modal-close-default" type="button" uk-close></button>';
-    html += '</header>'; // header
     html += '<main id="imgbnd" class="uk-modal-body uk-padding-remove">'; // body
     html += '<input type="file" id="imginp" style="display: none;" onchange="bind(this.parentNode, window.URL.createObjectURL(this.files[0]),' + wid + ',' + hei + ');">';
     html += '</main>';
+
+    html += '<footer class="uk-modal-footer">';
+    html += '<div class="uk-button-group">';
+    if (subs > 0) {
+        html += '<select id="imgsub" class="uk-select uk-width-auto" style="position: absolute; left: 4px" onchange="bind($(\'#imgbnd\'),\'' + action + '-\' + this.value,' + wid + ',' + hei + ');">';
+        for (var i = 1; i <= subs; i++) {
+            html += '<option value="' + i + '">' + title + ' ' + i + '</option>';
+        }
+        html += '</select>';
+    } else {
+        html += '<span class="uk-modal-title" style="position: absolute; left: 4px">' + title + '</span>';
+    }
+    html += '<button class="uk-button uk-button-default" onclick="$(\'#imginp\').click();">选择</button>';
+    html += '<button class="uk-button uk-button-default" onclick="cropUpd($(\'#imginp\'),' + (subs == 0 ? '\'' + action + '\', true)' : '\'' + action + '-\' + $(\'#imgsub\').value)') + '">保存</button>';
+    if (subs > 0) {
+        html += '<button uk-icon="bolt" class="uk-button uk-icon-button" style="position: absolute; right: 4px" onclick="bind($(\'#imgbnd\'),\'' + action + '-\' + $(\'#imgsub\').value);"></button>';
+    }
+    html += '</div>'; // control group
+    // html += '<button class="uk-modal-close-default" type="button" uk-close></button>';
+    html += '</footer>'; // header
+
     html += '</section>'; // dialog
     html += '</div>'; // modal
 
     var e = appendTo(document.body, html);
     UIkit.modal(e).show();
-    bind($('#imgbnd'), action, wid, hei);
+
+    bind($('#imgbnd'), subs == 0 ? action : action + '-1', wid, hei);
+
     e.addEventListener('hidden', function () {
         var dlg = $('#dialog');
         if (dlg) {
@@ -415,57 +699,66 @@ function crop(trig, appear, title) {
 
 var croppie;
 
+var cropWid = 0;
+var cropHei = 0;
+
 function bind(el, url, wid, hei) {
+
+    // swap width & height
+    if (!wid || !hei) {
+        var n = cropWid; cropWid = cropHei; cropHei = n;
+    }
+    else {
+        if ((!cropWid || !cropHei) || (cropWid != hei && cropHei != wid)) { // replace only needed
+            cropWid = wid;
+            cropHei = hei;
+        }
+    }
+
     if (croppie) {
         croppie.destroy();
     }
     croppie = new Croppie(el, {
-        url: url,
         viewport: {
-            width: wid,
-            height: hei
+            width: cropWid / 2,
+            height: cropHei / 2
         },
         enforceBoundary: true,
         showZoomer: false
     });
-    croppie.setZoom(1);
+    croppie.bind(url).then(function () {
+        croppie.setZoom(0.5); // itially native size
+    });
+
 }
 
-function upload(el, url) {
+function cropUpd(el, url, close) {
     // get blob of cropped image
     croppie.result(
         {
-            type: 'blob',
-            size: 'viewport',
-            format: 'jpeg'
+            type: 'blob', size: { width: cropWid, height: cropHei }, format: 'webp', quality: 0.95
         }
     ).then(function (blob) {
 
         // build form data
         var dat = new FormData();
-        dat.append('img', blob, 'img.jpg');
+        dat.append('img', blob, 'img.webp');
         // post
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, false);
         xhr.onload = function (e) {
-            if (xhr.status == 200) {
-                var div = ancestorOf(el, 'uk-modal');
-                UIkit.modal(div).hide();
+            if (xhr.status == 200 || xhr.status == 201) {
+                alert("上传成功");
+                if (close) {
+                    var div = ancestorOf(el, 'uk-modal');
+                    UIkit.modal(div).hide();
+                }
             }
         };
         xhr.send(dat);
     })
 }
 
-function closeUp(reload) {
-    var ifr = window.frameElement;
-    var div = ancestorOf(ifr, 'uk-modal');
-    if (reload) {
-        parent.location.reload(false);
-    } else {
-        UIkit.modal(div).hide();
-    }
-}
 
 function toggleAll(trig) {
     var frm = trig.form;

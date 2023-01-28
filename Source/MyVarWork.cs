@@ -2,10 +2,10 @@ using System.Threading.Tasks;
 using ChainFx;
 using ChainFx.Web;
 using static System.String;
-using static ChainFx.Nodal.Store;
+using static ChainFx.Fabric.Nodality;
 using static ChainFx.Web.Modal;
 
-namespace ChainVerse
+namespace ChainPort
 {
     [UserAuthorize]
     [Ui("账号信息")]
@@ -33,12 +33,11 @@ namespace ChainVerse
                 h._FORM();
 
                 h.FORM_();
-                h.TASKLIST();
                 h._FORM();
             }, false, 3, title: "我的账户");
         }
 
-        [Ui("设置"), Tool(ButtonShow)]
+        [Ui("设置"), Tool(ButtonOpen)]
         public async Task setg(WebContext wc)
         {
             const string PASSMASK = "t#0^0z4R4pX7";

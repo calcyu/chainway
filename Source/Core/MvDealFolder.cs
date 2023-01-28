@@ -2,7 +2,7 @@
 using System.Reflection;
 using ChainFx;
 
-namespace ChainVerse.Core
+namespace ChainPort.Core
 {
     public class MvDealFolder : IFolder<MvDeal>
     {

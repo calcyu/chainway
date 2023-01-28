@@ -1,10 +1,9 @@
 using System.Threading.Tasks;
 using ChainFx;
-using ChainFx.Nodal;
 using ChainFx.Web;
-using static ChainFx.Nodal.Store;
+using static ChainFx.Fabric.Nodality;
 
-namespace ChainVerse
+namespace ChainPort
 {
     [UserAuthorize(admly: User.ADMLY_)]
     [Ui("平台管理")]
@@ -22,7 +21,7 @@ namespace ChainVerse
 
             CreateWork<AdmlyUserWork>("user");
 
-            CreateWork<FedMgtWork>("fed", authorize: new UserAuthorizeAttribute(admly: User.ADMLY_MGT));
+            // CreateWork<FedMgtWork>("fed", authorize: new UserAuthorizeAttribute(admly: User.ADMLY_MGT));
 
             CreateWork<AdmlyClearWork>("clear");
         }
@@ -46,7 +45,7 @@ namespace ChainVerse
                 h._UL();
                 h._FORM();
 
-                h.TASKLIST();
+                h.WORKBOARD();
             });
         }
 
@@ -76,7 +75,7 @@ namespace ChainVerse
                             h.TDFORM(() =>
                             {
                                 h.HIDDEN(nameof(id), o.id);
-                                h.TOOL(nameof(acl), caption: "✕", subscript: 2, tool: ToolAttribute.BUTTON_CONFIRM, css: "uk-button-secondary");
+                                h.TOOL(nameof(acl), caption: "✕", subscript: 2, toolattr: ToolAttribute.BUTTON_CONFIRM, css: "uk-button-secondary");
                             });
                         },
                         caption: "现有操作权限"

@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using System.Web;
 using ChainFx;
 using ChainFx.Web;
-using static ChainVerse.WeChatUtility;
-using static ChainFx.Nodal.Store;
+using static ChainPort.WeChatUtility;
+using static ChainFx.Fabric.Nodality;
 
-namespace ChainVerse
+namespace ChainPort
 {
     [UserAuthenticate]
     public class MgtService : WebService
@@ -38,9 +38,9 @@ namespace ChainVerse
                 h._FIELDSUL();
 
                 h.FIELDSUL_("管理分组");
-                for (int i = 0; i < Works.Count; i++)
+                for (int i = 0; i < SubWorks.Count; i++)
                 {
-                    var wrk = Works.ValueAt(i);
+                    var wrk = SubWorks.ValueAt(i);
                     h.LI_("uk-flex");
                     h.A_(wrk.Key, wrk.HasVarWork ? "//" : "/", css: "uk-button uk-button-link uk-flex-left").T(wrk.Label)._A();
                     // h.P(wrk.Tip, "uk-padding uk-width-expand");
@@ -54,30 +54,7 @@ namespace ChainVerse
 
         public void @catch(WebContext wc)
         {
-            var e = wc.Exception;
-            if (e is WebException we)
-            {
-                if (we.Code == 401)
-                {
-                    if (wc.IsWeChat) // initiate signup
-                    {
-                        wc.GiveRedirect("/signup?url=" + HttpUtility.UrlEncode(wc.Url));
-                    }
-                    else // initiate form auth
-                    {
-                        wc.GiveRedirect("/signin?url=" + HttpUtility.UrlEncode(wc.Url));
-                    }
-                }
-                else if (we.Code == 403)
-                {
-                    wc.GivePage(403, m => { m.ALERT("此功能需要系统授权后才能使用。", head: "⛔ 没有访问权限"); }, title: "权限保护");
-                }
-            }
-            else
-            {
-                wc.Give(500, e.Message);
-                Console.Write(e.StackTrace);
-            }
+            var e = wc.Error;
         }
 
         public async Task signin(WebContext wc)
@@ -166,7 +143,6 @@ namespace ChainVerse
                 url = f[nameof(url)];
                 var o = new User
                 {
-                    state = Entity.STA_ENABLED,
                     name = f[nameof(name)],
                     tel = f[nameof(tel)],
                     im = openid,
@@ -203,7 +179,7 @@ namespace ChainVerse
                 using var dc = NewDbContext();
                 // verify that the ammount is correct
                 var today = DateTime.Today;
-                dc.Sql("SELECT price FROM orders WHERE id = @1 AND status = ").T(Entity.STA_DISABLED);
+                dc.Sql("SELECT price FROM orders WHERE id = @1 AND status = ");
                 var price = (decimal) dc.Scalar(p => p.Set(orderid));
                 if (price == cash) // update order status and line states
                 {
@@ -218,7 +194,7 @@ namespace ChainVerse
             finally
             {
                 // return xml to WCPay server
-                var x = new XmlContent(true, 1024);
+                var x = new XmlBuilder(true, 1024);
                 x.ELEM("xml", null, () =>
                 {
                     x.ELEM("return_code", "SUCCESS");

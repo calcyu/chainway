@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using ChainFx;
 
-namespace ChainVerse.Core
+namespace ChainPort.Core
 {
     /// <summary>
     /// A metaverse scope of states, that copmrises of an object set.

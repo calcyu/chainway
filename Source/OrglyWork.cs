@@ -1,8 +1,8 @@
 using ChainFx;
 using ChainFx.Web;
-using static ChainFx.Nodal.Store;
+using static ChainFx.Fabric.Nodality;
 
-namespace ChainVerse
+namespace ChainPort
 {
     [Ui("机构主体操作")]
     public class OrglyWork : WebWork

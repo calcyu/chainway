@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ChainFx.Web;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public abstract class ClearVarWork : WebWork
     {
@@ -13,7 +13,7 @@ namespace ChainVerse
 
     public class OrglyClearVarWork : ClearVarWork
     {
-        [Ui("￥", "微信领款"), Tool(Modal.ButtonShow)]
+        [Ui("￥", "微信领款"), Tool(Modal.ButtonOpen)]
         public async Task rcv(WebContext wc, int dt)
         {
             int orderid = wc[0];

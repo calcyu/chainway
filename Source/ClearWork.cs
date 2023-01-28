@@ -3,10 +3,10 @@ using System.Data;
 using System.Threading.Tasks;
 using ChainFx;
 using ChainFx.Web;
-using static ChainFx.Nodal.Store;
+using static ChainFx.Fabric.Nodality;
 using static ChainFx.Web.Modal;
 
-namespace ChainVerse
+namespace ChainPort
 {
     [UserAuthorize(admly: User.ADMLY_)]
     [Ui("平台代收款项结算", "credit-card")]
@@ -44,7 +44,7 @@ namespace ChainVerse
             }, false, 3);
         }
 
-        [Ui("历史", group: 2), Tool(AnchorPrompt, Appear.Small)]
+        [Ui("历史", group: 2), Tool(AnchorPrompt)]
         public async Task past(WebContext wc, int page)
         {
             bool inner = wc.Query[nameof(inner)];
@@ -89,7 +89,7 @@ namespace ChainVerse
         }
 
         [UserAuthorize(admly: 1)]
-        [Ui("∑", "结算零售代收款项", group: 1), Tool(ButtonOpen, Appear.Small)]
+        [Ui("∑", "结算零售代收款项", group: 1), Tool(ButtonOpen)]
         public async Task calcrtl(WebContext wc)
         {
             if (wc.IsGet)
@@ -150,15 +150,15 @@ namespace ChainVerse
                     h.TDCHECK(o.Key);
                     h.TD_().T(o.dt, 3, 0)._TD();
                     h.TD(Clear.Typs[o.typ]);
-                    h.TD(o.amt, currency: true);
-                    h.TD(Clear.Statuses[o.state]);
+                    h.TD(o.amt, money: true);
+                    h.TD(Clear.Statuses[o.status]);
                 });
                 h.PAGINATION(arr?.Length == 20);
             }, false, 3);
         }
 
         [UserAuthorize(orgly: 1)]
-        [Ui("统计", "时段统计"), Tool(ButtonShow)]
+        [Ui("统计", "时段统计"), Tool(ButtonOpen)]
         public async Task sum(WebContext wc, int page)
         {
             var prin = (User) wc.Principal;

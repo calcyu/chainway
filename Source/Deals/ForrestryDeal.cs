@@ -1,6 +1,6 @@
-﻿using ChainVerse.Core;
+﻿using ChainPort.Core;
 
-namespace ChainVerse.Deals
+namespace ChainPort.Deals
 {
     public class ForrestryDeal : MvDeal
     {

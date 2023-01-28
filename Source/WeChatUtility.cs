@@ -9,7 +9,7 @@ using static ChainFx.CryptoUtility;
 using static ChainFx.Application;
 using WebUtility = System.Net.WebUtility;
 
-namespace ChainVerse
+namespace ChainPort
 {
     /// <summary>
     /// A hub of operation that has its own weixin official acount.
@@ -141,7 +141,7 @@ namespace ChainVerse
 
         public static async Task<(string ticket, string url)> PostQrSceneAsync(int uid)
         {
-            var j = new JsonContent(true, 1024);
+            var j = new JsonBuilder(true, 1024);
             try
             {
                 j.OBJ_();
@@ -165,7 +165,7 @@ namespace ChainVerse
 
         public static async Task PostSendAsync(string openid, string text)
         {
-            var j = new JsonContent(true, 1024);
+            var j = new JsonBuilder(true, 1024);
             try
             {
                 j.OBJ_();
@@ -185,7 +185,7 @@ namespace ChainVerse
 
         public static async Task PostSendAsync(string openid, string title, string descr, string url, string picurl = null)
         {
-            var j = new JsonContent(true, 1024);
+            var j = new JsonBuilder(true, 1024);
             try
             {
                 j.OBJ_();

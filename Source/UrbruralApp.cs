@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using ChainFx;
-using ChainFx.Web;
-using ChainVerse.Core;
+using ChainPort.Core;
 using static System.Data.IsolationLevel;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public class UrbruralApp : Application
     {
@@ -16,7 +15,6 @@ namespace ChainVerse
         //
 
         static readonly ConcurrentDictionary<int, MvDeal> projects = new ConcurrentDictionary<int, MvDeal>();
-
 
 
         // periodic polling and concluding ended lots 
@@ -32,28 +30,11 @@ namespace ChainVerse
 
             // ScriptTest.Test();
 
-            if (args.Length == 0 || args.Contains("main"))
-            {
-                CacheUp();
+            CreateService<WwwService>("www");
 
-                CreateService<WwwService>("www");
+            CreateService<MgtService>("mgt");
 
-                CreateService<MgtService>("mgt");
-
-                CreateService<FedService>("fed");
-            }
-            else
-            {
-                if (args.Contains("www-p"))
-                {
-                    CreateService<ProxyService>("www");
-                }
-
-                if (args.Contains("mgt-p"))
-                {
-                    CreateService<ProxyService>("mgt");
-                }
-            }
+            CreateService<FedService>("fed");
 
             await StartAsync();
         }

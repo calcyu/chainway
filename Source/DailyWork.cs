@@ -1,6 +1,6 @@
 ﻿using ChainFx.Web;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public abstract class DailyWork : WebWork
     {

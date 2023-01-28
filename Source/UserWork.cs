@@ -1,9 +1,9 @@
 ﻿using ChainFx.Web;
 using static ChainFx.Web.Modal;
-using static ChainVerse.User;
-using static ChainFx.Nodal.Store;
+using static ChainPort.User;
+using static ChainFx.Fabric.Nodality;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public abstract class UserWork : WebWork
     {
@@ -39,13 +39,12 @@ namespace ChainVerse
                         // h.T(orgs[o.orgid].name).SP().T(Orgly[o.orgly]);
                     }
                     h._TD();
-                    h.TD("⊘", @if: o.IsDead);
                 });
                 h.PAGINATION(arr?.Length == 30);
             });
         }
 
-        [Ui("查询"), Tool(AnchorPrompt, Appear.Small)]
+        [Ui("查询"), Tool(AnchorPrompt)]
         public void search(WebContext wc)
         {
             bool inner = wc.Query[nameof(inner)];
@@ -80,7 +79,6 @@ namespace ChainVerse
                             // h.T(orgs[o.orgid].name).SP().T(Orgly[o.orgly]);
                         }
                         h._TD();
-                        h.TD("⊘", @if: o.IsDead);
                     });
                 }, false, 3);
             }
@@ -117,7 +115,6 @@ namespace ChainVerse
                         // h.T(orgs[o.orgid].name).SP().T(Orgly[o.orgly]);
                     }
                     h._TD();
-                    h.TD("⊘", @if: o.IsDead);
                 });
                 h.PAGINATION(arr?.Length == 30);
             });
@@ -158,8 +155,7 @@ namespace ChainVerse
                             // h.T(orgs[o.orgid].name).SP().T(Orgly[o.orgly]);
                         }
                         h._TD();
-                        h.TD("⊘", @if: o.IsDead);
-                        h.TDFORM(() => h.TOOLGROUPVAR(o.Key));
+                        h.TDFORM(() => h.VARPAD(o.Key));
                     });
                 }, false, 3);
             }

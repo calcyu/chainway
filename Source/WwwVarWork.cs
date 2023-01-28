@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using ChainFx.Web;
-using ChainVerse.Core;
-using static ChainFx.Nodal.Store;
+using ChainPort.Core;
+using static ChainFx.Fabric.Nodality;
 
-namespace ChainVerse
+namespace ChainPort
 {
     /// <summary>
     /// The home page for markets and businesses therein..
@@ -30,7 +30,7 @@ namespace ChainVerse
             {
                 wc.GivePage(200, h =>
                 {
-                    h.TOPBAR_().SUBNAV(regs, string.Empty, sect, filter: (k, v) => v.typ == MvScene.TYP_SECT);
+                    // h.TOPBAR_().SUBNAV(regs, string.Empty, sect,  (k, v) => v.typ == MvScene.TYP_SECT);
                     h.T("");
                 }, true, 60);
             }

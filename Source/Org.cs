@@ -1,12 +1,11 @@
 ﻿using ChainFx;
-using ChainFx.Web;
 
-namespace ChainVerse
+namespace ChainPort
 {
     /// <summary>
     /// The data model for an organizational unit.
     /// </summary>
-    public class Org : Entity, IKeyable<int>, IForkable
+    public class Org : Entity, IKeyable<int>
     {
         public static readonly Org Empty = new Org();
 
@@ -48,7 +47,7 @@ namespace ChainVerse
         {
             base.Read(s, msk);
 
-            if ((msk & ID) == ID)
+            if ((msk & MSK_ID) == MSK_ID)
             {
                 s.Get(nameof(id), ref id);
             }
@@ -59,7 +58,7 @@ namespace ChainVerse
             s.Get(nameof(x), ref x);
             s.Get(nameof(y), ref y);
             s.Get(nameof(tel), ref tel);
-            if ((msk & LATER) == LATER)
+            if ((msk & MSK_LATER) == MSK_LATER)
             {
                 s.Get(nameof(mgrid), ref mgrid);
                 s.Get(nameof(mgrname), ref mgrname);
@@ -73,7 +72,7 @@ namespace ChainVerse
         {
             base.Write(s, msk);
 
-            if ((msk & ID) == ID)
+            if ((msk & MSK_ID) == MSK_ID)
             {
                 s.Put(nameof(id), id);
             }
@@ -85,7 +84,7 @@ namespace ChainVerse
             s.Put(nameof(x), x);
             s.Put(nameof(y), y);
             s.Put(nameof(tel), tel);
-            if ((msk & LATER) == LATER)
+            if ((msk & MSK_LATER) == MSK_LATER)
             {
                 s.Put(nameof(mgrid), mgrid);
                 s.Put(nameof(mgrname), mgrname);

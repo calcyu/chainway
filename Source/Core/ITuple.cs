@@ -1,6 +1,6 @@
 ﻿using ChainFx;
 
-namespace ChainVerse.Core
+namespace ChainPort.Core
 {
     public interface ITuple : IKeyable<string>
     {

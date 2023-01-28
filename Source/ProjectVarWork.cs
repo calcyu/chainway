@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using ChainFx.Web;
-using ChainVerse.Core;
-using static ChainFx.Nodal.Store;
+using ChainPort.Core;
+using static ChainFx.Fabric.Nodality;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public class ProjectVarWork : WebWork
     {

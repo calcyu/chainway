@@ -1,4 +1,4 @@
-﻿namespace ChainVerse.Core
+﻿namespace ChainPort.Core
 {
     public class MvScopeInfo : MvEntityInfo<MvScene>
     {

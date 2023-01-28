@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 using ChainFx;
 using ChainFx.Web;
-using ChainVerse.Core;
-using ChainVerse;
-using static ChainFx.Nodal.Store;
+using ChainPort.Core;
+using ChainPort;
+using static ChainFx.Fabric.Nodality;
 using static ChainFx.Web.Modal;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public abstract class SceneVarWork : WebWork
     {
@@ -14,7 +14,7 @@ namespace ChainVerse
 
     public class AdmlySceneVarWork : SceneVarWork
     {
-        [Ui(group: 7), Tool(ButtonShow)]
+        [Ui(group: 7), Tool(ButtonOpen)]
         public async Task @default(WebContext wc, int typ)
         {
             short id = wc[0];
@@ -30,7 +30,7 @@ namespace ChainVerse
                     h.LI_().SELECT("类型", nameof(o.typ), o.typ, MvScene.Typs, filter: (k, v) => k == typ, required: true)._LI();
                     h.LI_().TEXT("名称", nameof(o.name), o.name, min: 2, max: 10, required: true)._LI();
                     h.LI_().NUMBER("排序", nameof(o.idx), o.idx, min: 1, max: 99)._LI();
-                    h.LI_().SELECT("状态", nameof(o.state), o.state, Entity.States)._LI();
+                    h.LI_().SELECT("状态", nameof(o.status), o.status, Entity.Statuses)._LI();
                     h._FIELDSUL()._FORM();
                 });
             }
@@ -48,7 +48,7 @@ namespace ChainVerse
             }
         }
 
-        [Ui("✕", "删除", group: 7), Tool(ButtonShow, Appear.Small)]
+        [Ui("✕", "删除", group: 7), Tool(ButtonOpen)]
         public async Task rm(WebContext wc)
         {
             short id = wc[0];

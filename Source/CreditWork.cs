@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using ChainFx.Web;
-using static ChainVerse.User;
-using static ChainFx.Nodal.Store;
+using static ChainPort.User;
+using static ChainFx.Fabric.Nodality;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public abstract class CreditWork : WebWork
     {

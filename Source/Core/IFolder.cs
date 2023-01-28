@@ -1,4 +1,4 @@
-﻿namespace ChainVerse.Core
+﻿namespace ChainPort.Core
 {
     public interface IFolder<E> where E : MvScope
     {

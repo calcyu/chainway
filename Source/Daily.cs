@@ -1,7 +1,7 @@
 ﻿using System;
 using ChainFx;
 
-namespace ChainVerse
+namespace ChainPort
 {
     /// <summary>
     /// A reportive record of daily transaction for goods.

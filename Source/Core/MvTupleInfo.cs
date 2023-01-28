@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ChainVerse.Core
+namespace ChainPort.Core
 {
     public class MvTupleInfo<T> where T : MvTuple, new()
     {

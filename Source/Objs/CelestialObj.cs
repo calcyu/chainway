@@ -1,7 +1,7 @@
 ﻿using ChainFx;
-using ChainVerse.Core;
+using ChainPort.Core;
 
-namespace ChainVerse.Objs
+namespace ChainPort.Objs
 {
     public class CelestialObj : MvObj
     {

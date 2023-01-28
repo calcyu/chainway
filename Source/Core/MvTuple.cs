@@ -1,7 +1,7 @@
 ﻿using System;
 using ChainFx;
 
-namespace ChainVerse.Core
+namespace ChainPort.Core
 {
     public abstract class MvTuple : IKeyable<string>
     {

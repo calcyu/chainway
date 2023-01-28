@@ -1,4 +1,4 @@
-﻿namespace ChainVerse.Core
+﻿namespace ChainPort.Core
 {
     public class MvObjInfo : MvTupleInfo<MvObj>
     {

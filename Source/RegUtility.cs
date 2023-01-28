@@ -1,7 +1,7 @@
 ﻿using ChainFx;
-using ChainFx.Nodal;
+using ChainFx.Fabric;
 
-namespace ChainVerse.Core
+namespace ChainPort.Core
 {
     public class RegUtility
     {
@@ -9,7 +9,7 @@ namespace ChainVerse.Core
 
         static RegUtility()
         {
-            using var dc = Store.NewDbContext();
+            using var dc = Nodality.NewDbContext();
 
             dc.Sql("SELECT ").collst(MvScene.Empty).T(" FROM regs WHERE state > 0");
             All = dc.Query<short, MvScene>();

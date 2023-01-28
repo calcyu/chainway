@@ -59,7 +59,7 @@ create table orgs
 )
     inherits (entities);
 
-alter table orgs owner to postgres;
+alter table orgs_old owner to postgres;
 
 create table users
 (
@@ -76,7 +76,7 @@ create table users
 )
     inherits (entities);
 
-alter table users owner to postgres;
+alter table users_old owner to postgres;
 
 create table ledgrs_
 (
@@ -111,7 +111,7 @@ create table peers_
 )
     inherits (entities);
 
-alter table peers_ owner to postgres;
+alter table _peers_ owner to postgres;
 
 create table reviews
 (
@@ -129,7 +129,7 @@ create table accts_
 )
     inherits (entities);
 
-alter table accts_ owner to postgres;
+alter table _accts_ owner to postgres;
 
 create table dats
 (
@@ -205,7 +205,7 @@ create table clears
 )
     inherits (entities);
 
-alter table clears owner to postgres;
+alter table buycls owner to postgres;
 
 create view orgs_vw(typ, status, name, tip, created, creator, adapted, adapter, id, fork, license, regid, addr, x, y, tel, mgrid, mgrname, mgrtel, mgrim, img) as
 SELECT o.typ,
@@ -229,8 +229,8 @@ SELECT o.typ,
        m.tel             AS mgrtel,
        m.im              AS mgrim,
        o.img IS NOT NULL AS img
-FROM orgs o
-         LEFT JOIN users m
+FROM orgs_old o
+         LEFT JOIN users_old m
                    ON o.mgrid =
                       m.id;
 

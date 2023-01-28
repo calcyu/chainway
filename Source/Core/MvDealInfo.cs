@@ -1,7 +1,7 @@
 ﻿using System;
 using ChainFx;
 
-namespace ChainVerse.Core
+namespace ChainPort.Core
 {
     /// <summary>
     /// The descriptor for a class of metaverse deals.

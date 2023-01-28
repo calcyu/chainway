@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using ChainFx;
 using ChainFx.Web;
-using static ChainFx.Nodal.Store;
+using static ChainFx.Fabric.Nodality;
 using static ChainFx.Web.Modal;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public abstract class UserVarWork : WebWork
     {
@@ -12,7 +12,7 @@ namespace ChainVerse
 
     public class AdmlyUserVarWork : UserVarWork
     {
-        [Ui("✎", "修改"), Tool(ButtonShow)]
+        [Ui("✎", "修改"), Tool(ButtonOpen)]
         public async Task upd(WebContext wc)
         {
             short typ;
@@ -43,7 +43,7 @@ namespace ChainVerse
 
     public class MrtlyUserVarWork : UserVarWork
     {
-        [Ui("✎", "修改"), Tool(ButtonShow)]
+        [Ui("✎", "修改"), Tool(ButtonOpen)]
         public async Task upd(WebContext wc)
         {
             short typ;

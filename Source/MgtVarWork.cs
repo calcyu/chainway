@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using ChainFx;
 using ChainFx.Web;
-using ChainVerse.Core;
-using static ChainFx.Nodal.Store;
+using ChainPort.Core;
+using static ChainFx.Fabric.Nodality;
 
-namespace ChainVerse
+namespace ChainPort
 {
     /// <summary>
     /// The home page for regionnal view of supply

@@ -1,6 +1,6 @@
 ﻿using ChainFx;
 
-namespace ChainVerse
+namespace ChainPort
 {
     /// <summary>
     /// A blog post for upon a certain project.

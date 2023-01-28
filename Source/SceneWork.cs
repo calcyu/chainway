@@ -2,12 +2,12 @@ using System;
 using System.Threading.Tasks;
 using ChainFx;
 using ChainFx.Web;
-using ChainVerse.Core;
-using static ChainVerse.User;
-using static ChainFx.Nodal.Store;
+using ChainPort.Core;
+using static ChainPort.User;
+using static ChainFx.Fabric.Nodality;
 using static ChainFx.Web.Modal;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public abstract class SceneWork : WebWork
     {
@@ -34,20 +34,18 @@ namespace ChainVerse
                     {
                         h.TDCHECK(o.Key);
                         h.TDAVAR(o.Key, o.name);
-                        h.TDFORM(() => h.TOOLGROUPVAR(o.Key, subscript: MvScene.TYP_PROV));
                     }
                 );
             });
         }
 
-        [Ui("✚", "新建区域", group: 7), Tool(ButtonShow)]
+        [Ui("✚", "新建区域", group: 7), Tool(ButtonOpen)]
         public async Task @new(WebContext wc, int typ)
         {
             var prin = (User) wc.Principal;
             var o = new MvScene
             {
                 typ = (short) typ,
-                state = Entity.STA_ENABLED,
                 created = DateTime.Now,
                 creator = prin.name,
             };
@@ -60,7 +58,7 @@ namespace ChainVerse
                     h.LI_().SELECT("类型", nameof(o.typ), o.typ, MvScene.Typs, filter: (k, v) => k == typ, required: true)._LI();
                     h.LI_().TEXT("名称", nameof(o.name), o.name, min: 2, max: 10, required: true)._LI();
                     h.LI_().NUMBER("排序", nameof(o.idx), o.idx, min: 1, max: 99)._LI();
-                    h.LI_().SELECT("状态", nameof(o.state), o.state, Entity.States)._LI();
+                    h.LI_().SELECT("状态", nameof(o.status), o.status, Entity.Statuses)._LI();
                     h._FIELDSUL()._FORM();
                 });
             }

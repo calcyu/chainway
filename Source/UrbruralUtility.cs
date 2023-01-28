@@ -2,10 +2,9 @@ using System;
 using System.Text;
 using ChainFx;
 using ChainFx.Web;
-using ChainVerse.Core;
 using static ChainFx.CryptoUtility;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public static class UrbruralUtility
     {
@@ -41,121 +40,6 @@ namespace ChainVerse
         }
 
 
-        public static HtmlContent A_POI(this HtmlContent h, double x, double y, string title, string addr, string tel = null, bool active = true)
-        {
-            if (active)
-            {
-                h.T("<a class=\"uk-icon-link\" uk-icon=\"location\" href=\"http://apis.map.qq.com/uri/v1/marker?marker=coord:").T(y).T(',').T(x).T(";title:").T(title).T(";addr:").T(addr);
-                if (tel != null)
-                {
-                    h.T(";tel:").T(tel);
-                }
-                h.T("\" onclick=\"return dialog(this,8,false,1,'')\"></a>");
-            }
-            else
-            {
-                h.T("<span class=\"uk-icon-link uk-inactive\" uk-icon=\"location\"></span>");
-            }
-            return h;
-        }
-
-
-        public static HtmlContent SELECT_ORG(this HtmlContent h, string label, string name, int v, Map<int, Org> opts, Map<short, MvScene> regs, Func<Org, bool> filter = null, bool required = false)
-        {
-            h.SELECT_(label, name, false, required);
-            if (opts != null)
-            {
-                short last = 0; // last typ
-                for (int i = 0; i < opts.Count; i++)
-                {
-                    var org = opts.ValueAt(i);
-                    if (filter != null && !filter(org))
-                    {
-                        continue;
-                    }
-                    if (org.regid != last)
-                    {
-                        if (last > 0)
-                        {
-                            h.T("</optgroup>");
-                        }
-                        h.T("<optgroup label=\"").T(regs[org.regid]?.name).T("\">");
-                    }
-                    h.OPTION(org.id, org.name);
-
-                    last = org.regid;
-                }
-                h.T("</optgroup>");
-            }
-            h._SELECT();
-            return h;
-        }
-
-        public static HtmlContent RECEIVER(this HtmlContent h, string tel)
-        {
-            h.T("<a class=\"uk-icon-button uk-light\" href=\"tel:").T(tel).T("\" uk-icon=\"icon: receiver\"></a>");
-            return h;
-        }
-
-        public static HtmlContent A_ICON(this HtmlContent h, string url, string icon)
-        {
-            h.T("<a class=\"uk-icon-button uk-light\" href=\"").T(url).T("\" uk-icon=\"icon: \"").T(icon).T("\"></a>");
-            return h;
-        }
-
-        public static HtmlContent A_TEL(this HtmlContent h, string name, string tel, string css = null)
-        {
-            h.T("<a ");
-            if (css != null)
-            {
-                h.T(" class=\"").T(css).T("\" ");
-            }
-            h.T("href=\"tel:").T(tel).T("\">").T(name).T("</a>");
-            return h;
-        }
-
-        public static HtmlContent A_TEL_ICON(this HtmlContent h, string name, string tel = null)
-        {
-            h.T("<a class=\"uk-icon-link\" uk-icon=\"receiver\" href=\"tel:").T(tel).T("\"></a>");
-            return h;
-        }
-
-        public static HtmlContent POI_(this HtmlContent h, double x, double y, string title, string addr, string tel = null)
-        {
-            h.T("<a class=\"\" href=\"http://apis.map.qq.com/uri/v1/marker?marker=coord:").T(y).T(',').T(x).T(";title:").T(title).T(";addr:").T(addr);
-            if (tel != null)
-            {
-                h.T(";tel:").T(tel);
-            }
-
-            h.T("&referer=\">");
-            return h;
-        }
-
-        public static HtmlContent _POI(this HtmlContent h)
-        {
-            h.T("</a>");
-            return h;
-        }
-
-        public static HtmlContent MASKNAME(this HtmlContent h, string name)
-        {
-            for (int i = 0; i < name?.Length; i++)
-            {
-                var c = name[i];
-                if (i == 0)
-                {
-                    h.T(c);
-                }
-                else
-                {
-                    h.T('Ｘ');
-                }
-            }
-            return h;
-        }
-
-
         public static string ComputeCredential(string tel, string password)
         {
             string v = tel + ":" + password;
@@ -164,11 +48,11 @@ namespace ChainVerse
 
         public static void SetTokenCookie(this WebContext wc, User o)
         {
-            string token = AuthenticateAttribute.EncryptPrincipal(o, 0x0fff);
+            string token = AuthenticateAttribute.ToToken(o, 0x0fff);
             wc.SetCookie(nameof(token), token);
         }
 
-        public static void ViewAgrmt(this HtmlContent h, JObj jo)
+        public static void ViewAgrmt(this HtmlBuilder h, JObj jo)
         {
             string title = null;
             string a = null, b = null;

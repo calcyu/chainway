@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using ChainFx;
 using ChainFx.Web;
-using static ChainFx.Nodal.Store;
+using static ChainFx.Fabric.Nodality;
 
-namespace ChainVerse
+namespace ChainPort
 {
     [Ui("机构操作")]
     public class OrglyVarWork : WebWork
@@ -42,7 +42,7 @@ namespace ChainVerse
                 h._UL();
                 h._FORM();
 
-                h.TASKLIST();
+                h.WORKBOARD();
             }, false, 3);
         }
 
@@ -71,7 +71,7 @@ namespace ChainVerse
                         h.TDFORM(() =>
                         {
                             h.HIDDEN(nameof(id), o.id);
-                            h.TOOL(nameof(acl), caption: "✕", subscript: 2, tool: ToolAttribute.BUTTON_CONFIRM, css: "uk-button-secondary");
+                            h.TOOL(nameof(acl), caption: "✕", subscript: 2, toolattr: ToolAttribute.BUTTON_CONFIRM, css: "uk-button-secondary");
                         });
                     }, caption: "现有操作权限");
 
@@ -107,7 +107,7 @@ namespace ChainVerse
             }
         }
 
-        [Ui("运行设置"), Tool(Modal.ButtonShow)]
+        [Ui("运行设置"), Tool(Modal.ButtonOpen)]
         public async Task setg(WebContext wc)
         {
             var org = wc[0].As<Org>();
@@ -118,7 +118,7 @@ namespace ChainVerse
                     h.FORM_().FIELDSUL_("修改基本设置");
                     h.LI_().TEXT("标语", nameof(org.tip), org.tip, max: 16)._LI();
                     h.LI_().TEXT("地址", nameof(org.addr), org.addr, max: 16)._LI();
-                    h.LI_().SELECT("状态", nameof(org.state), org.state, Entity.States, filter: (k, v) => k > 0)._LI();
+                    h.LI_().SELECT("状态", nameof(org.status), org.status, Entity.Statuses, filter: (k, v) => k > 0)._LI();
                     h._FIELDSUL()._FORM();
                 });
             }
@@ -128,7 +128,7 @@ namespace ChainVerse
                 using var dc = NewDbContext();
                 // update the db record
                 await dc.ExecuteAsync("UPDATE orgs SET tip = @1, cttid = CASE WHEN @2 = 0 THEN NULL ELSE @2 END, status = @3 WHERE id = @4",
-                    p => p.Set(o.tip).Set(o.state).Set(org.id));
+                    p => p.Set(o.tip).Set(o.status).Set(org.id));
 
                 wc.GivePane(200);
             }

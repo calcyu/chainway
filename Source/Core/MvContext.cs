@@ -1,7 +1,7 @@
-﻿using ChainFx.Nodal;
+﻿using ChainFx.Fabric;
 using ChainFx.Web;
 
-namespace ChainVerse.Core
+namespace ChainPort.Core
 {
     /// <summary>
     /// The scripting global states.

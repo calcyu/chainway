@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ChainVerse.Core
+namespace ChainPort.Core
 {
     /// <summary>
     /// The abstract root class for metaverse tasks.

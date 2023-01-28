@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using ChainFx.Web;
-using static ChainFx.Nodal.Store;
+using static ChainFx.Fabric.Nodality;
 
-namespace ChainVerse
+namespace ChainPort
 {
     /// <summary>
     /// To establish principal identity. 
@@ -25,7 +25,7 @@ namespace ChainVerse
             string token;
             if (wc.Cookies.TryGetValue(nameof(token), out token))
             {
-                var o = DecryptPrincipal<User>(token);
+                var o = FromToken<User>(token);
                 if (o != null)
                 {
                     wc.Principal = o;

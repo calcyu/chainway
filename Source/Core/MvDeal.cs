@@ -1,6 +1,6 @@
 ﻿using ChainFx;
 
-namespace ChainVerse.Core
+namespace ChainPort.Core
 {
     public class MvDeal : MvScope, IKeyable<int>, ILifeCycle
     {
@@ -43,7 +43,7 @@ namespace ChainVerse.Core
         {
             base.Read(s, msk);
 
-            if ((msk & ID) == ID)
+            if ((msk & MSK_ID) == MSK_ID)
             {
                 s.Get(nameof(id), ref id);
             }
@@ -71,7 +71,7 @@ namespace ChainVerse.Core
         {
             base.Write(s, msk);
 
-            if ((msk & ID) == ID)
+            if ((msk & MSK_ID) == MSK_ID)
             {
                 s.Put(nameof(id), id);
             }

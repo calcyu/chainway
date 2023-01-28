@@ -1,7 +1,7 @@
 ﻿using System;
 using ChainFx;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public class Clear : Entity, IKeyable<int>
     {
@@ -42,7 +42,7 @@ namespace ChainVerse
         {
             base.Read(s, msk);
 
-            if ((msk & EXTRA) == EXTRA)
+            if ((msk & MSK_ID) == MSK_ID)
             {
                 s.Get(nameof(id), ref id);
             }
@@ -57,7 +57,7 @@ namespace ChainVerse
         {
             base.Write(s, msk);
 
-            if ((msk & EXTRA) == EXTRA)
+            if ((msk & MSK_ID) == MSK_ID)
             {
                 s.Put(nameof(id), id);
             }

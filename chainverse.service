@@ -1,11 +1,11 @@
 [Unit]
-Description=A Deployment of The Coverse Platform
+Description=Chain Mart System
 
 [Service]
 EnvironmentFile=/etc/environment
 Type=forking
 WorkingDirectory=/home/ubuntu
-ExecStart=sudo /usr/bin/dotnet /home/ubuntu/publish/Coverse.dll deploy
+ExecStart=sudo -b /usr/bin/dotnet /home/ubuntu/lib/ChainMart.dll deploy
 Restart=always
 
 [Install]

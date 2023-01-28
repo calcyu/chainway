@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ChainFx;
 using ChainFx.Web;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public abstract class ReviewWork : WebWork
     {
@@ -19,7 +19,7 @@ namespace ChainVerse
             var q = queues[org.id];
             if (q != null)
             {
-                var jc = new JsonContent(true, 16);
+                var jc = new JsonBuilder(true, 16);
                 lock (q)
                 {
                     Review o;

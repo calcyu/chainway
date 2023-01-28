@@ -1,6 +1,6 @@
-﻿using ChainVerse.Core;
+﻿using ChainPort.Core;
 
-namespace ChainVerse.Library
+namespace ChainPort.Library
 {
     [Info("病虫害")]
     public class DispestObj : MvObj

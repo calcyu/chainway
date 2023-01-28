@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ChainVerse.Core
+namespace ChainPort.Core
 {
     /// <summary>
     /// To determine principal identity based on current web context. The interaction with user, however, is not included.

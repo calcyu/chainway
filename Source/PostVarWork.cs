@@ -3,11 +3,11 @@ using System.Data;
 using System.Threading.Tasks;
 using ChainFx;
 using ChainFx.Web;
-using static ChainFx.Nodal.Store;
+using static ChainFx.Fabric.Nodality;
 using static ChainFx.Application;
 using static ChainFx.Web.Modal;
 
-namespace ChainVerse
+namespace ChainPort
 {
     public class PostVarWork : WebWork
     {
@@ -72,7 +72,7 @@ namespace ChainVerse
             }
         }
 
-        [Ui("图标", @group: 1), Tool(ButtonCrop, Appear.Small)]
+        [Ui("图标", @group: 1), Tool(ButtonCrop)]
         public async Task icon(WebContext wc)
         {
             int id = wc[0];
@@ -92,7 +92,7 @@ namespace ChainVerse
             }
         }
 
-        [Ui("图片", @group: 1), Tool(ButtonCrop, Appear.Small)]
+        [Ui("图片", @group: 1), Tool(ButtonCrop)]
         public async Task img(WebContext wc)
         {
             int id = wc[0];
@@ -112,7 +112,7 @@ namespace ChainVerse
             }
         }
 
-        // [Ui("核实"), Tool(Modal.ButtonShow)]
+        // [Ui("核实"), Tool(Modal.ButtonOpen)]
     }
 
     public class DietBizlyPostVarWork : BizlyPostVarWork

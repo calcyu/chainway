@@ -1,8 +1,8 @@
-﻿using ChainVerse.Core;
-using ChainVerse.Library;
-using ChainVerse.Tasks;
+﻿using ChainPort.Core;
+using ChainPort.Library;
+using ChainPort.Tasks;
 
-namespace ChainVerse.Deals
+namespace ChainPort.Deals
 {
     // [Note]
     public class LandWheatDeal : MvDeal

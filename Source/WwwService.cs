@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using System.Web;
 using ChainFx;
 using ChainFx.Web;
-using ChainVerse.Core;
-using static ChainVerse.WeChatUtility;
-using static ChainFx.Nodal.Store;
+using ChainPort.Core;
+using static ChainPort.WeChatUtility;
+using static ChainFx.Fabric.Nodality;
 
-namespace ChainVerse
+namespace ChainPort
 {
     [UserAuthenticate]
     public class WwwService : WebService
@@ -27,98 +27,21 @@ namespace ChainVerse
             var regs = Grab<short, MvScene>();
 
             short regid = wc.Query[nameof(regid)];
-            int mrtid = wc.Query[nameof(mrtid)];
+            int mktid = wc.Query[nameof(mktid)];
 
             if (cmd == 0)
             {
-                if (mrtid == 0)
+                if (mktid == 0)
                 {
-                    mrtid = wc.Cookies[nameof(mrtid)].ToInt();
+                    mktid = wc.Cookies[nameof(mktid)].ToInt();
                 }
 
-                wc.GivePane(200, h =>
-                {
-                    h.FORM_();
-
-                    // show last-time selected
-                    //
-                    h.TOPBAR_();
-                    if (mrtid > 0)
-                    {
-                        var o = orgs[mrtid];
-                        PutMrt(h, o, true);
-                    }
-                    h._TOPBAR();
-
-                    // output for selection
-                    //
-                    h.FIELDSUL_();
-                    if (regid == 0)
-                    {
-                        regid = regs.First(v => v.IsDist).id;
-                    }
-                    h.LI_().SELECT(mrtid > 0 ? "其它市场" : "就近市场", nameof(regid), regid, regs, filter: (k, v) => v.IsDist, required: true, refresh: true)._LI();
-                    bool exist = false;
-                    for (int i = 0; i < orgs.Count; i++)
-                    {
-                        var o = orgs.ValueAt(i);
-                        h.LI_("uk-flex");
-                        PutMrt(h, o);
-                        h._LI();
-                        exist = true;
-                    }
-                    if (!exist)
-                    {
-                        h.LI_().T("（暂无市场）")._LI();
-                    }
-                    h._FIELDSUL();
-
-                    h.BOTTOMBAR_().BUTTON("确定", string.Empty, subscript: 1, post: false)._BOTTOMBAR();
-                    h._FORM();
-                }, false, 15, title: Self.Name);
-            }
-            else if (cmd == 1) // agreement
-            {
-                wc.SetCookie(nameof(mrtid), mrtid.ToString(), maxage: 3600 * 300);
-
-                wc.GiveRedirect(mrtid + "/");
-            }
-
-            void PutMrt(HtmlContent h, Org o, bool selected = false)
-            {
-                h.SPAN_("uk-width-expand").RADIO(nameof(mrtid), o.id, o.name, selected, required: true)._SPAN();
-                h.SPAN_("uk-margin-auto-left");
-                h.SPAN(o.addr, css: "uk-width-auto uk-text-small uk-padding-small-right");
-                h.A_POI(o.x, o.y, o.name, o.addr, o.Tel, o.x > 0 && o.y > 0)._SPAN();
             }
         }
 
         public void @catch(WebContext wc)
         {
-            var e = wc.Exception;
-            if (e is WebException we)
-            {
-                if (we.Code == 401)
-                {
-                    if (wc.IsWeChat) // initiate signup
-                    {
-                        wc.GiveRedirect("/signup?url=" + HttpUtility.UrlEncode(wc.Url));
-                    }
-                    else // initiate form auth
-                    {
-                        wc.GiveRedirect("/signin?url=" + HttpUtility.UrlEncode(wc.Url));
-                    }
-                }
-                else if (we.Code == 403)
-                {
-                    wc.GivePage(403, m => { m.ALERT("此功能需要系统授权后才能使用。", head: "⛔ 没有访问权限"); }, title: "权限保护");
-                }
-            }
-            else
-            {
-                wc.Give(500, e.Message);
-                Console.Write(e.StackTrace);
-            }
+            var e = wc.Error;
         }
 
         public async Task signin(WebContext wc)
@@ -207,7 +130,7 @@ namespace ChainVerse
                 url = f[nameof(url)];
                 var o = new User
                 {
-                    state = Entity.STA_ENABLED,
+                    status = Entity.STA_PRE,
                     name = f[nameof(name)],
                     tel = f[nameof(tel)],
                     im = openid,
@@ -244,7 +167,7 @@ namespace ChainVerse
                 using var dc = NewDbContext();
                 // verify that the ammount is correct
                 var today = DateTime.Today;
-                dc.Sql("SELECT price FROM orders WHERE id = @1 AND status = ").T(Entity.STA_DISABLED);
+                dc.Sql("SELECT price FROM orders WHERE id = @1 AND status = 4");
                 var price = (decimal) dc.Scalar(p => p.Set(orderid));
                 if (price == cash) // update order status and line states
                 {
@@ -259,7 +182,7 @@ namespace ChainVerse
             finally
             {
                 // return xml to WCPay server
-                var x = new XmlContent(true, 1024);
+                var x = new XmlBuilder(true, 1024);
                 x.ELEM("xml", null, () =>
                 {
                     x.ELEM("return_code", "SUCCESS");
@@ -288,7 +211,7 @@ namespace ChainVerse
                 using var dc = NewDbContext();
                 // verify that the ammount is correct
                 var today = DateTime.Today;
-                dc.Sql("SELECT price FROM orders WHERE id = @1 AND status = ").T(Entity.STA_DISABLED);
+                dc.Sql("SELECT price FROM orders WHERE id = @1 AND status = 4");
                 var price = (decimal) dc.Scalar(p => p.Set(orderid));
                 if (price == cash) // update order status and line states
                 {
@@ -303,7 +226,7 @@ namespace ChainVerse
             finally
             {
                 // return xml to WCPay server
-                var x = new XmlContent(true, 1024);
+                var x = new XmlBuilder(true, 1024);
                 x.ELEM("xml", null, () =>
                 {
                     x.ELEM("return_code", "SUCCESS");

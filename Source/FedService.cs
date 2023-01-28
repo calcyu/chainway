@@ -1,9 +1,10 @@
 ﻿using System;
+using ChainFx.Fabric;
 using ChainFx.Web;
 
-namespace ChainVerse
+namespace ChainPort
 {
-    public class FedService : ChainFx.Nodal.FedService
+    public class FedService : NodeService
     {
         public override void dir(WebContext wc)
         {

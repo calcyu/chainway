@@ -1,7 +1,7 @@
 ﻿using System;
 using ChainFx.Web;
 
-namespace ChainVerse
+namespace ChainPort
 {
     /// <summary>
     /// To implement principal authorization of access to the target resources.
@@ -47,8 +47,7 @@ namespace ChainVerse
             {
                 if (!mock)
                 {
-                    wc.Party = org.name;
-                    wc.Role = "管理员";
+                    // wc.Role = "管理员";
                 }
                 return true;
             }
@@ -58,8 +57,7 @@ namespace ChainVerse
             {
                 if (!mock)
                 {
-                    wc.Party = org.name;
-                    wc.Role = User.Orgly[prin.orgly];
+                    // wc.Role = User.Orgly[prin.orgly];
                 }
                 return true;
             }
