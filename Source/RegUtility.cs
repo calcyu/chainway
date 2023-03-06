@@ -1,5 +1,5 @@
 ﻿using ChainFx;
-using ChainFx.Fabric;
+using ChainFx.Nodal;
 
 namespace ChainPort.Core
 {

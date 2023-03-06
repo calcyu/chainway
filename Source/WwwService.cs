@@ -5,7 +5,7 @@ using ChainFx;
 using ChainFx.Web;
 using ChainPort.Core;
 using static ChainPort.WeChatUtility;
-using static ChainFx.Fabric.Nodality;
+using static ChainFx.Nodal.Nodality;
 
 namespace ChainPort
 {
@@ -130,7 +130,7 @@ namespace ChainPort
                 url = f[nameof(url)];
                 var o = new User
                 {
-                    status = Entity.STA_PRE,
+                    // status = Entity.STA_PRE,
                     name = f[nameof(name)],
                     tel = f[nameof(tel)],
                     im = openid,

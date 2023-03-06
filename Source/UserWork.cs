@@ -1,7 +1,7 @@
 ﻿using ChainFx.Web;
 using static ChainFx.Web.Modal;
 using static ChainPort.User;
-using static ChainFx.Fabric.Nodality;
+using static ChainFx.Nodal.Nodality;
 
 namespace ChainPort
 {

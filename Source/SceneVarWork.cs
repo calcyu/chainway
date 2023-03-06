@@ -3,7 +3,7 @@ using ChainFx;
 using ChainFx.Web;
 using ChainPort.Core;
 using ChainPort;
-using static ChainFx.Fabric.Nodality;
+using static ChainFx.Nodal.Nodality;
 using static ChainFx.Web.Modal;
 
 namespace ChainPort

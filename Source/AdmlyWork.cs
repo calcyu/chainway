@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using ChainFx;
 using ChainFx.Web;
-using static ChainFx.Fabric.Nodality;
+using static ChainFx.Nodal.Nodality;
 
 namespace ChainPort
 {
@@ -28,7 +28,7 @@ namespace ChainPort
 
         public void @default(WebContext wc)
         {
-            var prin = (User) wc.Principal;
+            var prin = (User)wc.Principal;
             var o = Self;
             wc.GivePage(200, h =>
             {

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ChainFx.Web;
 using ChainPort.Core;
-using static ChainFx.Fabric.Nodality;
+using static ChainFx.Nodal.Nodality;
 
 namespace ChainPort
 {

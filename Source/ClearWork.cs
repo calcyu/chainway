@@ -3,7 +3,7 @@ using System.Data;
 using System.Threading.Tasks;
 using ChainFx;
 using ChainFx.Web;
-using static ChainFx.Fabric.Nodality;
+using static ChainFx.Nodal.Nodality;
 using static ChainFx.Web.Modal;
 
 namespace ChainPort

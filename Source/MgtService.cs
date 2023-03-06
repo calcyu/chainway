@@ -4,7 +4,7 @@ using System.Web;
 using ChainFx;
 using ChainFx.Web;
 using static ChainPort.WeChatUtility;
-using static ChainFx.Fabric.Nodality;
+using static ChainFx.Nodal.Nodality;
 
 namespace ChainPort
 {

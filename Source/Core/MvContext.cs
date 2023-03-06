@@ -1,4 +1,4 @@
-﻿using ChainFx.Fabric;
+﻿using ChainFx.Nodal;
 using ChainFx.Web;
 
 namespace ChainPort.Core

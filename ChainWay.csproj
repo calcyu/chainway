@@ -21,6 +21,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="ChainFx" Version="4.1.0" />
       <PackageReference Include="Npgsql" Version="4.1.12" />
       <PackageReference Include="System.Threading.Timer" Version="4.3.0" />
     </ItemGroup>
@@ -30,8 +31,5 @@
       <Folder Include="www\var\celest" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\ChainFx\ChainFx.csproj" />
-    </ItemGroup>
 
 </Project>
